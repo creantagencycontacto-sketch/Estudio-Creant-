@@ -78,7 +78,7 @@ const Index = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
               <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
                 <PenTool className="h-8 w-8 text-primary group-hover:text-primary-foreground" />
               </div>
