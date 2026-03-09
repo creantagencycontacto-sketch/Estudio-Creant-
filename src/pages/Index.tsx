@@ -52,9 +52,15 @@ const Index = () => {
       <section id="servicios" className="py-24 bg-secondary/30 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16 md:mb-24">
+            <blockquote className="border-l-4 border-primary pl-6 md:pl-8 mb-12 max-w-3xl">
+              <p className="text-lg md:text-xl italic text-muted-foreground leading-relaxed">
+                «El contenido precede al diseño. Diseño en ausencia de contenido no es diseño, es decoración.»
+              </p>
+              <cite className="text-sm text-muted-foreground/60 mt-2 block not-italic">— Jeffrey Zeldman</cite>
+            </blockquote>
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
             <p className="text-xl text-muted-foreground max-w-2xl">
-              Combinamos creatividad visual con estrategias de crecimiento para Pymes.
+              Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer Pymes.
             </p>
           </div>
 
