@@ -88,7 +88,7 @@ const Index = () => {
               </p>
             </motion.div>
 
-            <div className="bg-background p-10 rounded-3xl border border-border hover:border-accent/50 transition-colors group">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="bg-background p-10 rounded-3xl border border-border hover:border-accent/50 transition-colors group">
               <div className="h-16 w-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-accent transition-colors">
                 <TrendingUp className="h-8 w-8 text-accent group-hover:text-accent-foreground" />
               </div>
