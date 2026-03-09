@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, PenTool, TrendingUp, Mail, Instagram, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import logoCreant from "@/assets/logo-creant.png";
+import milagrosPhoto from "@/assets/milagros.png";
+import juanPhoto from "@/assets/juan.png";
 
 const Index = () => {
   return (
@@ -99,48 +101,48 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Quiénes Somos Section */}
+      {/* Equipo Section */}
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">QUIÉNES SOMOS</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mb-16">
-            Un equipo joven con visión estratégica, creatividad sin límites y obsesión por los resultados.
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">EL EQUIPO DETRÁS DE LA ESTRATEGIA</h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-16 leading-relaxed">
+            En Creant Studio, no solo creamos contenido; construimos puentes digitales. Combinamos la potencia del branding y la identidad visual de Milagros con la precisión estratégica en pauta y conversión de Juan. Con más de una década de experiencia sumada, nos enfocamos en que tu marca no solo se vea increíble, sino que también venda y conecte de forma auténtica.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 mb-16">
-            {/* Team Member 1 */}
-            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center">
-              <div className="h-28 w-28 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center mb-6 overflow-hidden">
-                <span className="text-4xl font-black text-primary">C</span>
+            {/* Milagros */}
+            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
+              <div className="h-32 w-32 rounded-full border-4 border-primary/30 mb-6 overflow-hidden group-hover:border-primary transition-colors">
+                <img src={milagrosPhoto} alt="Milagros - Co-Founder & Creative Director" className="h-full w-full object-cover object-top" />
               </div>
-              <h3 className="text-xl font-bold mb-1">Nombre del Fundador</h3>
-              <p className="text-sm text-muted-foreground mb-4">Co-Founder & Creative Director</p>
+              <h3 className="text-2xl font-bold mb-1">Milagros</h3>
+              <p className="text-sm text-primary font-semibold mb-4">Co-Founder & Creative Director</p>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Apasionado por el diseño estratégico y la comunicación visual que genera impacto real en los negocios.
+                6 años de experiencia en Branding y Comunicación. Especialista en unir marca e identidad digital con una visión creativa única. Experta en edición de video y creación de contenido UGC que conecta y convierte.
               </p>
               <div className="flex flex-wrap justify-center gap-2">
-                <Badge variant="secondary" className="text-xs">Figma</Badge>
                 <Badge variant="secondary" className="text-xs">Branding</Badge>
-                <Badge variant="secondary" className="text-xs">UI/UX</Badge>
-                <Badge variant="secondary" className="text-xs">Illustrator</Badge>
+                <Badge variant="secondary" className="text-xs">Identidad Visual</Badge>
+                <Badge variant="secondary" className="text-xs">Video / UGC</Badge>
+                <Badge variant="secondary" className="text-xs">Comunicación</Badge>
               </div>
             </div>
 
-            {/* Team Member 2 */}
-            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center">
-              <div className="h-28 w-28 rounded-full bg-accent/10 border-2 border-accent/30 flex items-center justify-center mb-6 overflow-hidden">
-                <span className="text-4xl font-black text-accent">C</span>
+            {/* Juan */}
+            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-accent/50 transition-colors">
+              <div className="h-32 w-32 rounded-full border-4 border-accent/30 mb-6 overflow-hidden group-hover:border-accent transition-colors">
+                <img src={juanPhoto} alt="Juan - Co-Founder & Growth Strategist" className="h-full w-full object-cover object-top" />
               </div>
-              <h3 className="text-xl font-bold mb-1">Nombre del Co-Founder</h3>
-              <p className="text-sm text-muted-foreground mb-4">Co-Founder & Growth Strategist</p>
+              <h3 className="text-2xl font-bold mb-1">Juan</h3>
+              <p className="text-sm text-accent font-semibold mb-4">Co-Founder & Growth Strategist</p>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Especialista en marketing de crecimiento, campañas de performance y estrategias basadas en datos.
+                5 años como Ads y Social Media Manager. Especialista en campañas de performance, email marketing y estrategias de ventas orientadas a resultados medibles y escalables.
               </p>
               <div className="flex flex-wrap justify-center gap-2">
-                <Badge variant="secondary" className="text-xs">Meta Ads</Badge>
-                <Badge variant="secondary" className="text-xs">Google Ads</Badge>
-                <Badge variant="secondary" className="text-xs">Analytics</Badge>
-                <Badge variant="secondary" className="text-xs">Email Mktg</Badge>
+                <Badge variant="secondary" className="text-xs">Meta & Google Ads</Badge>
+                <Badge variant="secondary" className="text-xs">Social Media</Badge>
+                <Badge variant="secondary" className="text-xs">Email Marketing</Badge>
+                <Badge variant="secondary" className="text-xs">Ventas</Badge>
               </div>
             </div>
           </div>
