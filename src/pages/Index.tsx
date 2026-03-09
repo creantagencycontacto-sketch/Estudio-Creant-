@@ -128,7 +128,7 @@ const Index = () => {
               <h3 className="text-2xl font-bold mb-1">Milagros</h3>
               <p className="text-sm text-primary font-semibold mb-4">Co-Founder & Creative Director</p>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                6 años de experiencia en Branding y Comunicación. Especialista en unir marca e identidad digital con una visión creativa única. Experta en edición de video y creación de contenido UGC que conecta y convierte.
+                6 años de experiencia en Branding y Comunicación. Especialista en unir marca e identidad digital con una visión creativa única. Manejo de edición de video y creación de contenido UGC que conecta y convierte.
               </p>
               <div className="flex flex-wrap justify-center gap-2">
                 <Badge variant="secondary" className="text-xs">Branding</Badge>
