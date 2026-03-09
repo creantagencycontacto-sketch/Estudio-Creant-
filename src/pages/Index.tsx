@@ -3,7 +3,7 @@ import { ArrowRight, BarChart3, PenTool, TrendingUp, Mail, Instagram, MessageCir
 import { Badge } from "@/components/ui/badge";
 import logoCreant from "@/assets/logo-creant.png";
 import milagrosPhoto from "@/assets/milagros.png";
-import juanPhoto from "@/assets/juan.png";
+import juanPhoto from "@/assets/juan-new.png";
 
 const Index = () => {
   return (
