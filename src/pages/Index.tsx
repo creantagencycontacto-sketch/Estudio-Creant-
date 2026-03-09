@@ -162,11 +162,11 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contacto" className="py-32 px-6">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter mb-8">
             ¿LISTO PARA ESCALAR?
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Dejanos tus datos y nos pondremos en contacto para analizar cómo podemos ayudar a tu empresa a crecer.
+          <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Dejá tus datos y nos pondremos en contacto para analizar cómo podemos ayudar a tu empresa a crecer.
           </p>
           
           <div className="max-w-md mx-auto space-y-4">
