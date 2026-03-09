@@ -41,7 +41,7 @@ const Index = () => {
                 Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
-            <Button size="lg" variant="secondary" className="rounded-full text-lg h-14 px-8 font-bold">
+            <Button size="lg" variant="secondary" className="rounded-full text-lg h-14 px-8 font-bold" onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}>
               Ver servicios
             </Button>
           </div>
