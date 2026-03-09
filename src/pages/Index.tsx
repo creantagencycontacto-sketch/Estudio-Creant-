@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, PenTool, TrendingUp, Mail, Instagram, MessageCircle } from "lucide-react";
+import AntAnimation from "@/components/AntAnimation";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import logoCreant from "@/assets/logo-creant.png";
