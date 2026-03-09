@@ -114,7 +114,7 @@ const AntAnimation = () => {
       {antPaths.map((ant) => (
         <motion.div
           key={ant.id}
-          className="absolute text-primary/40"
+          className="absolute text-primary/60"
           initial={{ left: ant.path.x[0], top: ant.path.y[0], opacity: 0 }}
           animate={{
             left: ant.path.x,
