@@ -139,7 +139,7 @@ const Index = () => {
             </motion.div>
 
             {/* Juan */}
-            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-accent/50 transition-colors">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-accent/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-accent/30 mb-6 overflow-hidden group-hover:border-accent transition-colors">
                 <img src={juanPhoto} alt="Juan - Co-Founder & Growth Strategist" className="h-full w-full object-cover object-center scale-110" />
               </div>
