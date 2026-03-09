@@ -39,16 +39,16 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-40 pb-20 md:pt-52 md:pb-32 px-6">
         <div className="container mx-auto max-w-5xl">
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0} className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
             BIENVENIDO AL <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               HORMIGUERO.
             </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
+          </motion.h1>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={1} className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
             Donde la creatividad y el trabajo en conjunto ponen tus redes a funcionar y a generar resultados reales.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          </motion.p>
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="rounded-full text-lg h-14 px-8 font-bold">
               <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer">
                 Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
@@ -57,7 +57,7 @@ const Index = () => {
             <Button size="lg" variant="secondary" className="rounded-full text-lg h-14 px-8 font-bold" onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}>
               Ver servicios
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
 
