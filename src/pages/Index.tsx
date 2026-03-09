@@ -29,7 +29,7 @@ const Index = () => {
             <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               <MessageCircle className="h-5 w-5" />
             </a>
-            <Button variant="outline" className="hidden md:flex rounded-full border-primary/30 hover:bg-primary/10 text-primary">
+            <Button variant="outline" className="hidden md:flex rounded-full border-primary/30 hover:bg-primary/10 text-primary" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>
               Hablemos
             </Button>
           </div>
