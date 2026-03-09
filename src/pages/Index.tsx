@@ -71,9 +71,9 @@ const Index = () => {
               </p>
               <cite className="text-sm text-muted-foreground/60 mt-2 block not-italic">— Jeffrey Zeldman</cite>
             </blockquote>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl">
-              Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer Pymes.
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">
+              Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer pymes.
             </p>
           </motion.div>
 
