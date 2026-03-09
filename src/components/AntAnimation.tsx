@@ -4,26 +4,39 @@ const AntSVG = ({ size = 14, flip = false }: { size?: number; flip?: boolean }) 
   <svg
     width={size}
     height={size}
-    viewBox="0 0 24 24"
+    viewBox="0 0 28 24"
     fill="currentColor"
     style={{ transform: flip ? "scaleX(-1)" : undefined }}
   >
-    {/* Body segments */}
-    <ellipse cx="7" cy="13" rx="3.5" ry="2.5" />
-    <ellipse cx="13" cy="12" rx="2.5" ry="2" />
-    <ellipse cx="18" cy="11" rx="2.2" ry="1.8" />
+    {/* Abdomen */}
+    <ellipse cx="6" cy="13" rx="4" ry="3" />
+    <ellipse cx="6" cy="13" rx="3.2" ry="2.2" fill="currentColor" opacity="0.7" />
+    {/* Thorax */}
+    <ellipse cx="12.5" cy="11.5" rx="2.8" ry="2.2" />
+    {/* Petiole (narrow waist) */}
+    <ellipse cx="9.5" cy="12.5" rx="1.2" ry="1" />
     {/* Head */}
-    <circle cx="21" cy="10" r="2" />
+    <ellipse cx="17.5" cy="10.5" rx="2.5" ry="2.2" />
+    {/* Mandibles */}
+    <path d="M19.5 11.5 Q21 13 20 14" stroke="currentColor" strokeWidth="0.6" fill="none" />
+    <path d="M19.8 10.8 Q21.5 11.5 21 13" stroke="currentColor" strokeWidth="0.6" fill="none" />
+    {/* Eyes */}
+    <circle cx="18.5" cy="9.8" r="0.6" fill="hsl(var(--background))" opacity="0.8" />
     {/* Antennae */}
-    <line x1="22" y1="9" x2="24" y2="5" stroke="currentColor" strokeWidth="0.8" fill="none" />
-    <line x1="21" y1="8.5" x2="23.5" y2="6.5" stroke="currentColor" strokeWidth="0.8" fill="none" />
-    {/* Legs */}
-    <line x1="8" y1="15" x2="6" y2="19" stroke="currentColor" strokeWidth="0.7" />
-    <line x1="10" y1="14.5" x2="9" y2="19" stroke="currentColor" strokeWidth="0.7" />
-    <line x1="12" y1="14" x2="12" y2="18.5" stroke="currentColor" strokeWidth="0.7" />
-    <line x1="14" y1="13.5" x2="15" y2="18" stroke="currentColor" strokeWidth="0.7" />
-    <line x1="16" y1="13" x2="18" y2="17" stroke="currentColor" strokeWidth="0.7" />
-    <line x1="18" y1="12.5" x2="20.5" y2="16" stroke="currentColor" strokeWidth="0.7" />
+    <path d="M18.5 9 Q20 6 22 4.5" stroke="currentColor" strokeWidth="0.7" fill="none" />
+    <path d="M17.8 8.8 Q19 6.5 21 5.5" stroke="currentColor" strokeWidth="0.7" fill="none" />
+    {/* Antenna tips */}
+    <circle cx="22" cy="4.5" r="0.5" />
+    <circle cx="21" cy="5.5" r="0.5" />
+    {/* Front legs */}
+    <path d="M16 12.5 Q17 15 18.5 17" stroke="currentColor" strokeWidth="0.7" fill="none" />
+    <path d="M15 12.5 Q15.5 15.5 16.5 17.5" stroke="currentColor" strokeWidth="0.7" fill="none" />
+    {/* Middle legs */}
+    <path d="M12 13.5 Q12.5 16 13.5 18" stroke="currentColor" strokeWidth="0.7" fill="none" />
+    <path d="M10.5 13.5 Q10 16 9.5 18.5" stroke="currentColor" strokeWidth="0.7" fill="none" />
+    {/* Back legs */}
+    <path d="M7.5 15 Q6.5 17.5 5.5 19" stroke="currentColor" strokeWidth="0.7" fill="none" />
+    <path d="M5.5 15 Q4 17 3 19.5" stroke="currentColor" strokeWidth="0.7" fill="none" />
   </svg>
 );
 
