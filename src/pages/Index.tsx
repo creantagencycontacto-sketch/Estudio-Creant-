@@ -46,7 +46,7 @@ const Index = () => {
             </span>
           </motion.h1>
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={1} className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
-            Donde la creatividad y el trabajo en conjunto ponen tus redes a funcionar y a generar resultados reales.
+            Donde la creatividad y las estrategias de marketing son trabajadas en conjunto para generar crecimiento real.
           </motion.p>
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="rounded-full text-lg h-14 px-8 font-bold">
