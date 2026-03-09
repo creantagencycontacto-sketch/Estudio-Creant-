@@ -96,7 +96,7 @@ const Index = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Estrategias integrales, gestión de redes y campañas enfocadas en el retorno de inversión y escalabilidad.
               </p>
-            </div>
+            </motion.div>
 
             <div className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
               <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
