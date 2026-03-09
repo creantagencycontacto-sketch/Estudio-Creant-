@@ -206,7 +206,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8 border-t border-border text-center text-muted-foreground">
         <div className="flex items-center justify-center gap-6 mb-4">
-          <a href="https://www.instagram.com/creant.agency" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+          <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
             <Instagram className="h-5 w-5" />
           </a>
           <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-xs font-bold">
