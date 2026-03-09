@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, PenTool, TrendingUp, Mail, Instagram, MessageCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import logoCreant from "@/assets/logo-creant.png";
 
 const Index = () => {
