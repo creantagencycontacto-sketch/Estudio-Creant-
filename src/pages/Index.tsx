@@ -75,7 +75,7 @@ const Index = () => {
             </blockquote>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">
-              Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer pymes.
+              Estrategia, contenido y creatividad visual trabajando juntos para hacer crecer tu negocio.
             </p>
           </motion.div>
 
