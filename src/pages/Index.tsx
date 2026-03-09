@@ -113,7 +113,7 @@ const Index = () => {
             {/* Milagros */}
             <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-primary/30 mb-6 overflow-hidden group-hover:border-primary transition-colors">
-                <img src={milagrosPhoto} alt="Milagros - Co-Founder & Creative Director" className="h-full w-full object-cover object-[center_20%] scale-110" />
+                <img src={milagrosPhoto} alt="Milagros - Co-Founder & Creative Director" className="h-full w-full object-cover object-center" />
               </div>
               <h3 className="text-2xl font-bold mb-1">Milagros</h3>
               <p className="text-sm text-primary font-semibold mb-4">Co-Founder & Creative Director</p>
