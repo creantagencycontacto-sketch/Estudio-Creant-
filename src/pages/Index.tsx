@@ -114,10 +114,10 @@ const Index = () => {
       {/* Equipo Section */}
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">EL EQUIPO DETRÁS DE LA ESTRATEGIA</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-16 leading-relaxed">
+          <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="text-4xl md:text-6xl font-black tracking-tighter mb-6">EL EQUIPO DETRÁS DE LA ESTRATEGIA</motion.h2>
+          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-16 leading-relaxed">
             En Creant Studio, no solo creamos contenido; construimos puentes digitales. Combinamos la potencia del branding y la identidad visual de Milagros con la precisión estratégica en pauta y conversión de Juan. Con más de una década de experiencia sumada, nos enfocamos en que tu marca no solo se vea increíble, sino que también venda y conecte de forma auténtica.
-          </p>
+          </motion.p>
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Milagros */}
