@@ -106,7 +106,7 @@ const Index = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Campañas publicitarias optimizadas con datos reales para adquirir clientes calificados constantemente.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
