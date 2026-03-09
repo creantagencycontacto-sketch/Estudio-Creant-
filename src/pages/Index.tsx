@@ -23,13 +23,13 @@ const Index = () => {
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <img src={logoCreant} alt="Creant Agency" className="h-14 w-auto" />
           <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com/creant.agency" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               <Instagram className="h-5 w-5" />
             </a>
             <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               <MessageCircle className="h-5 w-5" />
             </a>
-            <Button variant="outline" className="hidden md:flex rounded-full border-primary/30 hover:bg-primary/10 text-primary">
+            <Button variant="outline" className="hidden md:flex rounded-full border-primary/30 hover:bg-primary/10 text-primary" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>
               Hablemos
             </Button>
           </div>
@@ -160,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-32 px-6">
+      <section id="contacto" className="py-32 px-6">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8">
             ¿LISTO PARA ESCALAR?
@@ -206,7 +206,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8 border-t border-border text-center text-muted-foreground">
         <div className="flex items-center justify-center gap-6 mb-4">
-          <a href="https://www.instagram.com/creant.agency" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+          <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
             <Instagram className="h-5 w-5" />
           </a>
           <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-xs font-bold">
