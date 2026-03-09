@@ -109,7 +109,7 @@ const Index = () => {
             En Creant Studio, no solo creamos contenido; construimos puentes digitales. Combinamos la potencia del branding y la identidad visual de Milagros con la precisión estratégica en pauta y conversión de Juan. Con más de una década de experiencia sumada, nos enfocamos en que tu marca no solo se vea increíble, sino que también venda y conecte de forma auténtica.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-4 md:gap-8">
             {/* Milagros */}
             <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-primary/30 mb-6 overflow-hidden group-hover:border-primary transition-colors">
