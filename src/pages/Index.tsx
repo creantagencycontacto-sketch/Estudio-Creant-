@@ -98,6 +98,64 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Quiénes Somos Section */}
+      <section className="py-24 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">QUIÉNES SOMOS</h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mb-16">
+            Un equipo joven con visión estratégica, creatividad sin límites y obsesión por los resultados.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {/* Team Member 1 */}
+            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center">
+              <div className="h-28 w-28 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center mb-6 overflow-hidden">
+                <span className="text-4xl font-black text-primary">C</span>
+              </div>
+              <h3 className="text-xl font-bold mb-1">Nombre del Fundador</h3>
+              <p className="text-sm text-muted-foreground mb-4">Co-Founder & Creative Director</p>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                Apasionado por el diseño estratégico y la comunicación visual que genera impacto real en los negocios.
+              </p>
+              <div className="flex flex-wrap justify-center gap-2">
+                <Badge variant="secondary" className="text-xs">Figma</Badge>
+                <Badge variant="secondary" className="text-xs">Branding</Badge>
+                <Badge variant="secondary" className="text-xs">UI/UX</Badge>
+                <Badge variant="secondary" className="text-xs">Illustrator</Badge>
+              </div>
+            </div>
+
+            {/* Team Member 2 */}
+            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center">
+              <div className="h-28 w-28 rounded-full bg-accent/10 border-2 border-accent/30 flex items-center justify-center mb-6 overflow-hidden">
+                <span className="text-4xl font-black text-accent">C</span>
+              </div>
+              <h3 className="text-xl font-bold mb-1">Nombre del Co-Founder</h3>
+              <p className="text-sm text-muted-foreground mb-4">Co-Founder & Growth Strategist</p>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                Especialista en marketing de crecimiento, campañas de performance y estrategias basadas en datos.
+              </p>
+              <div className="flex flex-wrap justify-center gap-2">
+                <Badge variant="secondary" className="text-xs">Meta Ads</Badge>
+                <Badge variant="secondary" className="text-xs">Google Ads</Badge>
+                <Badge variant="secondary" className="text-xs">Analytics</Badge>
+                <Badge variant="secondary" className="text-xs">Email Mktg</Badge>
+              </div>
+            </div>
+          </div>
+
+          {/* Tools Bar */}
+          <div className="bg-secondary/30 rounded-2xl border border-border p-6 text-center">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-semibold">Herramientas que usamos</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {["Figma", "Photoshop", "Illustrator", "Canva", "Meta Ads", "Google Ads", "Google Analytics", "Notion", "CapCut"].map((tool) => (
+                <Badge key={tool} variant="outline" className="text-xs px-3 py-1">{tool}</Badge>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section className="py-32 px-6">
         <div className="container mx-auto max-w-4xl text-center">
