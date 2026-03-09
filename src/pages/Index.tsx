@@ -142,7 +142,7 @@ const Index = () => {
           <a href="https://www.instagram.com/creant.agency" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
             <Instagram className="h-5 w-5" />
           </a>
-          <a href="https://www.tiktok.com/@creant.agency" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-xs font-bold">
+          <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-xs font-bold">
             TikTok
           </a>
           <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
