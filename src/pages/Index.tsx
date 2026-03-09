@@ -45,8 +45,8 @@ const Index = () => {
               HORMIGUERO.
             </span>
           </motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={1} className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
-            Donde la creatividad y las estrategias de marketing son trabajadas en conjunto para generar crecimiento real.
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={1} className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
+            Somos el estudio creativo que tu pyme necesita: branding, contenido y publicidad digital trabajando juntos para que tu marca venda más.
           </motion.p>
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="rounded-full text-lg h-14 px-8 font-bold">
@@ -71,9 +71,9 @@ const Index = () => {
               </p>
               <cite className="text-sm text-muted-foreground/60 mt-2 block not-italic">— Jeffrey Zeldman</cite>
             </blockquote>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl">
-              Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer Pymes.
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">
+              Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer pymes.
             </p>
           </motion.div>
 
@@ -114,8 +114,8 @@ const Index = () => {
       {/* Equipo Section */}
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
-          <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="text-4xl md:text-6xl font-black tracking-tighter mb-6">EL EQUIPO DETRÁS DE LA ESTRATEGIA</motion.h2>
-          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-16 leading-relaxed">
+          <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter mb-6">EL EQUIPO DETRÁS DE LA ESTRATEGIA</motion.h2>
+          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mb-16 leading-relaxed">
             En Creant Studio, no solo creamos contenido; construimos puentes digitales. Combinamos la potencia del branding y la identidad visual de Milagros con la precisión estratégica en pauta y conversión de Juan. Con más de una década de experiencia sumada, nos enfocamos en que tu marca no solo se vea increíble, sino que también venda y conecte de forma auténtica.
           </motion.p>
 
@@ -128,7 +128,7 @@ const Index = () => {
               <h3 className="text-2xl font-bold mb-1">Milagros</h3>
               <p className="text-sm text-primary font-semibold mb-4">Co-Founder & Creative Director</p>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                6 años de experiencia en Branding y Comunicación. Especialista en unir marca e identidad digital con una visión creativa única. Experta en edición de video y creación de contenido UGC que conecta y convierte.
+                6 años de experiencia en Branding y Comunicación. Especialista en unir marca e identidad digital con una visión creativa única. Manejo de edición de video y creación de contenido UGC que conecta y convierte.
               </p>
               <div className="flex flex-wrap justify-center gap-2">
                 <Badge variant="secondary" className="text-xs">Branding</Badge>
@@ -162,11 +162,11 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contacto" className="py-32 px-6">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter mb-8">
             ¿LISTO PARA ESCALAR?
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Dejanos tus datos y nos pondremos en contacto para analizar cómo podemos ayudar a tu empresa a crecer.
+          <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Dejá tus datos y nos pondremos en contacto para analizar cómo podemos ayudar a tu empresa a crecer.
           </p>
           
           <div className="max-w-md mx-auto space-y-4">
