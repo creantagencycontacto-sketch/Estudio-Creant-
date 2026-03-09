@@ -154,7 +154,7 @@ const Index = () => {
                 <Badge variant="secondary" className="text-xs">Email Marketing</Badge>
                 <Badge variant="secondary" className="text-xs">Ventas</Badge>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
