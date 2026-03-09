@@ -49,7 +49,7 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-secondary/30 px-6">
+      <section id="servicios" className="py-24 bg-secondary/30 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16 md:mb-24">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
