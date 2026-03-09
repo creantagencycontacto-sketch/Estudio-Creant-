@@ -41,7 +41,7 @@ const Index = () => {
                 Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
-            <Button size="lg" variant="secondary" className="rounded-full text-lg h-14 px-8 font-bold">
+            <Button size="lg" variant="secondary" className="rounded-full text-lg h-14 px-8 font-bold" onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}>
               Ver servicios
             </Button>
           </div>
@@ -49,7 +49,7 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-secondary/30 px-6">
+      <section id="servicios" className="py-24 bg-secondary/30 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16 md:mb-24">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
