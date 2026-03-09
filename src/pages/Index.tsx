@@ -98,7 +98,7 @@ const Index = () => {
               </p>
             </motion.div>
 
-            <div className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={2} className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
               <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
                 <BarChart3 className="h-8 w-8 text-primary group-hover:text-primary-foreground" />
               </div>
