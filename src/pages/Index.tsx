@@ -160,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-32 px-6">
+      <section id="contacto" className="py-32 px-6">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8">
             ¿LISTO PARA ESCALAR?
