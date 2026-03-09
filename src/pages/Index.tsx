@@ -64,7 +64,7 @@ const Index = () => {
       {/* Services Section */}
       <section id="servicios" className="py-24 bg-secondary/30 px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="mb-16 md:mb-24">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="mb-16 md:mb-24">
             <blockquote className="border-l-4 border-primary pl-6 md:pl-8 mb-12 max-w-3xl">
               <p className="text-lg md:text-xl italic text-muted-foreground leading-relaxed">
                 «El contenido precede al diseño. Diseño en ausencia de contenido no es diseño, es decoración.»
@@ -75,7 +75,7 @@ const Index = () => {
             <p className="text-xl text-muted-foreground max-w-2xl">
               Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer Pymes.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
