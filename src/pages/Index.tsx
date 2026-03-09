@@ -1,9 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, PenTool, TrendingUp, Mail, Instagram, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 import logoCreant from "@/assets/logo-creant.png";
 import milagrosPhoto from "@/assets/milagros.png";
 import juanPhoto from "@/assets/juan-new.png";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.15, ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number] },
+  }),
+};
 
 const Index = () => {
   return (
@@ -29,16 +39,16 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-40 pb-20 md:pt-52 md:pb-32 px-6">
         <div className="container mx-auto max-w-5xl">
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0} className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
             BIENVENIDO AL <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               HORMIGUERO.
             </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
+          </motion.h1>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={1} className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
             Donde la creatividad y el trabajo en conjunto ponen tus redes a funcionar y a generar resultados reales.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          </motion.p>
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="rounded-full text-lg h-14 px-8 font-bold">
               <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer">
                 Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
@@ -47,14 +57,14 @@ const Index = () => {
             <Button size="lg" variant="secondary" className="rounded-full text-lg h-14 px-8 font-bold" onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}>
               Ver servicios
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Services Section */}
       <section id="servicios" className="py-24 bg-secondary/30 px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="mb-16 md:mb-24">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="mb-16 md:mb-24">
             <blockquote className="border-l-4 border-primary pl-6 md:pl-8 mb-12 max-w-3xl">
               <p className="text-lg md:text-xl italic text-muted-foreground leading-relaxed">
                 «El contenido precede al diseño. Diseño en ausencia de contenido no es diseño, es decoración.»
@@ -65,10 +75,10 @@ const Index = () => {
             <p className="text-xl text-muted-foreground max-w-2xl">
               Por eso combinamos estrategia y contenido con creatividad visual para hacer crecer Pymes.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
               <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
                 <PenTool className="h-8 w-8 text-primary group-hover:text-primary-foreground" />
               </div>
@@ -76,9 +86,9 @@ const Index = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Identidad visual, branding y diseño de interfaces pensadas para convertir y destacar en el mercado.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-background p-10 rounded-3xl border border-border hover:border-accent/50 transition-colors group">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="bg-background p-10 rounded-3xl border border-border hover:border-accent/50 transition-colors group">
               <div className="h-16 w-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-accent transition-colors">
                 <TrendingUp className="h-8 w-8 text-accent group-hover:text-accent-foreground" />
               </div>
@@ -86,9 +96,9 @@ const Index = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Estrategias integrales, gestión de redes y campañas enfocadas en el retorno de inversión y escalabilidad.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={2} className="bg-background p-10 rounded-3xl border border-border hover:border-primary/50 transition-colors group">
               <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-colors">
                 <BarChart3 className="h-8 w-8 text-primary group-hover:text-primary-foreground" />
               </div>
@@ -96,7 +106,7 @@ const Index = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Campañas publicitarias optimizadas con datos reales para adquirir clientes calificados constantemente.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -104,14 +114,14 @@ const Index = () => {
       {/* Equipo Section */}
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">EL EQUIPO DETRÁS DE LA ESTRATEGIA</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-16 leading-relaxed">
+          <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="text-4xl md:text-6xl font-black tracking-tighter mb-6">EL EQUIPO DETRÁS DE LA ESTRATEGIA</motion.h2>
+          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-16 leading-relaxed">
             En Creant Studio, no solo creamos contenido; construimos puentes digitales. Combinamos la potencia del branding y la identidad visual de Milagros con la precisión estratégica en pauta y conversión de Juan. Con más de una década de experiencia sumada, nos enfocamos en que tu marca no solo se vea increíble, sino que también venda y conecte de forma auténtica.
-          </p>
+          </motion.p>
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Milagros */}
-            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-primary/30 mb-6 overflow-hidden group-hover:border-primary transition-colors">
                 <img src={milagrosPhoto} alt="Milagros - Co-Founder & Creative Director" className="h-full w-full object-cover object-center" />
               </div>
@@ -126,10 +136,10 @@ const Index = () => {
                 <Badge variant="secondary" className="text-xs">Video / UGC</Badge>
                 <Badge variant="secondary" className="text-xs">Comunicación</Badge>
               </div>
-            </div>
+            </motion.div>
 
             {/* Juan */}
-            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-accent/50 transition-colors">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={1} className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-accent/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-accent/30 mb-6 overflow-hidden group-hover:border-accent transition-colors">
                 <img src={juanPhoto} alt="Juan - Co-Founder & Growth Strategist" className="h-full w-full object-cover object-center scale-110" />
               </div>
@@ -144,7 +154,7 @@ const Index = () => {
                 <Badge variant="secondary" className="text-xs">Email Marketing</Badge>
                 <Badge variant="secondary" className="text-xs">Ventas</Badge>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
