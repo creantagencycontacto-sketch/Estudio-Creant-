@@ -23,7 +23,7 @@ const Index = () => {
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <img src={logoCreant} alt="Creant Agency" className="h-14 w-auto" />
           <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com/creant.agency" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               <Instagram className="h-5 w-5" />
             </a>
             <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
