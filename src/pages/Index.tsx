@@ -86,7 +86,7 @@ const Index = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Identidad visual, branding y diseño de interfaces pensadas para convertir y destacar en el mercado.
               </p>
-            </div>
+            </motion.div>
 
             <div className="bg-background p-10 rounded-3xl border border-border hover:border-accent/50 transition-colors group">
               <div className="h-16 w-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-accent transition-colors">
