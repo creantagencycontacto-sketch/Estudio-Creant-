@@ -3,7 +3,7 @@ import { ArrowRight, BarChart3, PenTool, TrendingUp, Mail, Instagram, MessageCir
 import { Badge } from "@/components/ui/badge";
 import logoCreant from "@/assets/logo-creant.png";
 import milagrosPhoto from "@/assets/milagros.png";
-import juanPhoto from "@/assets/juan.png";
+import juanPhoto from "@/assets/juan-new.png";
 
 const Index = () => {
   return (
@@ -109,7 +109,7 @@ const Index = () => {
             En Creant Studio, no solo creamos contenido; construimos puentes digitales. Combinamos la potencia del branding y la identidad visual de Milagros con la precisión estratégica en pauta y conversión de Juan. Con más de una década de experiencia sumada, nos enfocamos en que tu marca no solo se vea increíble, sino que también venda y conecte de forma auténtica.
           </p>
 
-          <div className="grid grid-cols-2 gap-4 md:gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Milagros */}
             <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-primary/30 mb-6 overflow-hidden group-hover:border-primary transition-colors">
@@ -131,7 +131,7 @@ const Index = () => {
             {/* Juan */}
             <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-accent/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-accent/30 mb-6 overflow-hidden group-hover:border-accent transition-colors">
-                <img src={juanPhoto} alt="Juan - Co-Founder & Growth Strategist" className="h-full w-full object-cover object-[center_30%] scale-150" />
+                <img src={juanPhoto} alt="Juan - Co-Founder & Growth Strategist" className="h-full w-full object-cover object-[center_34%] scale-[2.3]" />
               </div>
               <h3 className="text-2xl font-bold mb-1">Juan</h3>
               <p className="text-sm text-accent font-semibold mb-4">Co-Founder & Growth Strategist</p>
