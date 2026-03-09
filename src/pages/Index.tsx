@@ -136,7 +136,7 @@ const Index = () => {
                 <Badge variant="secondary" className="text-xs">Video / UGC</Badge>
                 <Badge variant="secondary" className="text-xs">Comunicación</Badge>
               </div>
-            </div>
+            </motion.div>
 
             {/* Juan */}
             <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-accent/50 transition-colors">
