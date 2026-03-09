@@ -121,7 +121,7 @@ const Index = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Milagros */}
-            <div className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} custom={0} className="bg-secondary/30 rounded-3xl border border-border p-8 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
               <div className="h-36 w-36 rounded-full border-4 border-primary/30 mb-6 overflow-hidden group-hover:border-primary transition-colors">
                 <img src={milagrosPhoto} alt="Milagros - Co-Founder & Creative Director" className="h-full w-full object-cover object-center" />
               </div>
