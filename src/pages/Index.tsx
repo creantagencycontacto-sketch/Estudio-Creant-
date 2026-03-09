@@ -38,8 +38,9 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-52 md:pb-32 px-6">
-        <div className="container mx-auto max-w-5xl">
+      <section className="pt-32 pb-16 md:pt-52 md:pb-32 px-6 relative">
+        <div className="container mx-auto max-w-5xl relative">
+          <AntAnimation />
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0} className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6 md:mb-8">
             LLEGASTE AL <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
