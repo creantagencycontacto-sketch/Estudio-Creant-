@@ -24,11 +24,11 @@ const Index = () => {
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <img src={logoCreant} alt="Creant Agency" className="h-14 w-auto" />
           <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-              <Instagram className="h-5 w-5" />
+            <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Creant Studio" className="text-muted-foreground hover:text-primary transition-colors">
+              <Instagram className="h-5 w-5" aria-hidden="true" />
             </a>
-            <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-              <MessageCircle className="h-5 w-5" />
+            <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" className="text-muted-foreground hover:text-primary transition-colors">
+              <MessageCircle className="h-5 w-5" aria-hidden="true" />
             </a>
             <Button variant="outline" className="hidden md:flex rounded-full border-primary/30 hover:bg-primary/10 text-primary" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>
               Hablemos
@@ -173,18 +173,32 @@ const Index = () => {
           
           <div className="max-w-md mx-auto space-y-4">
             <div className="space-y-4">
-              <input 
-                type="text" 
-                placeholder="Tu nombre" 
+              <label htmlFor="contact-name" className="sr-only">Tu nombre</label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                placeholder="Tu nombre"
+                aria-label="Tu nombre"
                 className="w-full h-14 bg-secondary/50 border border-border rounded-xl px-6 outline-none focus:border-primary transition-colors"
               />
-              <input 
-                type="email" 
-                placeholder="Tu email" 
+              <label htmlFor="contact-email" className="sr-only">Tu email</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="Tu email"
+                aria-label="Tu email"
                 className="w-full h-14 bg-secondary/50 border border-border rounded-xl px-6 outline-none focus:border-primary transition-colors"
               />
-              <textarea 
-                placeholder="Contanos sobre tu proyecto" 
+              <label htmlFor="contact-message" className="sr-only">Contanos sobre tu proyecto</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="Contanos sobre tu proyecto"
+                aria-label="Contanos sobre tu proyecto"
                 className="w-full h-32 bg-secondary/50 border border-border rounded-xl px-6 py-4 outline-none focus:border-primary transition-colors resize-none"
               />
             </div>
@@ -208,14 +222,14 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8 border-t border-border text-center text-muted-foreground">
         <div className="flex items-center justify-center gap-6 mb-4">
-          <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-            <Instagram className="h-5 w-5" />
+          <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Creant Studio" className="hover:text-primary transition-colors">
+            <Instagram className="h-5 w-5" aria-hidden="true" />
           </a>
-          <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-xs font-bold">
+          <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Creant Studio" className="hover:text-primary transition-colors text-xs font-bold">
             TikTok
           </a>
-          <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-            <MessageCircle className="h-5 w-5" />
+          <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" className="hover:text-primary transition-colors">
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>
         <p>© {new Date().getFullYear()} Creant Agency. Todos los derechos reservados.</p>
