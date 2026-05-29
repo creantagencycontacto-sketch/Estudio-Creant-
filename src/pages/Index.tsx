@@ -22,7 +22,7 @@ const Index = () => {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <img src={logoCreant} alt="Creant Agency" className="h-14 w-auto" />
+          <img src={logoCreant} alt="Creant Agency" width="160" height="56" fetchPriority="high" className="h-14 w-auto" />
           <div className="flex items-center gap-3">
             <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Creant Studio" className="text-muted-foreground hover:text-primary transition-colors">
               <Instagram className="h-5 w-5" aria-hidden="true" />
@@ -42,12 +42,12 @@ const Index = () => {
       <section className="pt-32 pb-16 md:pt-52 md:pb-32 px-6 relative">
         <div className="container mx-auto max-w-5xl relative">
           <AntAnimation />
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0} className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6 md:mb-8">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6 md:mb-8">
             LLEGASTE AL <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               HORMIGUERO.
             </span>
-          </motion.h1>
+          </h1>
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={1} className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
             Somos el estudio creativo que tu pyme necesita: branding, contenido y publicidad digital trabajando juntos para que tu marca venda más.
           </motion.p>
