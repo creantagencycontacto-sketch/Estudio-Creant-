@@ -37,6 +37,7 @@ const Index = () => {
         </div>
       </nav>
 
+      <main>
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-52 md:pb-32 px-6 relative">
         <div className="container mx-auto max-w-5xl relative">
@@ -71,7 +72,7 @@ const Index = () => {
               <p className="text-lg md:text-xl italic text-muted-foreground leading-relaxed">
                 «El contenido precede al diseño. Diseño en ausencia de contenido no es diseño, es decoración.»
               </p>
-              <cite className="text-sm text-muted-foreground/60 mt-2 block not-italic">— Jeffrey Zeldman</cite>
+              <cite className="text-sm text-muted-foreground mt-2 block not-italic">— Jeffrey Zeldman</cite>
             </blockquote>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter mb-4">NUESTRO ENFOQUE</h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl">
