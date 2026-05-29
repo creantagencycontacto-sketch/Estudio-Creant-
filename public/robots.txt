@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://estudiocreant.com/sitemap.xml
+Sitemap: https://growth-pixel-magic.lovable.app/sitemap.xml
