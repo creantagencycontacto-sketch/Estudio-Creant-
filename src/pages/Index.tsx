@@ -17,7 +17,7 @@ const fadeUp = {
 };
 
 const Index = () => {
-  const whatsappUrl = "https://web.whatsapp.com/send?phone=5492216024898";
+  const whatsappUrl = "https://wa.me/5492216024898";
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
