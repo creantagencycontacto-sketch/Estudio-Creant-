@@ -24,7 +24,7 @@ const Index = () => {
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <img src={logoCreant} alt="Creant Agency" width="160" height="56" fetchPriority="high" className="h-14 w-auto" />
           <div className="flex items-center gap-3">
-            <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="https://wa.me/5492216024898" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" className="text-muted-foreground hover:text-primary transition-colors">
               <MessageCircle className="h-5 w-5" aria-hidden="true" />
             </a>
             <Button variant="outline" className="hidden md:flex rounded-full border-primary/30 hover:bg-primary/10 text-primary" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>
@@ -50,7 +50,7 @@ const Index = () => {
           </motion.p>
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="rounded-full text-lg h-14 px-8 font-bold">
-              <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/5492216024898" target="_blank" rel="noopener noreferrer">
                 Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
@@ -210,7 +210,7 @@ const Index = () => {
             <a href="mailto:Creantagency.contacto@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2">
               <Mail className="h-4 w-4" /> Creantagency.contacto@gmail.com
             </a>
-            <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-2">
+            <a href="https://wa.me/5492216024898" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-2">
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>
           </div>
@@ -227,7 +227,7 @@ const Index = () => {
           <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Creant Studio" className="hover:text-primary transition-colors text-xs font-bold">
             TikTok
           </a>
-          <a href="https://wa.link/yzax1m" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" className="hover:text-primary transition-colors">
+          <a href="https://wa.me/5492216024898" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" className="hover:text-primary transition-colors">
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>
