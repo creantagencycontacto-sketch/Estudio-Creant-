@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, PenTool, TrendingUp, Mail, Instagram, MessageCircle } from "lucide-react";
 import AntAnimation from "@/components/AntAnimation";
+import ContactForm from "@/components/ContactForm";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
+import { WHATSAPP_URL } from "@/lib/leads";
+import { trackEvent } from "@/lib/tracking";
 import logoCreant from "@/assets/logo-creant.png";
 import milagrosPhoto from "@/assets/milagros.png";
 import juanPhoto from "@/assets/juan-new.png";
@@ -17,16 +20,21 @@ const fadeUp = {
 };
 
 const Index = () => {
-  const whatsappUrl = "https://wa.me/5492216024898";
+  const whatsappUrl = WHATSAPP_URL;
+
+  /** Cada click a WhatsApp le avisa a Meta, para poder medirlo como conversión. */
+  const trackWhatsapp = (origen: string) => () =>
+    trackEvent("Contact", { content_name: `WhatsApp — ${origen}` });
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <img src={logoCreant} alt="Creant Agency" width="160" height="56" fetchPriority="high" className="h-14 w-auto" />
+          {/* fetchpriority en minúscula: React 18 no reconoce la versión camelCase y tira un error en la consola. */}
+          <img src={logoCreant} alt="Creant Agency" width="160" height="56" {...{ fetchpriority: "high" }} className="h-14 w-auto" />
           <div className="flex items-center gap-3">
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("menú")} aria-label="Escribinos por WhatsApp" className="text-muted-foreground hover:text-primary transition-colors">
               <MessageCircle className="h-5 w-5" aria-hidden="true" />
             </a>
             <Button variant="outline" className="hidden md:flex rounded-full border-primary/30 hover:bg-primary/10 text-primary" onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}>
@@ -52,7 +60,7 @@ const Index = () => {
           </motion.p>
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="rounded-full text-lg h-14 px-8 font-bold">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("hero")}>
                 Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
@@ -171,48 +179,14 @@ const Index = () => {
             Dejá tus datos y nos pondremos en contacto para analizar cómo podemos ayudar a tu empresa a crecer.
           </p>
           
-          <div className="max-w-md mx-auto space-y-4">
-            <div className="space-y-4">
-              <label htmlFor="contact-name" className="sr-only">Tu nombre</label>
-              <input
-                id="contact-name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                placeholder="Tu nombre"
-                aria-label="Tu nombre"
-                className="w-full h-14 bg-secondary/50 border border-border rounded-xl px-6 outline-none focus:border-primary transition-colors"
-              />
-              <label htmlFor="contact-email" className="sr-only">Tu email</label>
-              <input
-                id="contact-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="Tu email"
-                aria-label="Tu email"
-                className="w-full h-14 bg-secondary/50 border border-border rounded-xl px-6 outline-none focus:border-primary transition-colors"
-              />
-              <label htmlFor="contact-message" className="sr-only">Contanos sobre tu proyecto</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                placeholder="Contanos sobre tu proyecto"
-                aria-label="Contanos sobre tu proyecto"
-                className="w-full h-32 bg-secondary/50 border border-border rounded-xl px-6 py-4 outline-none focus:border-primary transition-colors resize-none"
-              />
-            </div>
-            <Button size="lg" className="w-full h-14 rounded-xl text-lg font-bold mt-4">
-              Enviar Mensaje <Mail className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
+          <ContactForm />
 
           {/* Contact info */}
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground text-sm">
-            <a href="mailto:Creantagency.contacto@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2">
-              <Mail className="h-4 w-4" /> Creantagency.contacto@gmail.com
+            <a href="mailto:creantagency.contacto@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2">
+              <Mail className="h-4 w-4" /> creantagency.contacto@gmail.com
             </a>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-2">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("sección contacto")} className="hover:text-primary transition-colors flex items-center gap-2">
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>
           </div>
