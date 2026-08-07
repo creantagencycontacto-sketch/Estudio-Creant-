@@ -49,18 +49,23 @@ export type TrafficSource = {
 const SOURCE_STORAGE_KEY = "creant_traffic_source";
 
 /**
- * Lee los parámetros de la URL la primera vez que la persona entra y los
- * guarda en la sesión del navegador.
+ * Lee de dónde vino la visita y lo guarda en la sesión del navegador.
  *
- * ¿Por qué guardarlos? Porque si alguien entra desde un anuncio y recién
+ * ¿Por qué guardarlo? Porque si alguien entra desde un anuncio y recién
  * escribe diez minutos después, la URL ya puede haber perdido los parámetros.
  * Así el dato del origen sigue estando cuando manda el formulario.
+ *
+ * La regla es: si la URL actual trae datos de campaña, ese es el origen bueno
+ * y pisa lo que hubiera guardado. Si no trae nada, respetamos lo anterior.
+ *
+ * Sin esa regla pasaba esto: alguien entra directo a la web, después ve un
+ * anuncio, vuelve a entrar desde el anuncio y manda la consulta — y el lead
+ * quedaba marcado como "vino directo", tapando al anuncio que sí funcionó.
  */
 export function captureTrafficSource(): void {
   try {
-    if (sessionStorage.getItem(SOURCE_STORAGE_KEY)) return;
-
     const params = new URLSearchParams(window.location.search);
+
     const source: TrafficSource = {
       utm_source: params.get("utm_source"),
       utm_medium: params.get("utm_medium"),
@@ -70,6 +75,12 @@ export function captureTrafficSource(): void {
       referrer: document.referrer || null,
       landing_page: window.location.pathname + window.location.search,
     };
+
+    const vieneDeUnaCampaña =
+      !!source.utm_source || !!source.utm_campaign || !!source.fbclid;
+
+    // Sin datos de campaña y con algo ya guardado: no lo pisamos.
+    if (!vieneDeUnaCampaña && sessionStorage.getItem(SOURCE_STORAGE_KEY)) return;
 
     sessionStorage.setItem(SOURCE_STORAGE_KEY, JSON.stringify(source));
   } catch {
