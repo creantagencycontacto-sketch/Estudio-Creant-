@@ -8,7 +8,6 @@ import Marco from "@/components/Marco";
 import { WHATSAPP_URL } from "@/lib/leads";
 import { trackEvent } from "@/lib/tracking";
 
-import hormigaColorada from "@/assets/hormiga-colorada.svg";
 import milagrosFoto from "@/assets/milagros-2026.webp";
 import juanFoto from "@/assets/juan-new.png";
 
@@ -99,20 +98,7 @@ const Index = () => {
 
           <h1 className="mt-4 font-display text-[clamp(2.9rem,11vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.045em]">
             Llegaste al
-            <span className="block text-accent">
-              hormiguero.
-              {/* La hormiga fluye en el texto, después del punto: así la ubica el
-                  navegador y no una coordenada calculada a mano. `align-baseline`
-                  le apoya las patas en la misma línea que las letras. Va separada
-                  del punto porque comparten el rojo y juntas se leen como una
-                  sola mancha. */}
-              <img
-                src={hormigaColorada}
-                alt="" aria-hidden="true"
-                className="inline-block align-baseline"
-                style={{ height: "0.34em", width: "0.248em", marginLeft: "0.12em", maxWidth: "none" }}
-              />
-            </span>
+            <span className="block text-accent">hormiguero.</span>
           </h1>
 
           <motion.p variants={aparece} initial="hidden" animate="visible" custom={1}
