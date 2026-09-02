@@ -13,7 +13,12 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['"Bricolage"', "system-ui", "sans-serif"],
+        sans: ['"PublicSans"', "system-ui", "sans-serif"],
+      },
       colors: {
+        tunel: "hsl(var(--tunel))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
