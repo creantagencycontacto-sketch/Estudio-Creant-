@@ -31,7 +31,8 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen bg-background text-foreground">
       <header className="relative z-[6]">
         <nav className="container mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-6">
-          <Link to="/" aria-label="Creant, ir al inicio" className="text-foreground">
+          {/* py-2 -my-2 agranda el area tocable sin mover el logo de lugar */}
+          <Link to="/" aria-label="Creant, ir al inicio" className="-my-2 py-2 text-foreground">
             <img src={logotipo} alt="Creant" className="h-7 w-auto md:h-8" />
           </Link>
 
@@ -40,7 +41,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
               <Link
                 key={s.a}
                 to={s.a}
-                className={`border-b pb-0.5 transition-colors hover:text-foreground ${
+                className={`border-b py-2 transition-colors hover:text-foreground ${
                   pathname === s.a
                     ? "border-primary text-foreground"
                     : "border-transparent text-muted-foreground hover:border-primary"
@@ -51,7 +52,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
             ))}
           </div>
 
-          <Button onClick={irAContacto} className="rounded-none font-semibold">Hablemos</Button>
+          <Button onClick={irAContacto} className="h-11 rounded-none font-semibold">Hablemos</Button>
         </nav>
       </header>
 
@@ -60,20 +61,20 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
       <footer className="grano relative bg-tunel pb-10 pt-14 text-center text-background/55">
         <div className="mb-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm md:hidden">
           {SECCIONES.map((s) => (
-            <Link key={s.a} to={s.a} className="transition-colors hover:text-primary">{s.texto}</Link>
+            <Link key={s.a} to={s.a} className="px-2 py-3 transition-colors hover:text-primary">{s.texto}</Link>
           ))}
         </div>
         <div className="mb-4 flex items-center justify-center gap-6">
           <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer"
-             aria-label="Instagram de Creant" className="transition-colors hover:text-primary">
+             aria-label="Instagram de Creant" className="-m-3 p-3 transition-colors hover:text-primary">
             <Instagram className="h-5 w-5" aria-hidden="true" />
           </a>
           <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer"
-             aria-label="TikTok de Creant" className="text-xs font-bold transition-colors hover:text-primary">
+             aria-label="TikTok de Creant" className="-m-3 flex min-h-[44px] items-center p-3 text-xs font-bold transition-colors hover:text-primary">
             TikTok
           </a>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("pie")}
-             aria-label="Escribinos por WhatsApp" className="transition-colors hover:text-primary">
+             aria-label="Escribinos por WhatsApp" className="-m-3 p-3 transition-colors hover:text-primary">
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>

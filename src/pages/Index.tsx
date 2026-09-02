@@ -200,11 +200,11 @@ const Index = () => {
           <ContactForm />
 
           <div className="mt-12 flex flex-col items-center justify-center gap-5 text-sm text-background/60 sm:flex-row sm:gap-8">
-            <a href="mailto:creantagency.contacto@gmail.com" className="flex items-center gap-2 transition-colors hover:text-primary">
+            <a href="mailto:creantagency.contacto@gmail.com" className="flex items-center gap-2 py-3 transition-colors hover:text-primary">
               <Mail className="h-4 w-4" /> creantagency.contacto@gmail.com
             </a>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("sección contacto")}
-               className="flex items-center gap-2 transition-colors hover:text-primary">
+               className="flex items-center gap-2 py-3 transition-colors hover:text-primary">
               <MessageCircle className="h-4 w-4" /> WhatsApp
             </a>
           </div>

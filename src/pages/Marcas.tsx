@@ -143,7 +143,7 @@ const Marcas = () => {
           <div className="container mx-auto max-w-4xl px-6">
             <button
               onClick={() => setAbierta(null)}
-              className="font-mono text-[0.66rem] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
+              className="-m-2 p-2 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
             >
               ← Volver a las marcas
             </button>

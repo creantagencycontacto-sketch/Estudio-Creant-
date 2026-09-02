@@ -203,7 +203,7 @@ const Pauta = () => {
           <div className="mb-10 flex flex-wrap gap-2">
             {RUBROS.map((r) => (
               <button key={r} onClick={() => setRubro(r)}
-                className={`border px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] transition-colors ${
+                className={`flex min-h-[44px] items-center border px-4 font-mono text-[0.68rem] uppercase tracking-[0.12em] transition-colors ${
                   rubro === r ? "border-primary bg-primary text-foreground"
                               : "border-background/25 text-background/70 hover:border-primary hover:text-background"}`}>
                 {r}
