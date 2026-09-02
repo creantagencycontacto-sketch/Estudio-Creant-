@@ -55,7 +55,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
             />
           </Link>
 
-          <div className="hidden items-center gap-6 text-sm lg:flex">
+          <div className="hidden items-center gap-6 text-sm md:flex">
             {SECCIONES.map((s) => (
               <Link
                 key={s.a}
@@ -78,10 +78,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
       {children}
 
       <footer className="grano relative bg-tunel pb-10 pt-14 text-center text-background/55">
-        {/* Con cuatro secciones la barra de arriba ya no entra en tablet, así que
-            se esconde antes (lg) y el menú del pie aparece hasta ese mismo ancho.
-            Si los dos cortaran en md, entre 768 y 1024 no habría menú en ningún lado. */}
-        <div className="mb-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm lg:hidden">
+        <div className="mb-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm md:hidden">
           {SECCIONES.map((s) => (
             <Link key={s.a} to={s.a} className="px-2 py-3 transition-colors hover:text-primary">{s.texto}</Link>
           ))}
