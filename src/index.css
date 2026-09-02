@@ -122,6 +122,17 @@
     color: hsl(var(--background) / 0.72);
   }
 
+  /* El sendero. En pantalla grande entra completo; en celular se hace más
+     alto y recorta los costados, y así las obreras se agrandan en vez de
+     volverse una mota que no se entiende qué lleva. */
+  .sendero-hormigas {
+    width: 100%;
+    aspect-ratio: 1440 / 130;
+  }
+  @media (max-width: 640px) {
+    .sendero-hormigas { aspect-ratio: 1440 / 645; }
+  }
+
   /* Las obreras caminan por un sendero al borde de la tierra. */
   .hormiga {
     offset-path: path("M -40 96 C 250 62, 520 112, 800 74 S 1240 46, 1500 90");

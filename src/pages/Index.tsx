@@ -75,8 +75,8 @@ const Index = () => {
       <section className="grano relative overflow-hidden">
         {/* El sendero va en la franja libre de abajo: si cruzara el titular, las
             obreras caminarían tapadas por las letras. */}
-        <svg className="pointer-events-none absolute bottom-9 left-0 right-0 z-[4] w-full"
-             style={{ aspectRatio: "1440 / 130" }} viewBox="0 0 1440 130" aria-hidden="true">
+        <svg className="sendero-hormigas pointer-events-none absolute bottom-9 left-0 right-0 z-[4]"
+             viewBox="0 0 1440 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <path d="M -40 96 C 250 62, 520 112, 800 74 S 1240 46, 1500 90"
                 fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="1.1"
                 strokeDasharray="3 8" opacity="0.45" />
@@ -93,7 +93,7 @@ const Index = () => {
 
         <div className="container relative z-[3] mx-auto max-w-6xl px-6 pt-6">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground">
-            Estudio de marca y pauta · Navarro, Buenos Aires
+            Estudio de marca y pauta
           </p>
 
           <h1 className="mt-4 font-display text-[clamp(2.9rem,11vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.045em]">
@@ -109,7 +109,7 @@ const Index = () => {
           </motion.p>
 
           <motion.div variants={aparece} initial="hidden" animate="visible" custom={2}
-                      className="mb-16 mt-10 flex flex-wrap gap-3">
+                      className="mb-40 mt-10 flex flex-wrap gap-3 sm:mb-16">
             <Button asChild size="lg" className="h-14 rounded-none px-8 text-base font-semibold">
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("hero")}>
                 Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
