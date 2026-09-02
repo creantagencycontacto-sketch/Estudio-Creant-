@@ -17,9 +17,11 @@ const queryClient = new QueryClient();
  * con doble click desde una carpeta, el navegador no deja cambiar la URL:
  * ahí usamos rutas con # para que la vista previa funcione igual.
  */
-const Router = typeof window !== "undefined" && window.location.protocol === "file:"
-  ? HashRouter
-  : BrowserRouter;
+const esVistaPrevia =
+  typeof window !== "undefined" &&
+  (window.location.protocol === "file:" || window.location.pathname.startsWith("/preview"));
+
+const Router = esVistaPrevia ? HashRouter : BrowserRouter;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

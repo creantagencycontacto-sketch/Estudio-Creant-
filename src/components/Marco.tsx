@@ -32,7 +32,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
       <header className="relative z-[6]">
         <nav className="container mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-6">
           {/* py-2 -my-2 agranda el area tocable sin mover el logo de lugar */}
-          <Link to="/" aria-label="Creant, ir al inicio" className="-my-2 py-2 text-foreground">
+          <Link to="/" aria-label="Creant, ir al inicio" className="-my-2 py-2 text-primary">
             <img src={logotipo} alt="Creant" className="h-7 w-auto md:h-8" />
           </Link>
 
