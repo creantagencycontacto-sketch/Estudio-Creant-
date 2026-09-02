@@ -32,8 +32,26 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
       <header className="relative z-[6]">
         <nav className="container mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-6">
           {/* py-2 -my-2 agranda el area tocable sin mover el logo de lugar */}
-          <Link to="/" aria-label="Creant, ir al inicio" className="-my-2 py-2 text-primary">
-            <img src={logotipo} alt="Creant" className="h-7 w-auto md:h-8" />
+          <Link to="/" aria-label="Creant, ir al inicio" className="-my-2 py-2">
+            {/* El logotipo va como máscara y no como imagen. Una imagen se dibuja
+                aislada de la página: el currentColor del SVG no encuentra color
+                del que heredar y cae al negro. Como máscara, el color lo pone el
+                fondo del elemento, así que se puede pintar desde el CSS. */}
+            <span
+              aria-hidden="true"
+              className="block h-[30px] bg-primary md:h-[34px]"
+              style={{
+                aspectRatio: "779 / 449",
+                WebkitMaskImage: `url(${logotipo})`,
+                maskImage: `url(${logotipo})`,
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+              }}
+            />
           </Link>
 
           <div className="hidden items-center gap-7 text-sm md:flex">
