@@ -26,7 +26,6 @@ type Marca = {
   nombre: string;
   logo: string;
   rubro: string;
-  año: string;
   concepto: string;
   paleta: string[];
   relato: string;
@@ -34,49 +33,49 @@ type Marca = {
 
 const MARCAS: Marca[] = [
   {
-    nombre: "Grannie", logo: mGrannie, rubro: "Mermeladas artesanales", año: "Mosaic",
+    nombre: "Grannie", logo: mGrannie, rubro: "Mermeladas artesanales",
     concepto: "Un sistema que se estira a siete sabores sin romperse",
     paleta: ["#8B2A2A", "#E8B33C", "#2D4A7C", "#F0E4C8"],
     relato: "Siete sabores, siete mundos de color, un solo sistema. La fruta ilustrada, la onda del dulce cayendo y el sello «hecho a mano con amor» se repiten en todas; lo único que cambia es la paleta. Se entregó con las planchas armadas para imprenta, listas para producir.",
   },
   {
-    nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Panadería artesanal", año: "Mosaic",
+    nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Panadería artesanal",
     concepto: "El personaje antes que el logo",
     paleta: ["#8C8F41", "#321F17", "#FFF2DE"],
     relato: "No le faltaba un logo, le faltaba una cara. Desarrollé a la Reyna alzando un budín —de la referencia al vector, limpiando y ajustando hasta que entrara dentro del monograma— para que la marca tuviera personaje y no solo letras. Es la que más se aplica sola: la ves en la bolsa y ya sabés de qué se trata.",
   },
   {
-    nombre: "Malvada Shoes", logo: mMalvada, rubro: "Calzado y accesorios", año: "Mosaic",
+    nombre: "Malvada Shoes", logo: mMalvada, rubro: "Calzado y accesorios",
     concepto: "El color se gana, no se reparte",
     paleta: ["#C7FF0F", "#F887C0", "#8F7BC1", "#111111"],
     relato: "Malvada no quería ser prolija. La base quedó en blanco y negro para que la marca no canse, y el color entra como tropezones de dopamina: lima, rosa, violeta, siempre por sorpresa. La regla que le dejé es de una línea — si el color está en todas partes, deja de llamar la atención en ninguna.",
   },
   {
-    nombre: "NMO Perfumería", logo: mNmo, rubro: "Perfumería · rebranding", año: "Mosaic",
+    nombre: "NMO Perfumería", logo: mNmo, rubro: "Perfumería · rebranding",
     concepto: "El nombre ya tenía la respuesta",
     paleta: ["#98CFF1", "#61A5DA", "#32536D"],
     relato: "No Me Olvides ya tenía una flor en su logo original. En vez de descartarla la rediseñé: la nomeolvides pasó a ser el isotipo y la marca ganó un símbolo propio que se sostiene incluso a cincuenta píxeles. Era un rebranding, no una marca nueva — la clienta de siempre tenía que reconocerla y la nueva, elegirla.",
   },
   {
-    nombre: "Resistencia", logo: mResistencia, rubro: "Indumentaria deportiva", año: "Creant",
+    nombre: "Resistencia", logo: mResistencia, rubro: "Indumentaria deportiva",
     concepto: "Dos colores, cero decoración",
     paleta: ["#C4FF00", "#0A0A0A", "#FFFFFF"],
     relato: "Ropa deportiva para gente que entrena de verdad, no para modelos de catálogo. Por eso el sistema es negro y lima: dos colores y todo contraste. La R dentro del círculo funciona como sello — se borda, se estampa y se imprime chica en la etiqueta sin perder nada.",
   },
   {
-    nombre: "Astegiano", logo: mAstegiano, rubro: "Neumáticos", año: "Creant",
+    nombre: "Astegiano", logo: mAstegiano, rubro: "Neumáticos",
     concepto: "La marca dentro de la banda de rodamiento",
     paleta: ["#FFED00", "#151912", "#A6A6A6"],
     relato: "El isotipo es una A dentro de anillos concéntricos que leen como la banda de un neumático. Amarillo y negro, la combinación del rubro, usada con orden: en un mercado donde todos gritan, la marca gana por estar mejor construida, no por gritar más fuerte.",
   },
   {
-    nombre: "Magna Fitness", logo: mMagna, rubro: "Indumentaria femenina", año: "Mosaic",
+    nombre: "Magna Fitness", logo: mMagna, rubro: "Indumentaria femenina",
     concepto: "Magna significa «fuera de lo común»",
     paleta: ["#D90416", "#F2949C", "#F2F2F2"],
     relato: "El nombre define la marca y el monograma lo sintetiza. Ropa para mujeres que entrenan en serio y necesitan que la prenda no las estorbe. El monograma se usa solo cuando el nombre completo no entra: perfil, etiqueta, botón.",
   },
   {
-    nombre: "Cherry Nails", logo: mCherry, rubro: "Manicuría", año: "Mosaic",
+    nombre: "Cherry Nails", logo: mCherry, rubro: "Manicuría",
     concepto: "Una guía corta para una marca chica",
     paleta: ["#E63462", "#F5A9C0", "#1A1A1A"],
     relato: "No todos los clientes necesitan un manual de trece páginas. Cherry pidió una guía mínima —logotipo, paleta, tipografías y aplicación en redes— y eso fue lo que se entregó. Saber cuándo entregar menos también es parte del oficio.",
@@ -150,7 +149,7 @@ const Marcas = () => {
             </button>
 
             <p className="mt-8 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">
-              {abierta.rubro} · {abierta.año}
+              {abierta.rubro}
             </p>
             <h2 className="mt-3 font-display text-[clamp(2rem,6vw,3.6rem)] font-extrabold uppercase leading-[0.95] tracking-[-0.035em]">
               {abierta.nombre}

@@ -5,96 +5,170 @@ import Marco from "@/components/Marco";
 /**
  * Portfolio de pauta.
  *
- * El contenido sale del relevamiento de Juan sobre las 11 cuentas del Business.
- * Dos reglas que vienen de ese documento y conviene no romper:
+ * Regla de escritura: la tarjeta se lee de arriba a abajo como una historia
+ * —qué necesitaba el cliente, qué hicimos, qué pasó— y recién al final aparece
+ * el número. Nadie que contrate una agencia sabe qué es un CTR: si el dato
+ * necesita un glosario, la tarjeta está mal escrita.
  *
- *  1. Cada anuncio se juzga por su rol en el embudo. Los de captación se miden
- *     por alcance, CPM y CTR; los de conversión por costo por conversación.
- *     Por eso cada tarjeta tiene UN dato protagonista y dos de apoyo.
- *  2. "Conversaciones", nunca "ventas": casi toda la cartera cierra por
- *     WhatsApp, fuera de la plataforma. Y ROAS solo donde hay Píxel.
+ * Dos reglas que vienen del relevamiento de Juan y conviene no romper:
+ *  · "Conversaciones", nunca "ventas": casi toda la cartera cierra por WhatsApp,
+ *    fuera de la plataforma. Y ROAS solo donde el Píxel mide compras.
+ *  · Cada moneda se muestra como se invirtió, sin convertir.
+ *
+ * Ningún cliente aparece con nombre: todos van por rubro. La única marca
+ * nombrada es la nuestra.
  */
 
+type Grafico =
+  | { tipo: "puntos"; llenos: number; leyenda: string }
+  | { tipo: "barras"; unidad: string; datos: { etiqueta: string; valor: number }[]; menorEsMejor?: boolean };
+
 type Caso = {
-  marca: string;
-  anonima?: boolean;
   rubro: string;
-  bajada: string;
-  protagonista: { dato: string; que: string };
-  apoyo: { dato: string; que: string }[];
-  relato: string;
+  titulo: string;
+  contexto: string;
+  objetivo: string;
+  comoLoHicimos: string;
+  resultado: string;
+  queSignifica: string;
+  grafico: Grafico;
   moneda: "ARS" | "USD";
 };
 
 const CASOS: Caso[] = [
   {
-    marca: "Satori Neumáticos", rubro: "Neumáticos", moneda: "ARS",
-    bajada: "Venta mayorista y minorista de neumáticos de camión · cierre por WhatsApp",
-    protagonista: { dato: "$96", que: "por conversación B2B" },
-    apoyo: [{ dato: "5,70%", que: "CTR" }, { dato: "460", que: "conversaciones" }],
-    relato: "La cuenta más profunda de la cartera: 3.368 conversaciones documentadas solo en los veinte anuncios de mayor inversión. El anuncio «Distribuidor» es probablemente el mejor que hicimos — noventa y seis pesos por una conversación B2B es un número que no necesita explicación.",
+    rubro: "Neumáticos", titulo: "Neumáticos de camión", moneda: "ARS",
+    contexto: "Venta mayorista y minorista · cierre por WhatsApp",
+    objetivo: "Que los talleres y revendedores escriban para pedir precio, sin salir a buscarlos uno por uno.",
+    comoLoHicimos: "Dejamos de hablarle al consumidor final y le hablamos al que compra por volumen. Probamos tres piezas distintas y sostuvimos la que traía consultas más baratas.",
+    resultado: "$96 por consulta",
+    queSignifica: "Cada persona que escribió costó menos de cien pesos. Es el mejor número que consiguió la agencia en toda su historia.",
+    grafico: { tipo: "barras", unidad: "$ por consulta", menorEsMejor: true,
+      datos: [{ etiqueta: "Pieza ganadora", valor: 96 }, { etiqueta: "Segunda", valor: 209 }, { etiqueta: "Tercera", valor: 313 }] },
   },
   {
-    marca: "CEA Electrónica", rubro: "Automotor", moneda: "ARS",
-    bajada: "Ecosistema de tres cuentas · equipos de diagnóstico, tienda online y cursos",
-    protagonista: { dato: "628.000", que: "reproducciones completas a $0,52" },
-    apoyo: [{ dato: "895.000", que: "impresiones" }, { dato: "697", que: "conversaciones en un mes" }],
-    relato: "Acá el mérito no es un anuncio, es la escala. Manejamos el ecosistema completo y solo en julio fueron más de ochocientos ochenta mil pesos de inversión administrada. Y tiene el caso de contenido más masivo que hicimos: dos videos educativos con 628 mil reproducciones completas a cincuenta y dos centavos cada una.",
+    rubro: "Automotor", titulo: "Electrónica automotriz", moneda: "ARS",
+    contexto: "Ecosistema de tres cuentas · equipos, tienda online y cursos",
+    objetivo: "Sostener tres negocios distintos al mismo tiempo sin que se pisen entre ellos.",
+    comoLoHicimos: "En vez de publicidad directa hicimos contenido que enseña el oficio. Primero el técnico aprende algo, después conoce la marca que se lo enseñó.",
+    resultado: "7 de cada 10 lo miraron entero",
+    queSignifica: "628 mil personas vieron el video completo, a cincuenta y dos centavos cada una. No lo saltearon: se quedaron.",
+    grafico: { tipo: "puntos", llenos: 70, leyenda: "de cada 100 personas que empezaron el video, lo terminaron" },
   },
   {
-    marca: "Epic", rubro: "E-commerce", moneda: "ARS",
-    bajada: "Tienda online del grupo CEA · la única cuenta con compra medida por Píxel",
-    protagonista: { dato: "16", que: "compras web con CPA de $4.365" },
-    apoyo: [{ dato: "3,38%", que: "CTR" }, { dato: "357", que: "conversaciones a $123" }],
-    relato: "La única cuenta de la cartera donde el Píxel mide compras de verdad, así que es la única donde podemos hablar de retorno. El resto cierra por WhatsApp, fuera de la plataforma: ahí medimos conversaciones, que es lo honesto.",
+    rubro: "E-commerce", titulo: "Tienda de equipos técnicos", moneda: "ARS",
+    contexto: "La única cuenta donde el Píxel mide la compra completa",
+    objetivo: "Vender equipos caros directamente por la web, no solo generar consultas.",
+    comoLoHicimos: "Instalamos la medición de compra en la tienda y reorientamos las campañas hacia quien efectivamente compraba, no hacia quien solo miraba.",
+    resultado: "16 compras online",
+    queSignifica: "De cada veintidós personas que escribieron, una terminó comprando sin hablar con nadie. En el resto de la cartera la venta se cierra por WhatsApp.",
+    grafico: { tipo: "barras", unidad: "personas",
+      datos: [{ etiqueta: "Escribieron", valor: 357 }, { etiqueta: "Compraron en la web", valor: 16 }] },
   },
   {
-    marca: "My Magical Mili", rubro: "Viajes", moneda: "USD",
-    bajada: "Agencia de viajes Disney & Universal · mercado hispano",
-    protagonista: { dato: "USD 0,44", que: "por conversación" },
-    apoyo: [{ dato: "39 → 126", que: "conversaciones en tres meses" }, { dato: "misma", que: "inversión mensual" }],
-    relato: "La curva más limpia que tenemos: treinta y nueve conversaciones en mayo, ochenta y cinco en junio, ciento veintiséis en julio — con la misma plata todos los meses. El objetivo de la cuenta era un dólar cincuenta por conversación y terminamos en cuarenta y cuatro centavos.",
+    rubro: "Viajes", titulo: "Viajes a parques temáticos", moneda: "USD",
+    contexto: "Mercado hispano · consultas por WhatsApp",
+    objetivo: "Conseguir más consultas de familias sin aumentar un peso el presupuesto mensual.",
+    comoLoHicimos: "Pusimos el precio a la vista en el anuncio. Tres meses seguidos ganó la pieza que decía cuánto salía el viaje, contra las que lo escondían.",
+    resultado: "El triple de consultas con la misma plata",
+    queSignifica: "De 39 consultas en mayo a 126 en julio, invirtiendo exactamente lo mismo todos los meses.",
+    grafico: { tipo: "barras", unidad: "consultas por mes",
+      datos: [{ etiqueta: "Mayo", valor: 39 }, { etiqueta: "Junio", valor: 85 }, { etiqueta: "Julio", valor: 126 }] },
   },
   {
-    marca: "Medicina estética", anonima: true, rubro: "Estética", moneda: "ARS",
-    bajada: "Centro médico estético · consultas por WhatsApp",
-    protagonista: { dato: "10,76%", que: "CTR" },
-    apoyo: [{ dato: "1.774", que: "visitas a la web a $40" }, { dato: "854", que: "conversaciones en la cuenta" }],
-    relato: "Un CTR de dos dígitos en uno de los rubros más caros para pautar. Va sin nombre porque es salud y la comunicación de la clienta es deliberadamente cuidada — el mérito acá es del rubro, no de la marca.",
+    rubro: "Estética", titulo: "Medicina estética", moneda: "ARS",
+    contexto: "Centro médico · sin precios públicos",
+    objetivo: "Llenar la agenda de consultas en un rubro donde la clienta no quiere publicar precios.",
+    comoLoHicimos: "Contenido que explica el tratamiento en vez de ofertarlo. El único paso siguiente posible es preguntar.",
+    resultado: "11 de cada 100 tocaron el anuncio",
+    queSignifica: "En un rubro donde la publicidad es carísima, una de cada nueve personas que lo vio quiso saber más.",
+    grafico: { tipo: "puntos", llenos: 11, leyenda: "de cada 100 personas que vieron el anuncio, tocaron" },
   },
   {
-    marca: "Refrigeración industrial", anonima: true, rubro: "Servicios B2B", moneda: "ARS",
-    bajada: "Servicio técnico de refrigeración civil e industrial · CABA y GBA",
-    protagonista: { dato: "13,49%", que: "CTR — el más alto de la cartera" },
-    apoyo: [{ dato: "709", que: "visitas a $27,51" }, { dato: "814", que: "visitas de perfil a $16,64" }],
-    relato: "Uno de cada siete que vio el anuncio lo tocó. En servicio técnico B2B, un rubro donde nadie espera que la pauta funcione. Es el mejor CTR que registramos en toda la agencia.",
+    rubro: "Servicios B2B", titulo: "Refrigeración industrial", moneda: "ARS",
+    contexto: "Servicio técnico civil e industrial · CABA y GBA",
+    objetivo: "Que las empresas llamen para el mantenimiento antes de que el equipo se rompa, no después.",
+    comoLoHicimos: "En vez de ofrecer el servicio mostramos el problema: qué pasa cuando no hacés mantenimiento. El miedo a la rotura vende más que el descuento.",
+    resultado: "13 de cada 100 tocaron el anuncio",
+    queSignifica: "Es el número más alto de toda la cartera. Y en un rubro donde nadie espera que la publicidad funcione.",
+    grafico: { tipo: "puntos", llenos: 13, leyenda: "de cada 100 personas que vieron el anuncio, tocaron" },
   },
   {
-    marca: "Salud mental", anonima: true, rubro: "Salud", moneda: "USD",
-    bajada: "Psiquiatría y mindfulness · público hispano",
-    protagonista: { dato: "USD 0,27", que: "de CPM" },
-    apoyo: [{ dato: "56.063", que: "personas con USD 20" }, { dato: "USD 0,01", que: "por visita de perfil" }],
-    relato: "El alcance más barato que conseguimos: veintisiete centavos de dólar cada mil impresiones. En salud mental el contenido de identificación emocional rinde distinto, y estos números lo muestran.",
+    rubro: "Salud", titulo: "Salud mental", moneda: "USD",
+    contexto: "Consultorio online · público hispano",
+    objetivo: "Llegar a mucha gente con poquísimo presupuesto, en un tema donde hay que hablar con cuidado.",
+    comoLoHicimos: "Contenido de identificación —situaciones cotidianas, no diagnósticos ni promesas—. La gente se reconoce y comparte, y eso abarata el alcance.",
+    resultado: "56.000 personas con 20 dólares",
+    queSignifica: "Llegar a mil personas costó veintisiete centavos. Es el alcance más barato que conseguimos.",
+    grafico: { tipo: "barras", unidad: "personas alcanzadas",
+      datos: [{ etiqueta: "Pieza que funcionó", valor: 56063 }, { etiqueta: "Pieza anterior", valor: 9508 }] },
   },
   {
-    marca: "Creant", rubro: "Agencia", moneda: "ARS",
-    bajada: "Nuestra propia marca · nos aplicamos lo mismo que vendemos",
-    protagonista: { dato: "11,34%", que: "CTR" },
-    apoyo: [{ dato: "736", que: "visitas a la web a $32" }, { dato: "23.602", que: "personas alcanzadas" }],
-    relato: "Números chicos al lado de los clientes, y va igual. El punto no es el volumen: es que invertimos en nuestra propia marca y nos rinde. Si no lo hiciéramos, no tendríamos con qué venderlo.",
+    rubro: "Agencia", titulo: "Creant", moneda: "ARS",
+    contexto: "Nuestra propia marca",
+    objetivo: "Probar en casa lo que vendemos afuera. Si no nos funciona a nosotros, no lo podemos ofrecer.",
+    comoLoHicimos: "Promocionamos piezas que ya habían funcionado solas en el perfil, en vez de fabricar anuncios nuevos desde cero.",
+    resultado: "11 de cada 100 tocaron el anuncio",
+    queSignifica: "Números chicos al lado de los clientes, y va igual: la agencia también invierte en su propia marca.",
+    grafico: { tipo: "puntos", llenos: 11, leyenda: "de cada 100 personas que vieron el anuncio, tocaron" },
   },
 ];
 
 const RUBROS = ["Todos", ...Array.from(new Set(CASOS.map((c) => c.rubro)))];
 
+/** Cien puntitos, y se pintan los que corresponden. Un porcentaje explicado
+ *  con palabras se olvida; contado en puntos se entiende de un vistazo. */
+const Puntos = ({ llenos, leyenda }: { llenos: number; leyenda: string }) => (
+  <div>
+    <div className="grid w-fit grid-cols-10 gap-[3px]">
+      {Array.from({ length: 100 }, (_, i) => (
+        <span key={i} className={`h-[7px] w-[7px] ${i < llenos ? "bg-primary" : "bg-background/20"}`} />
+      ))}
+    </div>
+    <p className="mt-3 text-xs leading-relaxed text-background/55">
+      <b className="font-semibold text-primary">{llenos}</b> {leyenda}
+    </p>
+  </div>
+);
+
+/** Barras comparadas. Cuando menos es mejor —un costo— se aclara, porque si no
+ *  la barra más larga se lee como la mejor y es al revés. */
+const Barras = ({ datos, unidad, menorEsMejor }: Extract<Grafico, { tipo: "barras" }>) => {
+  const max = Math.max(...datos.map((d) => d.valor));
+  const mejor = menorEsMejor ? Math.min(...datos.map((d) => d.valor)) : max;
+  return (
+    <div>
+      <div className="flex flex-col gap-3">
+        {datos.map((d) => (
+          <div key={d.etiqueta}>
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="text-xs text-background/60">{d.etiqueta}</span>
+              <span className={`font-display text-sm font-extrabold tabular-nums ${d.valor === mejor ? "text-primary" : "text-background/70"}`}>
+                {d.valor.toLocaleString("es-AR")}
+              </span>
+            </div>
+            <div className="mt-1 h-2 w-full bg-background/15">
+              <div
+                className={`h-full ${d.valor === mejor ? "bg-primary" : "bg-background/35"}`}
+                style={{ width: `${Math.max(4, (d.valor / max) * 100)}%` }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-xs text-background/45">
+        {unidad}{menorEsMejor ? " · más corto es mejor" : ""}
+      </p>
+    </div>
+  );
+};
+
 const Pauta = () => {
   const [rubro, setRubro] = useState("Todos");
-  const [abierta, setAbierta] = useState<string | null>(null);
   const visibles = rubro === "Todos" ? CASOS : CASOS.filter((c) => c.rubro === rubro);
 
   return (
     <Marco>
-      {/* Cabecera con los números de toda la cartera */}
       <section className="grano relative pb-16 pt-6">
         <div className="container mx-auto max-w-6xl px-6">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground">
@@ -103,15 +177,15 @@ const Pauta = () => {
           <h1 className="mt-3 max-w-4xl font-display text-[clamp(2.4rem,8vw,5.5rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.04em]">
             Lo que hicimos<br /><span className="text-accent">con la plata de otros</span>
           </h1>
-          <p className="mt-6 max-w-[34rem] text-lg text-muted-foreground">
-            Once cuentas publicitarias, ocho rubros. Cada caso muestra el número que
-            corresponde a lo que ese anuncio tenía que lograr — no el que queda más lindo.
+          <p className="mt-6 max-w-[36rem] text-lg text-muted-foreground">
+            Once cuentas publicitarias, ocho rubros. Cada caso cuenta qué necesitaba
+            el cliente, qué hicimos y qué pasó. Sin jerga y sin números inflados.
           </p>
 
           <div className="mt-12 grid grid-cols-2 gap-px bg-border md:grid-cols-4">
             {[
-              { n: "+6.500", q: "conversaciones iniciadas" },
-              { n: "+5M", q: "impresiones servidas" },
+              { n: "+6.500", q: "personas escribieron" },
+              { n: "+5M", q: "veces se mostraron los anuncios" },
               { n: "11", q: "cuentas gestionadas" },
               { n: "8", q: "rubros distintos" },
             ].map((d) => (
@@ -124,85 +198,66 @@ const Pauta = () => {
         </div>
       </section>
 
-      {/* Los casos, en la cámara */}
       <section className="grano relative bg-tunel py-16 text-background">
         <div className="container mx-auto max-w-6xl px-6">
           <div className="mb-10 flex flex-wrap gap-2">
             {RUBROS.map((r) => (
-              <button
-                key={r}
-                onClick={() => setRubro(r)}
+              <button key={r} onClick={() => setRubro(r)}
                 className={`border px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] transition-colors ${
-                  rubro === r
-                    ? "border-primary bg-primary text-foreground"
-                    : "border-background/25 text-background/70 hover:border-primary hover:text-background"
-                }`}
-              >
+                  rubro === r ? "border-primary bg-primary text-foreground"
+                              : "border-background/25 text-background/70 hover:border-primary hover:text-background"}`}>
                 {r}
               </button>
             ))}
           </div>
 
           <div className="grid gap-px bg-background/15 md:grid-cols-2">
-            {visibles.map((c, i) => {
-              const abiertaEsta = abierta === c.marca;
-              return (
-                <motion.article
-                  key={c.marca}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.45, delay: (i % 2) * 0.08 }}
-                  className="bg-tunel p-8"
-                >
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h2 className="font-display text-2xl font-extrabold uppercase tracking-tight">{c.marca}</h2>
-                    <span className="shrink-0 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-primary">{c.moneda}</span>
-                  </div>
-                  <p className="mt-1 text-sm text-background/55">{c.bajada}</p>
-                  {c.anonima && (
-                    <p className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-background/40">
-                      Sin nombre a pedido del cliente
-                    </p>
-                  )}
+            {visibles.map((c, i) => (
+              <motion.article key={c.titulo}
+                initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: (i % 2) * 0.08 }}
+                className="flex flex-col bg-tunel p-8">
 
-                  <p className="mt-7 font-display text-[clamp(2.2rem,5vw,3.2rem)] font-extrabold leading-none tracking-tight text-primary">
-                    {c.protagonista.dato}
+                <div className="flex items-baseline justify-between gap-3">
+                  <h2 className="font-display text-2xl font-extrabold uppercase leading-tight tracking-tight">{c.titulo}</h2>
+                  <span className="shrink-0 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-primary">{c.moneda}</span>
+                </div>
+                <p className="mt-1 text-sm text-background/50">{c.contexto}</p>
+
+                <div className="mt-7 space-y-5">
+                  <div>
+                    <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-primary">Qué necesitaba</p>
+                    <p className="mt-1.5 leading-relaxed text-background/80">{c.objetivo}</p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-primary">Qué hicimos</p>
+                    <p className="mt-1.5 leading-relaxed text-background/80">{c.comoLoHicimos}</p>
+                  </div>
+                </div>
+
+                <div className="mt-7 border-t border-background/15 pt-6">
+                  <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-primary">Qué pasó</p>
+                  <p className="mt-2 font-display text-[clamp(1.6rem,3.5vw,2.2rem)] font-extrabold leading-none tracking-tight">
+                    {c.resultado}
                   </p>
-                  <p className="mt-2 text-sm text-background/70">{c.protagonista.que}</p>
+                  <p className="mt-3 leading-relaxed text-background/65">{c.queSignifica}</p>
+                </div>
 
-                  <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-background/15 pt-5">
-                    {c.apoyo.map((a) => (
-                      <div key={a.que}>
-                        <p className="font-display text-lg font-extrabold tracking-tight">{a.dato}</p>
-                        <p className="font-mono text-[0.6rem] uppercase tracking-[0.1em] text-background/50">{a.que}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => setAbierta(abiertaEsta ? null : c.marca)}
-                    aria-expanded={abiertaEsta}
-                    className="mt-6 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-primary transition-opacity hover:opacity-75"
-                  >
-                    {abiertaEsta ? "Cerrar" : "Cómo se logró →"}
-                  </button>
-
-                  {abiertaEsta && (
-                    <p className="mt-4 border-l-2 border-primary pl-4 leading-relaxed text-background/80">
-                      {c.relato}
-                    </p>
-                  )}
-                </motion.article>
-              );
-            })}
+                <div className="mt-7">
+                  {c.grafico.tipo === "puntos"
+                    ? <Puntos llenos={c.grafico.llenos} leyenda={c.grafico.leyenda} />
+                    : <Barras {...c.grafico} />}
+                </div>
+              </motion.article>
+            ))}
           </div>
 
           <p className="mt-12 max-w-[38rem] text-sm leading-relaxed text-background/45">
             Los números salen del Administrador de Anuncios de Meta y cubren toda la vida de
-            cada cuenta. Cada moneda se muestra como se invirtió, sin convertir. Decimos
-            «conversaciones» y no «ventas» porque casi toda la cartera cierra por WhatsApp,
-            fuera de la plataforma.
+            cada cuenta. Cada moneda se muestra como se invirtió, sin convertir. Y decimos
+            «consultas» y no «ventas» porque casi toda la cartera cierra por WhatsApp, fuera
+            de la plataforma: contar como venta algo que no podemos ver sería inventar.
           </p>
         </div>
       </section>
