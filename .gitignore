@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# carpeta temporal de la vista previa, se regenera con cada build
+dist-preview/
