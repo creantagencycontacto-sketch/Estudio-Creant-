@@ -90,7 +90,7 @@ const Marcas = () => {
       <section className="grano relative pb-14 pt-6">
         <div className="container mx-auto max-w-6xl px-6">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground">
-            Portfolio · Marcas desarrolladas
+            Portfolio · Branding e identidad
           </p>
           <h1 className="mt-3 max-w-4xl font-display text-[clamp(2.4rem,8vw,5.5rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.04em]">
             Salieron del hormiguero<br /><span className="text-accent">listas para trabajar</span>

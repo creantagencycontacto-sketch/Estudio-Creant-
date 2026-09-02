@@ -6,6 +6,7 @@ import { BrowserRouter, HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Marcas from "./pages/Marcas";
 import Pauta from "./pages/Pauta";
+import Contenido from "./pages/Contenido";
 import ComoTrabajamos from "./pages/ComoTrabajamos";
 import NotFound from "./pages/NotFound";
 import IrArriba from "./components/IrArriba";
@@ -32,8 +33,9 @@ const App = () => (
         <IrArriba />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/marcas" element={<Marcas />} />
-          <Route path="/pauta" element={<Pauta />} />
+          <Route path="/branding" element={<Marcas />} />
+          <Route path="/meta-ads" element={<Pauta />} />
+          <Route path="/contenido" element={<Contenido />} />
           <Route path="/como-trabajamos" element={<ComoTrabajamos />} />
           {/* Las rutas nuevas van arriba de esta, que atrapa todo lo demás. */}
           <Route path="*" element={<NotFound />} />

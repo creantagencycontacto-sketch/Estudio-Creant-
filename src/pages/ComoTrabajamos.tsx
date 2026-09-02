@@ -95,10 +95,10 @@ const ComoTrabajamos = () => (
 
         <div className="mt-14 flex flex-wrap gap-3">
           <Button asChild size="lg" className="h-14 rounded-none px-8 text-base font-semibold">
-            <Link to="/marcas">Ver las marcas</Link>
+            <Link to="/branding">Ver el branding</Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="h-14 rounded-none border-foreground px-8 text-base font-semibold">
-            <Link to="/pauta">Ver la pauta</Link>
+            <Link to="/meta-ads">Ver los Meta Ads</Link>
           </Button>
         </div>
       </div>

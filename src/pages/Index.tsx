@@ -52,9 +52,9 @@ const CARGAS = [
 ];
 
 const PUERTAS = [
-  { a: "/marcas", eyebrow: "Portfolio", titulo: "Marcas", texto: "Ocho identidades completas, de la panadería de barrio a la perfumería. Cada una con su sistema, su paleta y su historia." },
-  { a: "/pauta", eyebrow: "Portfolio", titulo: "Pauta", texto: "Once cuentas gestionadas y más de seis mil conversaciones. Los números reales de cada campaña, sin maquillar." },
-  { a: "/como-trabajamos", eyebrow: "El método", titulo: "Cómo trabajamos", texto: "Miramos antes de proponer, definimos con qué se mide y ajustamos con los números en la mano." },
+  { a: "/branding", eyebrow: "Portfolio", titulo: "Branding", texto: "Ocho identidades completas, de la panadería de barrio a la perfumería. Cada una con su sistema, su paleta y su historia." },
+  { a: "/meta-ads", eyebrow: "Portfolio", titulo: "Meta Ads", texto: "Once cuentas gestionadas y más de seis mil consultas. Los números reales de cada campaña, sin maquillar." },
+  { a: "/contenido", eyebrow: "Portfolio", titulo: "Contenido", texto: "Redes, video y piezas hechas con IA aplicada con criterio. El proceso completo, no solo el resultado." },
 ];
 
 const EQUIPO = [
@@ -116,7 +116,7 @@ const Index = () => {
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="h-14 rounded-none border-foreground px-8 text-base font-semibold">
-              <Link to="/marcas">Ver el trabajo</Link>
+              <Link to="/branding">Ver el trabajo</Link>
             </Button>
           </motion.div>
         </div>
