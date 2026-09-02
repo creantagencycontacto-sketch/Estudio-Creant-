@@ -39,7 +39,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
                 fondo del elemento, así que se puede pintar desde el CSS. */}
             <span
               aria-hidden="true"
-              className="block h-[30px] bg-primary md:h-[34px]"
+              className="block h-[34px] bg-primary md:h-[38px]"
               style={{
                 aspectRatio: "779 / 449",
                 WebkitMaskImage: `url(${logotipo})`,
@@ -97,7 +97,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
           </a>
         </div>
         <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em]">
-          © {new Date().getFullYear()} Creant · Navarro, Buenos Aires
+          © {new Date().getFullYear()} Creant · Buenos Aires, Argentina
         </p>
       </footer>
     </div>
