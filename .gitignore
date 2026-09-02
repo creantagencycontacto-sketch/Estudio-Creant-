@@ -25,3 +25,6 @@ dist-ssr
 
 # carpeta temporal de la vista previa
 dist-preview
+
+# carpeta temporal de la vista previa, se regenera con cada build
+dist-preview/
