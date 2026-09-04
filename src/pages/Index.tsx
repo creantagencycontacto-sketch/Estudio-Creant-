@@ -159,8 +159,12 @@ const Index = () => {
       <section id="equipo" className="grano relative py-24">
         <div className="container mx-auto max-w-6xl px-6">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground">Quiénes somos</p>
+          {/* No decimos cuantos somos: nombrar un numero fija un tamaño y
+              envejece en cuanto entra un colaborador mas. Lo que se promete
+              es que no hay capas intermedias, que es lo que al cliente le
+              importa y sigue siendo cierto si el equipo crece. */}
           <h2 className="mt-3 font-display text-[clamp(1.9rem,5vw,3.4rem)] font-extrabold uppercase leading-[0.95] tracking-[-0.035em]">
-            Somos dos<br />y atendés con nosotros
+            Atendés con<br />quien hace el trabajo
           </h2>
           <p className="mt-5 max-w-3xl leading-relaxed text-muted-foreground">
             No hay ejecutivo de cuentas ni pasamanos. Combinamos la identidad visual de Milagros

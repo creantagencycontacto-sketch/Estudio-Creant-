@@ -31,38 +31,30 @@ const PASOS = [
 
 const ComoTrabajamos = () => (
   <Marco>
+    {/* La cita es el titulo de la pagina. Va en caja alta y baja y no en
+        mayusculas como el resto de los h1: son quince palabras, y en
+        mayusculas a este tamaño se vuelve un paredon ilegible.
+        Las comillas quedan porque el titular tiene que leerse como cita
+        desde el primer golpe de vista; sin ellas parece una frase nuestra
+        y la firma de abajo llega tarde.
+        El tratamiento es sobrio a proposito: comillas gigantes y florituras
+        arriba de una frase contra la decoracion serian un chiste en contra
+        nuestra. */}
     <section className="grano relative pb-16 pt-6">
       <div className="container mx-auto max-w-6xl px-6">
         <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground">
           Cómo trabajamos
         </p>
-        <h1 className="mt-3 max-w-4xl font-display text-[clamp(2.4rem,8vw,5.5rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.04em]">
-          Somos dos<br /><span className="text-accent">y atendés con nosotros</span>
-        </h1>
-        <p className="mt-6 max-w-[34rem] text-lg text-muted-foreground">
-          No hay ejecutivo de cuentas ni pasamanos. Hablás con quien hace el trabajo,
-          de principio a fin.
-        </p>
-      </div>
-    </section>
-
-    {/* La cita va antes del recorrido porque es la razon del paso 01, no un
-        adorno: sin la linea que la conecta con el metodo seria exactamente lo
-        que la frase critica. Tratamiento sobrio a proposito — comillas grandes
-        y florituras arriba de una frase contra la decoracion serian un chiste
-        en contra nuestra. */}
-    <section className="grano relative bg-tunel py-20 text-background md:py-24">
-      <div className="container mx-auto max-w-6xl px-6">
-        <blockquote className="max-w-[46rem]">
-          <p className="font-display text-[clamp(1.5rem,4.2vw,2.9rem)] font-extrabold uppercase leading-[1.05] tracking-[-0.03em]">
-            El contenido precede al diseño. Diseño en ausencia de contenido no es
-            diseño, <span className="text-accent-claro">es decoración.</span>
-          </p>
-          <footer className="mt-7 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-background/55">
+        <blockquote className="mt-4 max-w-[44rem]">
+          <h1 className="font-display text-[clamp(1.85rem,5vw,3.5rem)] font-extrabold leading-[1.08] tracking-[-0.025em]">
+            «El contenido precede al diseño. Diseño en ausencia de contenido no es
+            diseño, <span className="text-accent">es decoración.»</span>
+          </h1>
+          <footer className="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
             Jeffrey Zeldman — fundador de The Web Standards Project
           </footer>
         </blockquote>
-        <p className="mt-10 max-w-[32rem] border-l-2 border-primary pl-5 leading-relaxed text-background/70">
+        <p className="mt-10 max-w-[33rem] border-l-2 border-primary pl-5 text-lg leading-relaxed text-muted-foreground">
           La tenemos en nuestros informes desde el primer día. Por eso el primer
           paso nunca es diseñar.
         </p>
@@ -96,6 +88,13 @@ const ComoTrabajamos = () => (
         <h2 className="font-display text-[clamp(1.7rem,4vw,2.6rem)] font-extrabold uppercase tracking-tight">
           Qué hacemos
         </h2>
+        {/* Estaba bajo el titular viejo. Sobrevive al cambio porque no habla de
+            cuantos somos sino de que no hay capas intermedias, y eso sigue
+            siendo cierto trabajando con colaboradores. */}
+        <p className="mt-4 max-w-[33rem] text-lg text-muted-foreground">
+          No hay ejecutivo de cuentas ni pasamanos. Hablás con quien hace el trabajo,
+          de principio a fin.
+        </p>
         <div className="mt-12 grid gap-px bg-border md:grid-cols-3">
           {SERVICIOS.map((s, i) => (
             <motion.div
