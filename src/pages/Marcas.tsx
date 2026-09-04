@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 import Marco from "@/components/Marco";
 
 import mGrannie from "@/assets/marcas/grannie.png";
@@ -15,8 +16,17 @@ import mCherry from "@/assets/marcas/cherry.png";
  * Portfolio de marcas.
  *
  * La grilla las muestra a todas en la misma tinta: cada identidad fue diseñada
- * para destacar, así que juntas y a todo color se pelean entre ellas. El color
- * aparece recién al abrir un caso, y por eso funciona como recompensa.
+ * para destacar, así que juntas y a todo color se pelean entre ellas.
+ *
+ * Al abrir una NO se despliega una ficha más abajo, que era el problema de la
+ * version anterior: la pagina no se movia y el usuario creia que su click no
+ * habia hecho nada. Ahora entra a pantalla completa y pintada con los colores
+ * de esa marca — el cambio es imposible de no ver, y ademas es lo unico que se
+ * parece a "entrar" a una identidad.
+ *
+ * Los ocho archivos de logo estan aplanados a un solo marron, asi que se usan
+ * como mascara y el color lo pone el CSS. Por eso cada marca puede mostrar su
+ * logo en su propio color sin tener ocho archivos mas.
  *
  * Nunca se publica el manual completo: se muestra el resultado, no la
  * herramienta con la que el cliente lo aplica.
@@ -29,6 +39,13 @@ type Marca = {
   concepto: string;
   paleta: string[];
   relato: string;
+  /** Colores del universo de la marca. Verificados en contraste AA. */
+  fondo: string;
+  tinta: string;
+  colorLogo: string;
+  /** Se muestran solo si estan cargadas. */
+  tipografias?: string[];
+  aplicaciones?: string[];
 };
 
 const MARCAS: Marca[] = [
@@ -36,51 +53,180 @@ const MARCAS: Marca[] = [
     nombre: "Grannie", logo: mGrannie, rubro: "Mermeladas artesanales",
     concepto: "Un sistema que se estira a siete sabores sin romperse",
     paleta: ["#8B2A2A", "#E8B33C", "#2D4A7C", "#F0E4C8"],
+    fondo: "#F0E4C8", tinta: "#3B1616", colorLogo: "#8B2A2A",
     relato: "Siete sabores, siete mundos de color, un solo sistema. La fruta ilustrada, la onda del dulce cayendo y el sello «hecho a mano con amor» se repiten en todas; lo único que cambia es la paleta. Se entregó con las planchas armadas para imprenta, listas para producir.",
   },
   {
     nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Panadería artesanal",
     concepto: "El personaje antes que el logo",
     paleta: ["#8C8F41", "#321F17", "#FFF2DE"],
+    fondo: "#FFF2DE", tinta: "#321F17", colorLogo: "#8C8F41",
     relato: "No le faltaba un logo, le faltaba una cara. Desarrollé a la Reyna alzando un budín —de la referencia al vector, limpiando y ajustando hasta que entrara dentro del monograma— para que la marca tuviera personaje y no solo letras. Es la que más se aplica sola: la ves en la bolsa y ya sabés de qué se trata.",
   },
   {
     nombre: "Malvada Shoes", logo: mMalvada, rubro: "Calzado y accesorios",
     concepto: "El color se gana, no se reparte",
     paleta: ["#C7FF0F", "#F887C0", "#8F7BC1", "#111111"],
+    fondo: "#111111", tinta: "#FFFFFF", colorLogo: "#C7FF0F",
     relato: "Malvada no quería ser prolija. La base quedó en blanco y negro para que la marca no canse, y el color entra como tropezones de dopamina: lima, rosa, violeta, siempre por sorpresa. La regla que le dejé es de una línea — si el color está en todas partes, deja de llamar la atención en ninguna.",
   },
   {
     nombre: "NMO Perfumería", logo: mNmo, rubro: "Perfumería · rebranding",
     concepto: "El nombre ya tenía la respuesta",
     paleta: ["#98CFF1", "#61A5DA", "#32536D"],
+    fondo: "#32536D", tinta: "#EAF4FC", colorLogo: "#98CFF1",
     relato: "No Me Olvides ya tenía una flor en su logo original. En vez de descartarla la rediseñé: la nomeolvides pasó a ser el isotipo y la marca ganó un símbolo propio que se sostiene incluso a cincuenta píxeles. Era un rebranding, no una marca nueva — la clienta de siempre tenía que reconocerla y la nueva, elegirla.",
   },
   {
     nombre: "Resistencia", logo: mResistencia, rubro: "Indumentaria deportiva",
     concepto: "Dos colores, cero decoración",
     paleta: ["#C4FF00", "#0A0A0A", "#FFFFFF"],
+    fondo: "#0A0A0A", tinta: "#FFFFFF", colorLogo: "#C4FF00",
     relato: "Ropa deportiva para gente que entrena de verdad, no para modelos de catálogo. Por eso el sistema es negro y lima: dos colores y todo contraste. La R dentro del círculo funciona como sello — se borda, se estampa y se imprime chica en la etiqueta sin perder nada.",
   },
   {
     nombre: "Astegiano", logo: mAstegiano, rubro: "Neumáticos",
     concepto: "La marca dentro de la banda de rodamiento",
     paleta: ["#FFED00", "#151912", "#A6A6A6"],
+    fondo: "#151912", tinta: "#FFFFFF", colorLogo: "#FFED00",
     relato: "El isotipo es una A dentro de anillos concéntricos que leen como la banda de un neumático. Amarillo y negro, la combinación del rubro, usada con orden: en un mercado donde todos gritan, la marca gana por estar mejor construida, no por gritar más fuerte.",
   },
   {
     nombre: "Magna Fitness", logo: mMagna, rubro: "Indumentaria femenina",
     concepto: "Magna significa «fuera de lo común»",
     paleta: ["#D90416", "#F2949C", "#F2F2F2"],
+    fondo: "#F2F2F2", tinta: "#1A1A1A", colorLogo: "#D90416",
     relato: "El nombre define la marca y el monograma lo sintetiza. Ropa para mujeres que entrenan en serio y necesitan que la prenda no las estorbe. El monograma se usa solo cuando el nombre completo no entra: perfil, etiqueta, botón.",
   },
   {
     nombre: "Cherry Nails", logo: mCherry, rubro: "Manicuría",
     concepto: "Una guía corta para una marca chica",
     paleta: ["#E63462", "#F5A9C0", "#1A1A1A"],
+    fondo: "#1A1A1A", tinta: "#FFFFFF", colorLogo: "#E63462",
     relato: "No todos los clientes necesitan un manual de trece páginas. Cherry pidió una guía mínima —logotipo, paleta, tipografías y aplicación en redes— y eso fue lo que se entregó. Saber cuándo entregar menos también es parte del oficio.",
   },
 ];
+
+/** El logo va como máscara: los archivos son monocromos, el color lo pone el CSS. */
+const LogoMascara = ({ src, color, className }: { src: string; color: string; className?: string }) => (
+  <span
+    aria-hidden="true"
+    className={className}
+    style={{
+      background: color,
+      WebkitMaskImage: `url(${src})`, maskImage: `url(${src})`,
+      WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat",
+      WebkitMaskSize: "contain", maskSize: "contain",
+      WebkitMaskPosition: "center", maskPosition: "center",
+    }}
+  />
+);
+
+const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
+  // Mientras el universo esta abierto la pagina de atras no se scrollea: si no,
+  // al llegar al final del panel el scroll "salta" a la grilla y desorienta.
+  useEffect(() => {
+    const previo = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const conEsc = (e: KeyboardEvent) => e.key === "Escape" && cerrar();
+    window.addEventListener("keydown", conEsc);
+    return () => {
+      document.body.style.overflow = previo;
+      window.removeEventListener("keydown", conEsc);
+    };
+  }, [cerrar]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      role="dialog" aria-modal="true" aria-label={`Universo de la marca ${marca.nombre}`}
+      className="fixed inset-0 z-50 overflow-y-auto"
+      style={{ background: marca.fondo, color: marca.tinta }}
+    >
+      <button
+        onClick={cerrar}
+        aria-label="Cerrar"
+        className="fixed right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full transition-opacity hover:opacity-70 md:right-8 md:top-8"
+        style={{ background: `${marca.tinta}14`, color: marca.tinta }}
+      >
+        <X className="h-5 w-5" aria-hidden="true" />
+      </button>
+
+      <motion.div
+        initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.08 }}
+        className="container mx-auto max-w-5xl px-6 pb-24 pt-20 md:pt-28"
+      >
+        <LogoMascara src={marca.logo} color={marca.colorLogo}
+          className="block h-20 w-full max-w-[16rem] md:h-28 md:max-w-[22rem]"
+          />
+
+        <p className="mt-10 font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.6 }}>
+          {marca.rubro}
+        </p>
+        <h2 className="mt-3 font-display text-[clamp(2rem,6vw,4rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.035em]">
+          {marca.nombre}
+        </h2>
+        <p className="mt-6 max-w-[34rem] text-xl font-semibold leading-snug md:text-2xl">
+          {marca.concepto}
+        </p>
+
+        <p className="mt-8 max-w-[38rem] text-lg leading-relaxed" style={{ opacity: 0.75 }}>
+          {marca.relato}
+        </p>
+
+        <div className="mt-14">
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.55 }}>
+            La paleta
+          </p>
+          <div className="mt-4 grid gap-3" style={{ gridTemplateColumns: `repeat(${marca.paleta.length}, minmax(0,1fr))` }}>
+            {marca.paleta.map((c) => (
+              <div key={c}>
+                {/* El borde tiene que verse: algunas paletas incluyen el mismo
+                    color del fondo y sin marco el cuadrito desaparece. */}
+                <div className="h-20 md:h-28" style={{ background: c, outline: `1px solid ${marca.tinta}3D` }} />
+                <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-wider" style={{ opacity: 0.6 }}>{c}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {marca.tipografias?.length ? (
+          <div className="mt-14">
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.55 }}>
+              Las tipografías
+            </p>
+            <ul className="mt-4 space-y-1 text-lg">
+              {marca.tipografias.map((t) => <li key={t}>{t}</li>)}
+            </ul>
+          </div>
+        ) : null}
+
+        {marca.aplicaciones?.length ? (
+          <div className="mt-14">
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.55 }}>
+              Aplicada
+            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {marca.aplicaciones.map((src) => (
+                <img key={src} src={src} alt={`${marca.nombre} aplicada`} className="w-full" loading="lazy" />
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <button
+          onClick={cerrar}
+          className="mt-16 border-b pb-1 font-mono text-[0.7rem] uppercase tracking-[0.18em] transition-opacity hover:opacity-60"
+          style={{ borderColor: `${marca.tinta}59` }}
+        >
+          ← Volver a todas las marcas
+        </button>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const Marcas = () => {
   const [abierta, setAbierta] = useState<Marca | null>(null);
@@ -106,7 +252,7 @@ const Marcas = () => {
         <div className="container mx-auto max-w-6xl px-6">
           <p className="mb-8 max-w-[34rem] text-sm text-background/50">
             Todas entran en la misma tinta: cada una fue diseñada para destacar, así que
-            juntas y a todo color se pelean. El color aparece cuando abrís una.
+            juntas y a todo color se pelean. Tocá una para entrar a su universo.
           </p>
 
           <div className="grid grid-cols-2 gap-px bg-background/15 md:grid-cols-4">
@@ -118,54 +264,24 @@ const Marcas = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (i % 4) * 0.06 }}
                 onClick={() => setAbierta(m)}
-                aria-label={`Ver el caso de ${m.nombre}`}
-                className="group flex aspect-[4/3] items-center justify-center bg-tunel p-8 transition-colors hover:bg-background/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                aria-label={`Entrar al universo de ${m.nombre}`}
+                className="group relative flex aspect-[4/3] items-center justify-center bg-tunel p-8 transition-colors hover:bg-background/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
               >
-                <img
-                  src={m.logo}
-                  alt={m.nombre}
-                  className="max-h-16 w-auto max-w-[9rem] opacity-70 transition-opacity group-hover:opacity-100"
-                  style={{ filter: "brightness(0) invert(1)" }}
-                />
+                <LogoMascara src={m.logo} color="hsl(var(--background))"
+                  className="h-16 w-full max-w-[9rem] opacity-70 transition-opacity group-hover:opacity-100" />
+                {/* Sin esta pista, una grilla de logos no se lee como algo tocable */}
+                <span className="pointer-events-none absolute bottom-4 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                  Entrar
+                </span>
               </motion.button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* El caso abierto: acá aparece el color */}
-      {abierta && (
-        <motion.section
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-          className="grano relative bg-secondary py-16"
-          id="caso"
-        >
-          <div className="container mx-auto max-w-4xl px-6">
-            <button
-              onClick={() => setAbierta(null)}
-              className="-m-2 p-2 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
-            >
-              ← Volver a las marcas
-            </button>
-
-            <p className="mt-8 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">
-              {abierta.rubro}
-            </p>
-            <h2 className="mt-3 font-display text-[clamp(2rem,6vw,3.6rem)] font-extrabold uppercase leading-[0.95] tracking-[-0.035em]">
-              {abierta.nombre}
-            </h2>
-            <p className="mt-4 border-l-2 border-accent pl-4 text-lg font-semibold">{abierta.concepto}</p>
-
-            <div className="mt-8 flex">
-              {abierta.paleta.map((c) => (
-                <div key={c} className="h-14 flex-1 border border-foreground/10" style={{ background: c }} />
-              ))}
-            </div>
-
-            <p className="mt-8 max-w-[36rem] text-lg leading-relaxed text-muted-foreground">{abierta.relato}</p>
-          </div>
-        </motion.section>
-      )}
+      <AnimatePresence>
+        {abierta && <Universo marca={abierta} cerrar={() => setAbierta(null)} />}
+      </AnimatePresence>
     </Marco>
   );
 };
