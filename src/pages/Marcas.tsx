@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import Marco from "@/components/Marco";
@@ -11,6 +11,16 @@ import mResistencia from "@/assets/marcas/resistencia.png";
 import mAstegiano from "@/assets/marcas/astegiano.png";
 import mMagna from "@/assets/marcas/magna.png";
 import mCherry from "@/assets/marcas/cherry.png";
+
+// Piezas aplicadas. Salen del deck de cada marca, eligiendo solo las paginas
+// de aplicacion: las de manual (tipografias, construccion del logo, usos
+// correctos) no se publican, porque son la herramienta del cliente y no el
+// resultado del trabajo.
+import reynaSistema from "@/assets/marcas/aplicaciones/reyna-sistema.webp";
+import reynaPackaging from "@/assets/marcas/aplicaciones/reyna-packaging.webp";
+import reynaGrandes from "@/assets/marcas/aplicaciones/reyna-grandes.webp";
+import reynaPieza from "@/assets/marcas/aplicaciones/reyna-pieza.webp";
+import reynaLogo from "@/assets/marcas/aplicaciones/reyna-logo.png";
 
 /**
  * Portfolio de marcas.
@@ -28,6 +38,11 @@ import mCherry from "@/assets/marcas/cherry.png";
  * como mascara y el color lo pone el CSS. Por eso cada marca puede mostrar su
  * logo en su propio color sin tener ocho archivos mas.
  *
+ * Las etiquetas chicas del panel van al 80% de opacidad y no al 55%: cada
+ * marca trae su propio par de fondo y tinta, y con NMO —el par mas ajustado—
+ * recien al 70% se llega al minimo de contraste. El 80% deja margen para las
+ * ocho sin tener que calcular caso por caso.
+ *
  * Nunca se publica el manual completo: se muestra el resultado, no la
  * herramienta con la que el cliente lo aplica.
  */
@@ -36,16 +51,25 @@ type Marca = {
   nombre: string;
   logo: string;
   rubro: string;
+  /** La pregunta de mercado que abre el caso. Cuando esta, reemplaza al
+   *  concepto en el titular: dos frases cortas peleando por el mismo lugar
+   *  se anulan entre si. */
+  pregunta?: string;
   concepto: string;
   paleta: string[];
   relato: string;
+  /** El remate, en la voz del estudio. */
+  cierre?: string;
   /** Colores del universo de la marca. Verificados en contraste AA. */
   fondo: string;
   tinta: string;
   colorLogo: string;
+  /** El logo en sus colores reales, para el panel. Los archivos de la grilla
+   *  son monocromos y algunos son la version de contorno: pintados de un solo
+   *  color pierden el dibujo. Cuando esta este, se usa este. */
+  logoReal?: string;
   /** Se muestran solo si estan cargadas. */
-  tipografias?: string[];
-  aplicaciones?: string[];
+  aplicaciones?: { src: string; pie: string }[];
 };
 
 const MARCAS: Marca[] = [
@@ -58,10 +82,18 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Panadería artesanal",
+    pregunta: "¿Cómo te destacás en un mercado tan diverso y saturado como la pastelería?",
     concepto: "El personaje antes que el logo",
     paleta: ["#8C8F41", "#321F17", "#FFF2DE"],
-    fondo: "#FFF2DE", tinta: "#321F17", colorLogo: "#8C8F41",
-    relato: "No le faltaba un logo, le faltaba una cara. Desarrollé a la Reyna alzando un budín —de la referencia al vector, limpiando y ajustando hasta que entrara dentro del monograma— para que la marca tuviera personaje y no solo letras. Es la que más se aplica sola: la ves en la bolsa y ya sabés de qué se trata.",
+    fondo: "#FFF2DE", tinta: "#321F17", colorLogo: "#8C8F41", logoReal: reynaLogo,
+    relato: "Ro eligió los budines. Pero no son solo «budines»: son budines gigantes y con una vueltita de rosca. La acompañamos desde el arranque del emprendimiento con una identidad que tiene en el centro una caricatura de ella misma cargando esos budines espectaculares, y desarrollamos los elementos para su packaging de estilo artesanal.",
+    cierre: "Un personaje sencillo y versátil, que le sirve para contar su producto en tantos escenarios como quiera. Una tipografía bold y divertida. Colores que acompañan. Y ya: ¡poné la pava!",
+    aplicaciones: [
+      { src: reynaPackaging, pie: "El packaging real, ya en producción" },
+      { src: reynaSistema, pie: "El personaje y su familia de íconos" },
+      { src: reynaGrandes, pie: "Pieza de campaña: el tamaño como argumento" },
+      { src: reynaPieza, pie: "La marca aplicada en redes" },
+    ],
   },
   {
     nombre: "Malvada Shoes", logo: mMalvada, rubro: "Calzado y accesorios",
@@ -123,9 +155,15 @@ const LogoMascara = ({ src, color, className }: { src: string; color: string; cl
 );
 
 const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
+  const panel = useRef<HTMLDivElement>(null);
+
   // Mientras el universo esta abierto la pagina de atras no se scrollea: si no,
   // al llegar al final del panel el scroll "salta" a la grilla y desorienta.
   useEffect(() => {
+    // Y el panel arranca arriba. El navegador le heredaba la posicion de
+    // scroll de la pagina, asi que en los casos largos abria por la mitad y
+    // el logo, el nombre y la pregunta quedaban arriba de la pantalla.
+    panel.current?.scrollTo(0, 0);
     const previo = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const conEsc = (e: KeyboardEvent) => e.key === "Escape" && cerrar();
@@ -141,6 +179,7 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
       role="dialog" aria-modal="true" aria-label={`Universo de la marca ${marca.nombre}`}
+      ref={panel}
       className="fixed inset-0 z-50 overflow-y-auto"
       style={{ background: marca.fondo, color: marca.tinta }}
     >
@@ -158,26 +197,47 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
         transition={{ duration: 0.45, delay: 0.08 }}
         className="container mx-auto max-w-5xl px-6 pb-24 pt-20 md:pt-28"
       >
-        <LogoMascara src={marca.logo} color={marca.colorLogo}
-          className="block h-20 w-full max-w-[16rem] md:h-28 md:max-w-[22rem]"
-          />
-
-        <p className="mt-10 font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.6 }}>
+        {/* El titulo arriba y a todo el ancho, y el logo al costado del texto.
+            Antes el logo abria solo la pagina y dejaba un hueco enorme a su
+            derecha, que lo hacia ver colgado. */}
+        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.8 }}>
           {marca.rubro}
         </p>
         <h2 className="mt-3 font-display text-[clamp(2rem,6vw,4rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.035em]">
           {marca.nombre}
         </h2>
-        <p className="mt-6 max-w-[34rem] text-xl font-semibold leading-snug md:text-2xl">
-          {marca.concepto}
-        </p>
 
-        <p className="mt-8 max-w-[38rem] text-lg leading-relaxed" style={{ opacity: 0.75 }}>
-          {marca.relato}
-        </p>
+        <div className="mt-10 grid gap-10 md:grid-cols-[1fr_auto] md:items-start md:gap-14">
+          <div>
+            <p className="max-w-[34rem] text-xl font-semibold leading-snug md:text-2xl">
+              {marca.pregunta ?? marca.concepto}
+            </p>
+
+            <p className="mt-7 max-w-[38rem] text-lg leading-relaxed" style={{ opacity: 0.85 }}>
+              {marca.relato}
+            </p>
+
+            {marca.cierre ? (
+              <p className="mt-7 max-w-[38rem] border-l-2 pl-5 text-lg leading-relaxed"
+                 style={{ borderColor: marca.colorLogo }}>
+                {marca.cierre}
+              </p>
+            ) : null}
+          </div>
+
+          <div className="md:pt-1">
+            {marca.logoReal ? (
+              <img src={marca.logoReal} alt={`Logo de ${marca.nombre}`}
+                   className="h-28 w-auto md:h-44" />
+            ) : (
+              <LogoMascara src={marca.logo} color={marca.colorLogo}
+                className="block h-24 w-[14rem] md:h-32 md:w-[15rem]" />
+            )}
+          </div>
+        </div>
 
         <div className="mt-14">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.55 }}>
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.8 }}>
             La paleta
           </p>
           <div className="mt-4 grid gap-3" style={{ gridTemplateColumns: `repeat(${marca.paleta.length}, minmax(0,1fr))` }}>
@@ -186,31 +246,25 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
                 {/* El borde tiene que verse: algunas paletas incluyen el mismo
                     color del fondo y sin marco el cuadrito desaparece. */}
                 <div className="h-20 md:h-28" style={{ background: c, outline: `1px solid ${marca.tinta}3D` }} />
-                <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-wider" style={{ opacity: 0.6 }}>{c}</p>
+                <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-wider" style={{ opacity: 0.8 }}>{c}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {marca.tipografias?.length ? (
-          <div className="mt-14">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.55 }}>
-              Las tipografías
-            </p>
-            <ul className="mt-4 space-y-1 text-lg">
-              {marca.tipografias.map((t) => <li key={t}>{t}</li>)}
-            </ul>
-          </div>
-        ) : null}
-
         {marca.aplicaciones?.length ? (
           <div className="mt-14">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.55 }}>
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.8 }}>
               Aplicada
             </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {marca.aplicaciones.map((src) => (
-                <img key={src} src={src} alt={`${marca.nombre} aplicada`} className="w-full" loading="lazy" />
+            <div className="mt-4 grid gap-6 sm:grid-cols-2">
+              {marca.aplicaciones.map((a) => (
+                <figure key={a.src}>
+                  <img src={a.src} alt={`${marca.nombre} — ${a.pie}`} className="w-full" loading="lazy" />
+                  <figcaption className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style={{ opacity: 0.8 }}>
+                    {a.pie}
+                  </figcaption>
+                </figure>
               ))}
             </div>
           </div>
