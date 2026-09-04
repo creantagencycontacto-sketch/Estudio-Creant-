@@ -81,7 +81,7 @@ const MARCAS: Marca[] = [
     relato: "Siete sabores, siete mundos de color, un solo sistema. La fruta ilustrada, la onda del dulce cayendo y el sello «hecho a mano con amor» se repiten en todas; lo único que cambia es la paleta. Se entregó con las planchas armadas para imprenta, listas para producir.",
   },
   {
-    nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Panadería artesanal",
+    nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Pastelería artesanal",
     pregunta: "¿Cómo te destacás en un mercado tan diverso y saturado como la pastelería?",
     concepto: "El personaje antes que el logo",
     paleta: ["#8C8F41", "#321F17", "#FFF2DE"],
