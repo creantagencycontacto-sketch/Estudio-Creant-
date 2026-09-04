@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Instagram, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WHATSAPP_URL } from "@/lib/leads";
@@ -19,14 +19,8 @@ const SECCIONES = [
  */
 const Marco = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useLocation();
-  const navegar = useNavigate();
   const trackWhatsapp = (origen: string) => () =>
     trackEvent("Contact", { content_name: `WhatsApp — ${origen}` });
-
-  const irAContacto = () => {
-    if (pathname === "/") document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
-    else navegar("/#contacto");
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -71,7 +65,14 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
             ))}
           </div>
 
-          <Button onClick={irAContacto} className="h-11 rounded-none font-semibold">Hablemos</Button>
+          {/* El boton de la barra es el camino corto: abre WhatsApp de una.
+              El que baja al formulario es "Empezar proyecto", en la portada,
+              donde el que llega todavia esta decidiendo. */}
+          <Button asChild className="h-11 rounded-none font-semibold">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("barra")}>
+              Hablemos
+            </a>
+          </Button>
         </nav>
       </header>
 

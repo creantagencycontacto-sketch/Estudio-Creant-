@@ -21,6 +21,7 @@ import reynaPackaging from "@/assets/marcas/aplicaciones/reyna-packaging.webp";
 import reynaGrandes from "@/assets/marcas/aplicaciones/reyna-grandes.webp";
 import reynaPieza from "@/assets/marcas/aplicaciones/reyna-pieza.webp";
 import reynaLogo from "@/assets/marcas/aplicaciones/reyna-logo.png";
+import reynaSello from "@/assets/marcas/aplicaciones/reyna-sello.png";
 
 /**
  * Portfolio de marcas.
@@ -66,8 +67,16 @@ type Marca = {
   colorLogo: string;
   /** El logo en sus colores reales, para el panel. Los archivos de la grilla
    *  son monocromos y algunos son la version de contorno: pintados de un solo
-   *  color pierden el dibujo. Cuando esta este, se usa este. */
-  logoReal?: string;
+   *  color pierden el dibujo. Cuando estan estos, se usan estos.
+   *
+   *  El primero es el principal y va grande; los que siguen son variantes y
+   *  van chicos, debajo. Maximo TRES en total: con mas, la columna se vuelve
+   *  una grilla de sellos y le come el protagonismo al caso.
+   *
+   *  Solo entran variantes que se lean sobre el fondo de esa marca. Un
+   *  logotipo claro sobre un panel claro no se ve, por mas que sea una
+   *  variante legitima del manual. */
+  logos?: string[];
   /** Se muestran solo si estan cargadas. */
   aplicaciones?: { src: string; pie: string }[];
 };
@@ -85,7 +94,7 @@ const MARCAS: Marca[] = [
     pregunta: "¿Cómo te destacás en un mercado tan diverso y saturado como la pastelería?",
     concepto: "El personaje antes que el logo",
     paleta: ["#8C8F41", "#321F17", "#FFF2DE"],
-    fondo: "#FFF2DE", tinta: "#321F17", colorLogo: "#8C8F41", logoReal: reynaLogo,
+    fondo: "#FFF2DE", tinta: "#321F17", colorLogo: "#8C8F41", logos: [reynaLogo, reynaSello],
     relato: "Ro eligió los budines. Pero no son solo «budines»: son budines gigantes y con una vueltita de rosca. La acompañamos desde el arranque del emprendimiento con una identidad que tiene en el centro una caricatura de ella misma cargando esos budines espectaculares, y desarrollamos los elementos para su packaging de estilo artesanal.",
     cierre: "Un personaje sencillo y versátil, que le sirve para contar su producto en tantos escenarios como quiera. Una tipografía bold y divertida. Colores que acompañan. Y ya: ¡poné la pava!",
     aplicaciones: [
@@ -207,7 +216,10 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
           {marca.nombre}
         </h2>
 
-        <div className="mt-10 grid gap-10 md:grid-cols-[1fr_auto] md:items-start md:gap-14">
+        {/* La columna derecha lleva ancho fijo y los logos se miden por ancho y
+            no por alto. Con la columna ajustada al contenido quedaban del alto
+            pedido pero angostos, y las variantes con texto curvo no se leian. */}
+        <div className="mt-10 grid gap-10 md:grid-cols-[1fr_15rem] md:items-start md:gap-14">
           <div>
             <p className="max-w-[34rem] text-xl font-semibold leading-snug md:text-2xl">
               {marca.pregunta ?? marca.concepto}
@@ -226,9 +238,23 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
           </div>
 
           <div className="md:pt-1">
-            {marca.logoReal ? (
-              <img src={marca.logoReal} alt={`Logo de ${marca.nombre}`}
-                   className="h-28 w-auto md:h-44" />
+            {marca.logos?.length ? (
+              <>
+                <img src={marca.logos[0]} alt={`Logo de ${marca.nombre}`}
+                     className="w-full max-w-[13rem]" />
+                {marca.logos.length > 1 ? (
+                  <div className="mt-6 flex flex-wrap items-center gap-5 border-t pt-6"
+                       style={{ borderColor: `${marca.tinta}26` }}>
+                    {/* Las variantes van casi tan grandes como el principal:
+                        varias traen texto curvo o dibujo, y achicadas se
+                        vuelven una mancha en vez de leerse. */}
+                    {marca.logos.slice(1, 3).map((l) => (
+                      <img key={l} src={l} alt={`${marca.nombre}, otra versión del logo`}
+                           className="w-full max-w-[11rem]" />
+                    ))}
+                  </div>
+                ) : null}
+              </>
             ) : (
               <LogoMascara src={marca.logo} color={marca.colorLogo}
                 className="block h-24 w-[14rem] md:h-32 md:w-[15rem]" />

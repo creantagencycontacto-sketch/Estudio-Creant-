@@ -110,10 +110,11 @@ const Index = () => {
 
           <motion.div variants={aparece} initial="hidden" animate="visible" custom={2}
                       className="mb-40 mt-10 flex flex-wrap gap-3 sm:mb-16">
-            <Button asChild size="lg" className="h-14 rounded-none px-8 text-base font-semibold">
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("hero")}>
-                Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
+            {/* Baja al formulario, no a WhatsApp: el que recien entra suele
+                querer contar el proyecto antes que abrir un chat. */}
+            <Button size="lg" className="h-14 rounded-none px-8 text-base font-semibold"
+              onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}>
+              Empezar proyecto <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button asChild variant="outline" size="lg" className="h-14 rounded-none border-foreground px-8 text-base font-semibold">
               <Link to="/branding">Ver el trabajo</Link>
