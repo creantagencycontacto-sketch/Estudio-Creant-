@@ -250,7 +250,7 @@ const Marcas = () => {
 
       <section className="grano relative bg-tunel py-16 text-background">
         <div className="container mx-auto max-w-6xl px-6">
-          <p className="mb-8 max-w-[34rem] text-sm text-background/50">
+          <p className="mb-8 max-w-[34rem] text-sm text-background/60">
             Todas entran en la misma tinta: cada una fue diseñada para destacar, así que
             juntas y a todo color se pelean. Tocá una para entrar a su universo.
           </p>

@@ -156,7 +156,7 @@ const Barras = ({ datos, unidad, menorEsMejor }: Extract<Grafico, { tipo: "barra
           </div>
         ))}
       </div>
-      <p className="mt-3 text-xs text-background/45">
+      <p className="mt-3 text-xs text-background/60">
         {unidad}{menorEsMejor ? " · más corto es mejor" : ""}
       </p>
     </div>
@@ -223,7 +223,7 @@ const Pauta = () => {
                   <h2 className="font-display text-2xl font-extrabold uppercase leading-tight tracking-tight">{c.titulo}</h2>
                   <span className="shrink-0 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-primary">{c.moneda}</span>
                 </div>
-                <p className="mt-1 text-sm text-background/50">{c.contexto}</p>
+                <p className="mt-1 text-sm text-background/60">{c.contexto}</p>
 
                 <div className="mt-7 space-y-5">
                   <div>
@@ -253,7 +253,7 @@ const Pauta = () => {
             ))}
           </div>
 
-          <p className="mt-12 max-w-[38rem] text-sm leading-relaxed text-background/45">
+          <p className="mt-12 max-w-[38rem] text-sm leading-relaxed text-background/60">
             Los números salen del Administrador de Anuncios de Meta y cubren toda la vida de
             cada cuenta. Cada moneda se muestra como se invirtió, sin convertir. Y decimos
             «consultas» y no «ventas» porque casi toda la cartera cierra por WhatsApp, fuera

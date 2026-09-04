@@ -46,6 +46,29 @@ const ComoTrabajamos = () => (
       </div>
     </section>
 
+    {/* La cita va antes del recorrido porque es la razon del paso 01, no un
+        adorno: sin la linea que la conecta con el metodo seria exactamente lo
+        que la frase critica. Tratamiento sobrio a proposito — comillas grandes
+        y florituras arriba de una frase contra la decoracion serian un chiste
+        en contra nuestra. */}
+    <section className="grano relative bg-tunel py-20 text-background md:py-24">
+      <div className="container mx-auto max-w-6xl px-6">
+        <blockquote className="max-w-[46rem]">
+          <p className="font-display text-[clamp(1.5rem,4.2vw,2.9rem)] font-extrabold uppercase leading-[1.05] tracking-[-0.03em]">
+            El contenido precede al diseño. Diseño en ausencia de contenido no es
+            diseño, <span className="text-accent-claro">es decoración.</span>
+          </p>
+          <footer className="mt-7 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-background/55">
+            Jeffrey Zeldman — fundador de The Web Standards Project
+          </footer>
+        </blockquote>
+        <p className="mt-10 max-w-[32rem] border-l-2 border-primary pl-5 leading-relaxed text-background/70">
+          La tenemos en nuestros informes desde el primer día. Por eso el primer
+          paso nunca es diseñar.
+        </p>
+      </div>
+    </section>
+
     <section className="grano relative bg-secondary py-20">
       <div className="container mx-auto max-w-6xl px-6">
         <h2 className="font-display text-[clamp(1.7rem,4vw,2.6rem)] font-extrabold uppercase tracking-tight">

@@ -113,7 +113,10 @@ const Contenido = () => (
             <motion.div key={p.n}
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: i * 0.06 }}
-              className={`bg-background p-7 ${p.n === "03" ? "md:bg-secondary" : ""}`}>
+              // El paso 03 se destaca con una linea y no con un fondo tintado:
+              // sobre ese tinte el rojo caia a 4.30:1, abajo del minimo. Ademas
+              // el borde tambien se ve en celular, donde el fondo no aparecia.
+              className={`bg-background p-7 ${p.n === "03" ? "border-t-2 border-accent" : "border-t-2 border-transparent"}`}>
               <p className="font-mono text-[0.7rem] tracking-[0.2em] text-accent">{p.n}</p>
               <h3 className="mt-3 font-display text-xl font-extrabold uppercase tracking-tight">{p.titulo}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.texto}</p>

@@ -58,6 +58,11 @@
     --accent: 350 83% 42%;           /* rojo   #C41230 */
     --accent-foreground: 38 41% 89%;
 
+    /* El rojo de marca sobre el marrón del túnel da 2.82:1 y no llega ni al
+       mínimo de 3:1 que pide el texto grande. Este es el mismo rojo subido de
+       luminosidad hasta 4.56:1, para usar solo sobre fondos oscuros. */
+    --accent-claro: 350 83% 60%;     /* rojo claro #EE4461 */
+
     --destructive: 0 72% 41%;
     --destructive-foreground: 38 41% 89%;
 
