@@ -34,6 +34,40 @@ import grFrutosRojos from "@/assets/marcas/aplicaciones/grannie-frutos-rojos.web
 import grMockup from "@/assets/marcas/aplicaciones/grannie-mockup.webp";
 import grConservas from "@/assets/marcas/aplicaciones/grannie-conservas.webp";
 import grMermeladas from "@/assets/marcas/aplicaciones/grannie-mermeladas.webp";
+import asLogo from "@/assets/marcas/aplicaciones/aste-logo.png";
+import asIso from "@/assets/marcas/aplicaciones/aste-isologo.png";
+import asBarro from "@/assets/marcas/aplicaciones/aste-barro.webp";
+import asMixer from "@/assets/marcas/aplicaciones/aste-mixer.webp";
+import asTransporte from "@/assets/marcas/aplicaciones/aste-transporte.webp";
+import asCampo from "@/assets/marcas/aplicaciones/aste-campo.webp";
+import mlvLogo from "@/assets/marcas/aplicaciones/mlv-logo.png";
+import mlvM from "@/assets/marcas/aplicaciones/mlv-m.png";
+import mlvShop from "@/assets/marcas/aplicaciones/mlv-shop.webp";
+import mlvEnvios from "@/assets/marcas/aplicaciones/mlv-envios.webp";
+import mlvMayoristas from "@/assets/marcas/aplicaciones/mlv-mayoristas.webp";
+import mlvClientes from "@/assets/marcas/aplicaciones/mlv-clientes.webp";
+import chyLogo from "@/assets/marcas/aplicaciones/chy-logo.png";
+import chyCh from "@/assets/marcas/aplicaciones/chy-ch.png";
+import chyAvatar from "@/assets/marcas/aplicaciones/chy-avatar.webp";
+import chyPatron from "@/assets/marcas/aplicaciones/chy-patron.webp";
+import chyDest1 from "@/assets/marcas/aplicaciones/chy-dest1.webp";
+import chyDest2 from "@/assets/marcas/aplicaciones/chy-dest2.webp";
+import nmoLogo from "@/assets/marcas/aplicaciones/nmo-logo.svg";
+import nmoFlor from "@/assets/marcas/aplicaciones/nmo-flor.svg";
+import nmoRegalo from "@/assets/marcas/aplicaciones/nmo-regalo.webp";
+import nmoEpoca from "@/assets/marcas/aplicaciones/nmo-epoca.webp";
+import nmoTips from "@/assets/marcas/aplicaciones/nmo-tips.webp";
+import nmoCrema from "@/assets/marcas/aplicaciones/nmo-crema.webp";
+import magLogo from "@/assets/marcas/aplicaciones/mag-logo.png";
+import magCirculo from "@/assets/marcas/aplicaciones/mag-circulo.png";
+import magRojo from "@/assets/marcas/aplicaciones/mag-rojo.webp";
+import magNegro from "@/assets/marcas/aplicaciones/mag-negro.webp";
+import magBlanco from "@/assets/marcas/aplicaciones/mag-blanco.webp";
+import resLogo from "@/assets/marcas/aplicaciones/res-logo.png";
+import resSello from "@/assets/marcas/aplicaciones/res-sello.png";
+import resBuzo from "@/assets/marcas/aplicaciones/res-buzo.webp";
+import resAtleta from "@/assets/marcas/aplicaciones/res-atleta.webp";
+import resGrupo from "@/assets/marcas/aplicaciones/res-grupo.webp";
 
 /**
  * Portfolio de marcas.
@@ -160,42 +194,112 @@ const MARCAS: Marca[] = [
     concepto: "El color se gana, no se reparte",
     paleta: ["#C7FF0F", "#F887C0", "#8F7BC1", "#111111"],
     fondo: "#111111", tinta: "#FFFFFF", colorLogo: "#C7FF0F",
+    logos: [mlvLogo, mlvM],
     relato: "Malvada no quería ser prolija. La base quedó en blanco y negro para que la marca no canse, y el color entra como tropezones de dopamina: lima, rosa, violeta, siempre por sorpresa. La regla que le dejé es de una línea — si el color está en todas partes, deja de llamar la atención en ninguna.",
+    bloques: [
+      {
+        titulo: "En Instagram", columnas: 4,
+        piezas: [
+          { src: mlvShop, pie: "Shop" },
+          { src: mlvEnvios, pie: "Envíos" },
+          { src: mlvMayoristas, pie: "Mayoristas" },
+          { src: mlvClientes, pie: "Clientes" },
+        ],
+      },
+    ],
   },
   {
     nombre: "NMO Perfumería", logo: mNmo, rubro: "Perfumería · rebranding",
     concepto: "El nombre ya tenía la respuesta",
     paleta: ["#98CFF1", "#61A5DA", "#32536D"],
     fondo: "#32536D", tinta: "#EAF4FC", colorLogo: "#98CFF1",
+    logos: [nmoLogo, nmoFlor],
     relato: "No Me Olvides ya tenía una flor en su logo original. En vez de descartarla la rediseñé: la nomeolvides pasó a ser el isotipo y la marca ganó un símbolo propio que se sostiene incluso a cincuenta píxeles. Era un rebranding, no una marca nueva — la clienta de siempre tenía que reconocerla y la nueva, elegirla.",
+    bloques: [
+      {
+        titulo: "El feed", columnas: 4,
+        piezas: [
+          { src: nmoRegalo, pie: "«El regalo perfecto»" },
+          { src: nmoEpoca, pie: "Campaña de fin de año" },
+          { src: nmoTips, pie: "Contenido que enseña" },
+          { src: nmoCrema, pie: "Rutina de cuidado" },
+        ],
+      },
+    ],
   },
   {
     nombre: "Resistencia", logo: mResistencia, rubro: "Indumentaria deportiva",
     concepto: "Dos colores, cero decoración",
     paleta: ["#C4FF00", "#0A0A0A", "#FFFFFF"],
     fondo: "#0A0A0A", tinta: "#FFFFFF", colorLogo: "#C4FF00",
+    logos: [resLogo, resSello],
     relato: "Ropa deportiva para gente que entrena de verdad, no para modelos de catálogo. Por eso el sistema es negro y lima: dos colores y todo contraste. La R dentro del círculo funciona como sello — se borda, se estampa y se imprime chica en la etiqueta sin perder nada.",
+    bloques: [
+      {
+        titulo: "Diseños de muestra", columnas: 3,
+        piezas: [
+          { src: resBuzo, pie: "La prenda estampada" },
+          { src: resAtleta, pie: "La marca sobre la foto" },
+          { src: resGrupo, pie: "Pieza de campaña" },
+        ],
+      },
+    ],
   },
   {
     nombre: "Astegiano", logo: mAstegiano, rubro: "Neumáticos",
     concepto: "La marca dentro de la banda de rodamiento",
     paleta: ["#FFED00", "#151912", "#A6A6A6"],
     fondo: "#151912", tinta: "#FFFFFF", colorLogo: "#FFED00",
+    logos: [asLogo, asIso],
     relato: "El isotipo es una A dentro de anillos concéntricos que leen como la banda de un neumático. Amarillo y negro, la combinación del rubro, usada con orden: en un mercado donde todos gritan, la marca gana por estar mejor construida, no por gritar más fuerte.",
+    bloques: [
+      {
+        titulo: "La marca en la calle", columnas: 4,
+        piezas: [
+          { src: asBarro, pie: "«En el barro»" },
+          { src: asMixer, pie: "Neumáticos para mixer" },
+          { src: asTransporte, pie: "Línea de transporte" },
+          { src: asCampo, pie: "«Fuerza en el campo»" },
+        ],
+      },
+    ],
   },
   {
     nombre: "Magna Fitness", logo: mMagna, rubro: "Indumentaria femenina",
     concepto: "Magna significa «fuera de lo común»",
     paleta: ["#D90416", "#F2949C", "#F2F2F2"],
     fondo: "#F2F2F2", tinta: "#1A1A1A", colorLogo: "#D90416",
+    logos: [magLogo, magCirculo],
     relato: "El nombre define la marca y el monograma lo sintetiza. Ropa para mujeres que entrenan en serio y necesitan que la prenda no las estorbe. El monograma se usa solo cuando el nombre completo no entra: perfil, etiqueta, botón.",
+    bloques: [
+      {
+        titulo: "Las tres versiones", columnas: 3,
+        piezas: [
+          { src: magRojo, pie: "Sobre el rojo de marca" },
+          { src: magNegro, pie: "Sobre negro" },
+          { src: magBlanco, pie: "El monograma solo" },
+        ],
+      },
+    ],
   },
   {
     nombre: "Cherry Nails", logo: mCherry, rubro: "Manicuría",
     concepto: "Una guía corta para una marca chica",
     paleta: ["#E63462", "#F5A9C0", "#1A1A1A"],
     fondo: "#1A1A1A", tinta: "#FFFFFF", colorLogo: "#E63462",
+    logos: [chyLogo, chyCh],
     relato: "No todos los clientes necesitan un manual de trece páginas. Cherry pidió una guía mínima —logotipo, paleta, tipografías y aplicación en redes— y eso fue lo que se entregó. Saber cuándo entregar menos también es parte del oficio.",
+    bloques: [
+      {
+        titulo: "Lo que se entregó", columnas: 4,
+        piezas: [
+          { src: chyAvatar, pie: "Avatar de redes" },
+          { src: chyPatron, pie: "El patrón de cerezas" },
+          { src: chyDest1, pie: "Destacada" },
+          { src: chyDest2, pie: "Destacada" },
+        ],
+      },
+    ],
   },
 ];
 
