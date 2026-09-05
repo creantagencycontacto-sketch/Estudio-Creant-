@@ -68,6 +68,29 @@ import resSello from "@/assets/marcas/aplicaciones/res-sello.png";
 import resBuzo from "@/assets/marcas/aplicaciones/res-buzo.webp";
 import resAtleta from "@/assets/marcas/aplicaciones/res-atleta.webp";
 import resGrupo from "@/assets/marcas/aplicaciones/res-grupo.webp";
+import mlvToteM from "@/assets/marcas/aplicaciones/mlv-tote-mlvd.webp";
+import mlvToteV from "@/assets/marcas/aplicaciones/mlv-tote-malvada.webp";
+import mlvBolsaV from "@/assets/marcas/aplicaciones/mlv-bolsa-violeta.webp";
+import mlvBolsaR from "@/assets/marcas/aplicaciones/mlv-bolsa-rosa.webp";
+import stBota from "@/assets/marcas/aplicaciones/mlv-st-bota.png";
+import stCaja from "@/assets/marcas/aplicaciones/mlv-st-caja.png";
+import stCarita from "@/assets/marcas/aplicaciones/mlv-st-carita-regalo.png";
+import stFlor from "@/assets/marcas/aplicaciones/mlv-st-flor.png";
+import stHash from "@/assets/marcas/aplicaciones/mlv-st-hashtag.png";
+import stHerradura from "@/assets/marcas/aplicaciones/mlv-st-herradura.png";
+import stLila from "@/assets/marcas/aplicaciones/mlv-st-malvada-lila.png";
+import stNegro from "@/assets/marcas/aplicaciones/mlv-st-malvada-negro.png";
+import stPato1 from "@/assets/marcas/aplicaciones/mlv-st-pato1.png";
+import stPato2 from "@/assets/marcas/aplicaciones/mlv-st-pato2.png";
+import stRayo from "@/assets/marcas/aplicaciones/mlv-st-rayo.png";
+import stZapa from "@/assets/marcas/aplicaciones/mlv-st-zapa.png";
+import mlvReapertura from "@/assets/marcas/aplicaciones/mlv-post-reapertura.webp";
+import mlvZapas from "@/assets/marcas/aplicaciones/mlv-post-zapas.webp";
+import mlvNewIn from "@/assets/marcas/aplicaciones/mlv-post-newin.webp";
+import chyTarjeta from "@/assets/marcas/aplicaciones/chy-tarjeta.webp";
+import chyTote from "@/assets/marcas/aplicaciones/chy-tote.webp";
+import chyCartel from "@/assets/marcas/aplicaciones/chy-cartel.webp";
+import chySticker from "@/assets/marcas/aplicaciones/chy-sticker.webp";
 
 /**
  * Portfolio de marcas.
@@ -130,7 +153,20 @@ type Marca = {
    *  Cada bloque elige sus columnas: dos o tres para fotos y piezas
    *  cuadradas, cuatro para etiquetas, donde lo que importa es poder
    *  compararlas entre si de un vistazo. */
-  bloques?: { titulo: string; columnas: 2 | 3 | 4; piezas: { src: string; pie: string }[] }[];
+  bloques?: {
+    titulo: string;
+    columnas: 2 | 3 | 4 | 6;
+    /** Encierra cada pieza en un cuadrado y la centra adentro. Hace falta
+     *  cuando el bloque mezcla proporciones —una plancha de stickers, por
+     *  ejemplo—: sin esto cada fila queda de un alto distinto y la grilla
+     *  se ve rota. */
+    cuadrado?: boolean;
+    /** Recorta todas las piezas a una misma proporcion. Para bloques de fotos
+     *  con encuadres distintos: sin esto cada una queda de otro alto y los
+     *  epigrafes terminan a distinta altura, que se ve descuidado. */
+    uniforme?: boolean;
+    piezas: { src: string; pie?: string }[];
+  }[];
 };
 
 const MARCAS: Marca[] = [
@@ -148,7 +184,7 @@ const MARCAS: Marca[] = [
     cierre: "Terminé babeando con cada etiqueta. Y esa es la prueba de que funcionan: si te dan ganas de comerlas, la etiqueta ya hizo su trabajo.",
     bloques: [
       {
-        titulo: "En el frasco", columnas: 3,
+        titulo: "En el frasco", columnas: 3, uniforme: true,
         piezas: [
           { src: grMockup, pie: "El packaging completo" },
           { src: grMermeladas, pie: "La línea de mermeladas" },
@@ -198,7 +234,35 @@ const MARCAS: Marca[] = [
     relato: "Malvada no quería ser prolija. La base quedó en blanco y negro para que la marca no canse, y el color entra como tropezones de dopamina: lima, rosa, violeta, siempre por sorpresa. La regla que le dejé es de una línea — si el color está en todas partes, deja de llamar la atención en ninguna.",
     bloques: [
       {
-        titulo: "En Instagram", columnas: 4,
+        titulo: "En la bolsa", columnas: 4, uniforme: true,
+        piezas: [
+          { src: mlvToteM, pie: "Tote #MLVD" },
+          { src: mlvToteV, pie: "Tote Mal·Vada" },
+          { src: mlvBolsaV, pie: "Bolsa violeta" },
+          { src: mlvBolsaR, pie: "Bolsa rosa" },
+        ],
+      },
+      {
+        // Los stickers son la regla del color puesta a prueba: cada uno mete
+        // un color distinto y el sistema no se rompe. Van sin pie porque se
+        // leen solos y doce epigrafes solo agregarian ruido.
+        titulo: "La plancha de stickers", columnas: 6, cuadrado: true,
+        piezas: [
+          { src: stZapa }, { src: stBota }, { src: stPato1 }, { src: stPato2 },
+          { src: stRayo }, { src: stFlor }, { src: stHerradura }, { src: stCaja },
+          { src: stCarita }, { src: stHash }, { src: stNegro }, { src: stLila },
+        ],
+      },
+      {
+        titulo: "La marca en el feed", columnas: 3,
+        piezas: [
+          { src: mlvReapertura, pie: "Reapertura del local" },
+          { src: mlvZapas, pie: "Producto en la calle" },
+          { src: mlvNewIn, pie: "Nuevos ingresos" },
+        ],
+      },
+      {
+        titulo: "Destacadas", columnas: 4,
         piezas: [
           { src: mlvShop, pie: "Shop" },
           { src: mlvEnvios, pie: "Envíos" },
@@ -291,9 +355,18 @@ const MARCAS: Marca[] = [
     relato: "No todos los clientes necesitan un manual de trece páginas. Cherry pidió una guía mínima —logotipo, paleta, tipografías y aplicación en redes— y eso fue lo que se entregó. Saber cuándo entregar menos también es parte del oficio.",
     bloques: [
       {
-        titulo: "Lo que se entregó", columnas: 4,
+        titulo: "Aplicada", columnas: 4, uniforme: true,
         piezas: [
-          { src: chyAvatar, pie: "Avatar de redes" },
+          { src: chyTarjeta, pie: "La tarjeta" },
+          { src: chyTote, pie: "Tote bag" },
+          { src: chyCartel, pie: "El cartel del local" },
+          { src: chySticker, pie: "Sticker holográfico" },
+        ],
+      },
+      {
+        titulo: "En redes", columnas: 4,
+        piezas: [
+          { src: chyAvatar, pie: "Avatar" },
           { src: chyPatron, pie: "El patrón de cerezas" },
           { src: chyDest1, pie: "Destacada" },
           { src: chyDest2, pie: "Destacada" },
@@ -438,15 +511,29 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.8 }}>
               {b.titulo}
             </p>
-            <div className={`mt-4 grid gap-6 ${
-              b.columnas === 4 ? "grid-cols-2 md:grid-cols-4"
+            <div className={`mt-4 grid ${b.cuadrado ? "gap-3" : "gap-6"} ${
+              b.columnas === 6 ? "grid-cols-3 sm:grid-cols-4 md:grid-cols-6"
+              : b.columnas === 4 ? "grid-cols-2 md:grid-cols-4"
               : b.columnas === 3 ? "grid-cols-1 sm:grid-cols-3" : "sm:grid-cols-2"}`}>
               {b.piezas.map((a) => (
                 <figure key={a.src}>
-                  <img src={a.src} alt={`${marca.nombre} — ${a.pie}`} className="w-full" loading="lazy" />
-                  <figcaption className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style={{ opacity: 0.8 }}>
-                    {a.pie}
-                  </figcaption>
+                  {b.cuadrado ? (
+                    <div className="flex aspect-square items-center justify-center">
+                      <img src={a.src} alt={a.pie ? `${marca.nombre} — ${a.pie}` : `${marca.nombre}, pieza aplicada`}
+                           className="max-h-full max-w-full" loading="lazy" />
+                    </div>
+                  ) : b.uniforme ? (
+                    <img src={a.src} alt={a.pie ? `${marca.nombre} — ${a.pie}` : `${marca.nombre}, pieza aplicada`}
+                         className="aspect-[4/5] w-full object-cover" loading="lazy" />
+                  ) : (
+                    <img src={a.src} alt={a.pie ? `${marca.nombre} — ${a.pie}` : `${marca.nombre}, pieza aplicada`}
+                         className="w-full" loading="lazy" />
+                  )}
+                  {a.pie ? (
+                    <figcaption className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style={{ opacity: 0.8 }}>
+                      {a.pie}
+                    </figcaption>
+                  ) : null}
                 </figure>
               ))}
             </div>
