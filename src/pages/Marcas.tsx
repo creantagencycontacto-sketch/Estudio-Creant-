@@ -31,6 +31,9 @@ import grManzana from "@/assets/marcas/aplicaciones/grannie-manzana.webp";
 import grPera from "@/assets/marcas/aplicaciones/grannie-pera.webp";
 import grOtonal from "@/assets/marcas/aplicaciones/grannie-otonal.webp";
 import grFrutosRojos from "@/assets/marcas/aplicaciones/grannie-frutos-rojos.webp";
+import grMockup from "@/assets/marcas/aplicaciones/grannie-mockup.webp";
+import grConservas from "@/assets/marcas/aplicaciones/grannie-conservas.webp";
+import grMermeladas from "@/assets/marcas/aplicaciones/grannie-mermeladas.webp";
 
 /**
  * Portfolio de marcas.
@@ -86,13 +89,14 @@ type Marca = {
    *  logotipo claro sobre un panel claro no se ve, por mas que sea una
    *  variante legitima del manual. */
   logos?: string[];
-  /** Se muestran solo si estan cargadas. */
-  aplicaciones?: { src: string; pie: string }[];
-  /** Columnas de la grilla de piezas. Dos por defecto, que va bien para
-   *  fotos y piezas cuadradas. Las piezas altas y angostas —una etiqueta de
-   *  frasco, por ejemplo— se ven mejor en cuatro: en dos quedan gigantes y
-   *  se pierde la comparacion entre una y otra, que muchas veces es el punto. */
-  columnas?: 2 | 4;
+  /** Las piezas van en bloques y no en una grilla sola, porque no todas
+   *  piden el mismo formato: un mockup cuadrado y una etiqueta alta y
+   *  angosta mezclados en la misma grilla quedan desprolijos.
+   *
+   *  Cada bloque elige sus columnas: dos o tres para fotos y piezas
+   *  cuadradas, cuatro para etiquetas, donde lo que importa es poder
+   *  compararlas entre si de un vistazo. */
+  bloques?: { titulo: string; columnas: 2 | 3 | 4; piezas: { src: string; pie: string }[] }[];
 };
 
 const MARCAS: Marca[] = [
@@ -108,15 +112,27 @@ const MARCAS: Marca[] = [
     logos: [grSello, grNombre],
     relato: "Elsie emprende de grande, haciendo conservas con las recetas de su familia. El enfoque fue parecido al de Reyna: una tipografía descontracturada pero legible, versátil para encajar en todos sus productos artesanales. Siete sabores, siete mundos de color y un solo sistema: la fruta ilustrada, la onda del dulce cayendo y el sello se repiten en cada etiqueta, y lo único que cambia es la paleta.",
     cierre: "Terminé babeando con cada etiqueta. Y esa es la prueba de que funcionan: si te dan ganas de comerlas, la etiqueta ya hizo su trabajo.",
-    columnas: 4,
-    aplicaciones: [
-      { src: grFrutilla, pie: "Frutilla" },
-      { src: grArandanos, pie: "Arándanos" },
-      { src: grNaranjas, pie: "Naranjas" },
-      { src: grManzana, pie: "Manzana" },
-      { src: grPera, pie: "Pera" },
-      { src: grOtonal, pie: "Otoñal" },
-      { src: grFrutosRojos, pie: "Frutos rojos" },
+    bloques: [
+      {
+        titulo: "En el frasco", columnas: 3,
+        piezas: [
+          { src: grMockup, pie: "El packaging completo" },
+          { src: grMermeladas, pie: "La línea de mermeladas" },
+          { src: grConservas, pie: "La línea de conservas" },
+        ],
+      },
+      {
+        titulo: "Siete sabores, un sistema", columnas: 4,
+        piezas: [
+          { src: grFrutilla, pie: "Frutilla" },
+          { src: grArandanos, pie: "Arándanos" },
+          { src: grNaranjas, pie: "Naranjas" },
+          { src: grManzana, pie: "Manzana" },
+          { src: grPera, pie: "Pera" },
+          { src: grOtonal, pie: "Otoñal" },
+          { src: grFrutosRojos, pie: "Frutos rojos" },
+        ],
+      },
     ],
   },
   {
@@ -127,11 +143,16 @@ const MARCAS: Marca[] = [
     fondo: "#FFF2DE", tinta: "#321F17", colorLogo: "#8C8F41", logos: [reynaLogo, reynaSello],
     relato: "Ro eligió los budines. Pero no son solo «budines»: son budines gigantes y con una vueltita de rosca. La acompañamos desde el arranque del emprendimiento con una identidad que tiene en el centro una caricatura de ella misma cargando esos budines espectaculares, y desarrollamos los elementos para su packaging de estilo artesanal.",
     cierre: "Un personaje sencillo y versátil, que le sirve para contar su producto en tantos escenarios como quiera. Una tipografía bold y divertida. Colores que acompañan. Y ya: ¡poné la pava!",
-    aplicaciones: [
-      { src: reynaPackaging, pie: "El packaging real, ya en producción" },
-      { src: reynaSistema, pie: "El personaje y su familia de íconos" },
-      { src: reynaGrandes, pie: "Pieza de campaña: el tamaño como argumento" },
-      { src: reynaPieza, pie: "La marca aplicada en redes" },
+    bloques: [
+      {
+        titulo: "Aplicada", columnas: 2,
+        piezas: [
+          { src: reynaPackaging, pie: "El packaging real, ya en producción" },
+          { src: reynaSistema, pie: "El personaje y su familia de íconos" },
+          { src: reynaGrandes, pie: "Pieza de campaña: el tamaño como argumento" },
+          { src: reynaPieza, pie: "La marca aplicada en redes" },
+        ],
+      },
     ],
   },
   {
@@ -308,13 +329,15 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
           </div>
         </div>
 
-        {marca.aplicaciones?.length ? (
-          <div className="mt-14">
+        {marca.bloques?.map((b) => (
+          <div key={b.titulo} className="mt-14">
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.8 }}>
-              Aplicada
+              {b.titulo}
             </p>
-            <div className={`mt-4 grid gap-6 ${marca.columnas === 4 ? "grid-cols-2 md:grid-cols-4" : "sm:grid-cols-2"}`}>
-              {marca.aplicaciones.map((a) => (
+            <div className={`mt-4 grid gap-6 ${
+              b.columnas === 4 ? "grid-cols-2 md:grid-cols-4"
+              : b.columnas === 3 ? "grid-cols-1 sm:grid-cols-3" : "sm:grid-cols-2"}`}>
+              {b.piezas.map((a) => (
                 <figure key={a.src}>
                   <img src={a.src} alt={`${marca.nombre} — ${a.pie}`} className="w-full" loading="lazy" />
                   <figcaption className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style={{ opacity: 0.8 }}>
@@ -324,7 +347,7 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
               ))}
             </div>
           </div>
-        ) : null}
+        ))}
 
         <button
           onClick={cerrar}
