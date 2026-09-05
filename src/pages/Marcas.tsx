@@ -22,6 +22,15 @@ import reynaGrandes from "@/assets/marcas/aplicaciones/reyna-grandes.webp";
 import reynaPieza from "@/assets/marcas/aplicaciones/reyna-pieza.webp";
 import reynaLogo from "@/assets/marcas/aplicaciones/reyna-logo.png";
 import reynaSello from "@/assets/marcas/aplicaciones/reyna-sello.png";
+import grSello from "@/assets/marcas/aplicaciones/grannie-sello.png";
+import grNombre from "@/assets/marcas/aplicaciones/grannie-nombre.png";
+import grFrutilla from "@/assets/marcas/aplicaciones/grannie-frutilla.webp";
+import grArandanos from "@/assets/marcas/aplicaciones/grannie-arandanos.webp";
+import grNaranjas from "@/assets/marcas/aplicaciones/grannie-naranjas.webp";
+import grManzana from "@/assets/marcas/aplicaciones/grannie-manzana.webp";
+import grPera from "@/assets/marcas/aplicaciones/grannie-pera.webp";
+import grOtonal from "@/assets/marcas/aplicaciones/grannie-otonal.webp";
+import grFrutosRojos from "@/assets/marcas/aplicaciones/grannie-frutos-rojos.webp";
 
 /**
  * Portfolio de marcas.
@@ -79,15 +88,36 @@ type Marca = {
   logos?: string[];
   /** Se muestran solo si estan cargadas. */
   aplicaciones?: { src: string; pie: string }[];
+  /** Columnas de la grilla de piezas. Dos por defecto, que va bien para
+   *  fotos y piezas cuadradas. Las piezas altas y angostas —una etiqueta de
+   *  frasco, por ejemplo— se ven mejor en cuatro: en dos quedan gigantes y
+   *  se pierde la comparacion entre una y otra, que muchas veces es el punto. */
+  columnas?: 2 | 4;
 };
 
 const MARCAS: Marca[] = [
   {
-    nombre: "Grannie", logo: mGrannie, rubro: "Mermeladas artesanales",
+    nombre: "Grannie", logo: mGrannie, rubro: "Conservas artesanales",
+    pregunta: "¿Cómo hacés que las recetas de una familia se vean como una marca?",
     concepto: "Un sistema que se estira a siete sabores sin romperse",
-    paleta: ["#8B2A2A", "#E8B33C", "#2D4A7C", "#F0E4C8"],
-    fondo: "#F0E4C8", tinta: "#3B1616", colorLogo: "#8B2A2A",
-    relato: "Siete sabores, siete mundos de color, un solo sistema. La fruta ilustrada, la onda del dulce cayendo y el sello «hecho a mano con amor» se repiten en todas; lo único que cambia es la paleta. Se entregó con las planchas armadas para imprenta, listas para producir.",
+    // La paleta sale de los archivos de la marca, no de una aproximacion:
+    // el naranja y la crema son los del logo, y los otros dos son colores de
+    // sabor, para que se vea que el sistema cambia de paleta y no de forma.
+    paleta: ["#FC6000", "#FCF0B4", "#48546C", "#900000"],
+    fondo: "#FCF0B4", tinta: "#3B1616", colorLogo: "#FC6000",
+    logos: [grSello, grNombre],
+    relato: "Elsie emprende de grande, haciendo conservas con las recetas de su familia. El enfoque fue parecido al de Reyna: una tipografía descontracturada pero legible, versátil para encajar en todos sus productos artesanales. Siete sabores, siete mundos de color y un solo sistema: la fruta ilustrada, la onda del dulce cayendo y el sello se repiten en cada etiqueta, y lo único que cambia es la paleta.",
+    cierre: "Terminé babeando con cada etiqueta. Y esa es la prueba de que funcionan: si te dan ganas de comerlas, la etiqueta ya hizo su trabajo.",
+    columnas: 4,
+    aplicaciones: [
+      { src: grFrutilla, pie: "Frutilla" },
+      { src: grArandanos, pie: "Arándanos" },
+      { src: grNaranjas, pie: "Naranjas" },
+      { src: grManzana, pie: "Manzana" },
+      { src: grPera, pie: "Pera" },
+      { src: grOtonal, pie: "Otoñal" },
+      { src: grFrutosRojos, pie: "Frutos rojos" },
+    ],
   },
   {
     nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Pastelería artesanal",
@@ -283,7 +313,7 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em]" style={{ opacity: 0.8 }}>
               Aplicada
             </p>
-            <div className="mt-4 grid gap-6 sm:grid-cols-2">
+            <div className={`mt-4 grid gap-6 ${marca.columnas === 4 ? "grid-cols-2 md:grid-cols-4" : "sm:grid-cols-2"}`}>
               {marca.aplicaciones.map((a) => (
                 <figure key={a.src}>
                   <img src={a.src} alt={`${marca.nombre} — ${a.pie}`} className="w-full" loading="lazy" />
