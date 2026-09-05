@@ -8,6 +8,7 @@ import Marcas from "./pages/Marcas";
 import Pauta from "./pages/Pauta";
 import Contenido from "./pages/Contenido";
 import ComoTrabajamos from "./pages/ComoTrabajamos";
+import DemoCreativo from "./pages/DemoCreativo";  // TEMPORAL: se borra al elegir
 import NotFound from "./pages/NotFound";
 import IrArriba from "./components/IrArriba";
 
@@ -37,6 +38,8 @@ const App = () => (
           <Route path="/meta-ads" element={<Pauta />} />
           <Route path="/contenido" element={<Contenido />} />
           <Route path="/como-trabajamos" element={<ComoTrabajamos />} />
+          {/* TEMPORAL: comparacion de las dos formas de mostrar el creativo */}
+          <Route path="/demo-creativo" element={<DemoCreativo />} />
           {/* Las rutas nuevas van arriba de esta, que atrapa todo lo demás. */}
           <Route path="*" element={<NotFound />} />
         </Routes>
