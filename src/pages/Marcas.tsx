@@ -31,6 +31,7 @@ import grManzana from "@/assets/marcas/aplicaciones/grannie-manzana.webp";
 import grPera from "@/assets/marcas/aplicaciones/grannie-pera.webp";
 import grOtonal from "@/assets/marcas/aplicaciones/grannie-otonal.webp";
 import grFrutosRojos from "@/assets/marcas/aplicaciones/grannie-frutos-rojos.webp";
+import grDurazno from "@/assets/marcas/aplicaciones/grannie-durazno.webp";
 import grMockup from "@/assets/marcas/aplicaciones/grannie-mockup.webp";
 import grConservas from "@/assets/marcas/aplicaciones/grannie-conservas.webp";
 import grMermeladas from "@/assets/marcas/aplicaciones/grannie-mermeladas.webp";
@@ -58,6 +59,10 @@ import nmoRegalo from "@/assets/marcas/aplicaciones/nmo-regalo.webp";
 import nmoEpoca from "@/assets/marcas/aplicaciones/nmo-epoca.webp";
 import nmoTips from "@/assets/marcas/aplicaciones/nmo-tips.webp";
 import nmoCrema from "@/assets/marcas/aplicaciones/nmo-crema.webp";
+import nmoSale from "@/assets/marcas/aplicaciones/nmo-sale.webp";
+import nmoGondola from "@/assets/marcas/aplicaciones/nmo-gondola.webp";
+import nmoBlotter from "@/assets/marcas/aplicaciones/nmo-blotter.webp";
+import nmoOferta from "@/assets/marcas/aplicaciones/nmo-oferta.webp";
 import magLogo from "@/assets/marcas/aplicaciones/mag-logo.png";
 import magCirculo from "@/assets/marcas/aplicaciones/mag-circulo.png";
 import magRojo from "@/assets/marcas/aplicaciones/mag-rojo.webp";
@@ -173,14 +178,14 @@ const MARCAS: Marca[] = [
   {
     nombre: "Grannie", logo: mGrannie, rubro: "Conservas artesanales",
     pregunta: "¿Cómo hacés que las recetas de una familia se vean como una marca?",
-    concepto: "Un sistema que se estira a siete sabores sin romperse",
+    concepto: "Un sistema que se estira sabor por sabor sin romperse",
     // La paleta sale de los archivos de la marca, no de una aproximacion:
     // el naranja y la crema son los del logo, y los otros dos son colores de
     // sabor, para que se vea que el sistema cambia de paleta y no de forma.
     paleta: ["#FC6000", "#FCF0B4", "#48546C", "#900000"],
     fondo: "#FCF0B4", tinta: "#3B1616", colorLogo: "#FC6000",
     logos: [grSello, grNombre],
-    relato: "Elsie emprende de grande, haciendo conservas con las recetas de su familia. El enfoque fue parecido al de Reyna: una tipografía descontracturada pero legible, versátil para encajar en todos sus productos artesanales. Siete sabores, siete mundos de color y un solo sistema: la fruta ilustrada, la onda del dulce cayendo y el sello se repiten en cada etiqueta, y lo único que cambia es la paleta.",
+    relato: "Elsie emprende de grande, haciendo conservas con las recetas de su familia. El enfoque fue parecido al de Reyna: una tipografía descontracturada pero legible, versátil para encajar en todos sus productos artesanales. Cada sabor tiene su propio mundo de color y todos comparten el mismo sistema: la fruta ilustrada, la onda del dulce cayendo y el sello se repiten en cada etiqueta, y lo único que cambia es la paleta.",
     cierre: "Terminé babeando con cada etiqueta. Y esa es la prueba de que funcionan: si te dan ganas de comerlas, la etiqueta ya hizo su trabajo.",
     bloques: [
       {
@@ -192,7 +197,7 @@ const MARCAS: Marca[] = [
         ],
       },
       {
-        titulo: "Siete sabores, un sistema", columnas: 4,
+        titulo: "Sabor por sabor, el mismo sistema", columnas: 4,
         piezas: [
           { src: grFrutilla, pie: "Frutilla" },
           { src: grArandanos, pie: "Arándanos" },
@@ -201,6 +206,7 @@ const MARCAS: Marca[] = [
           { src: grPera, pie: "Pera" },
           { src: grOtonal, pie: "Otoñal" },
           { src: grFrutosRojos, pie: "Frutos rojos" },
+          { src: grDurazno, pie: "Durazno" },
         ],
       },
     ],
@@ -280,6 +286,20 @@ const MARCAS: Marca[] = [
     logos: [nmoLogo, nmoFlor],
     relato: "No Me Olvides ya tenía una flor en su logo original. En vez de descartarla la rediseñé: la nomeolvides pasó a ser el isotipo y la marca ganó un símbolo propio que se sostiene incluso a cincuenta píxeles. Era un rebranding, no una marca nueva — la clienta de siempre tenía que reconocerla y la nueva, elegirla.",
     bloques: [
+      {
+        // Van en cuadrado y no recortadas: son piezas de proporciones muy
+        // distintas —un blotter alargado al lado de una etiqueta vertical— y
+        // recortarlas a una misma medida les comeria justo lo que se tiene
+        // que leer. El fondo del brandbook es el mismo azul del panel, asi
+        // que el recorte no se nota.
+        titulo: "Papelería y packaging", columnas: 4, cuadrado: true,
+        piezas: [
+          { src: nmoSale, pie: "Etiquetas Sale" },
+          { src: nmoGondola, pie: "Porta precios de góndola" },
+          { src: nmoBlotter, pie: "Blotters personalizados" },
+          { src: nmoOferta, pie: "Cartel de oferta" },
+        ],
+      },
       {
         titulo: "El feed", columnas: 4,
         piezas: [
