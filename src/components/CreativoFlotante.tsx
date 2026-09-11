@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import { Instagram } from "lucide-react";
+import { useVideoEnVista } from "@/hooks/useVideoEnVista";
 
 /**
  * El creativo real de una campaña, flotando dentro de la tarjeta del caso.
@@ -12,10 +12,8 @@ import { Instagram } from "lucide-react";
  * El video va mudo, en loop y sin controles: no es una pieza para mirar
  * sentado, es la prueba de que la campaña existió.
  *
- * Nada se descarga hasta que la tarjeta se acerca a la pantalla, y solo
- * reproduce el que está a la vista. Con ocho casos en una página, dejarlos
- * a todos en autoplay serían varios megas de golpe y ocho videos moviéndose
- * al mismo tiempo, que marea y le saca el foco al número.
+ * La carga diferida y el arranque al entrar en pantalla viven en
+ * useVideoEnVista, compartido con las piezas de la página de contenido.
  */
 
 type Props = {
@@ -28,44 +26,7 @@ type Props = {
 };
 
 const CreativoFlotante = ({ video, poster, enlace, cuenta }: Props) => {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [cargar, setCargar] = useState(false);
-  const [enVista, setEnVista] = useState(false);
-
-  // Mirar y reproducir van separados a propósito. Juntos no funciona: pedir
-  // play() en el mismo momento en que se decide cargar el archivo falla,
-  // porque el src todavía no está puesto —React no volvió a dibujar— y el
-  // video no arrancaba hasta que uno se iba de la tarjeta y volvía.
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        setEnVista(e.isIntersecting);
-        if (e.isIntersecting) setCargar(true);
-      },
-      { rootMargin: "200px" },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !cargar) return;
-
-    // Quien pidió menos movimiento en su sistema se queda con la imagen fija.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    if (enVista) {
-      // play() devuelve una promesa que el navegador rechaza si la pestaña
-      // está en segundo plano. Sin el catch queda un error suelto en consola
-      // cada vez que alguien cambia de pestaña.
-      void el.play().catch(() => {});
-    } else {
-      el.pause();
-    }
-  }, [cargar, enVista]);
+  const { ref, cargar } = useVideoEnVista();
 
   const pieza = (
     <>

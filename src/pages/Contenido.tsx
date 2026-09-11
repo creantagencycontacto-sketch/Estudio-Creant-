@@ -1,6 +1,20 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Marco from "@/components/Marco";
+import VideoPieza from "@/components/VideoPieza";
+
+import vFiltros from "@/assets/contenido/tci-filtros.mp4";
+import pFiltros from "@/assets/contenido/tci-filtros.jpg";
+import vManten from "@/assets/contenido/tci-manten.mp4";
+import pManten from "@/assets/contenido/tci-manten.jpg";
+import vPalabras from "@/assets/contenido/aste-3palabras.mp4";
+import pPalabras from "@/assets/contenido/aste-3palabras.jpg";
+import vHora from "@/assets/contenido/aste-hora.mp4";
+import pHora from "@/assets/contenido/aste-hora.jpg";
+import vMedidor from "@/assets/contenido/ia-medidor.mp4";
+import pMedidor from "@/assets/contenido/ia-medidor.jpg";
+import vControl from "@/assets/contenido/ia-control.mp4";
+import pControl from "@/assets/contenido/ia-control.jpg";
 
 /**
  * Portfolio de contenido.
@@ -14,8 +28,9 @@ import Marco from "@/components/Marco";
  * alguien produce contenido que lo respete. Por eso la página engancha con la
  * sección de branding en vez de vivir aislada.
  *
- * PENDIENTE: faltan las piezas reales. Cuando estén, reemplazan el bloque de
- * "en preparación" del final.
+ * Las dos piezas de IA van dentro de la sección que habla de IA y no en una
+ * galería aparte: ahí el argumento y la prueba quedan juntos, y no hay que
+ * pedirle al que lee que se acuerde de lo que decía tres pantallas arriba.
  */
 
 const HACEMOS = [
@@ -129,19 +144,39 @@ const Contenido = () => (
           las diez sirve, por qué las otras nueve no, y dejarla lista para que se
           imprima sin romperse — eso es lo que se paga.
         </p>
+
+        <div className="mt-14 grid max-w-[34rem] gap-8 sm:grid-cols-2">
+          <VideoPieza video={vMedidor} poster={pMedidor} tono="claro"
+            pie="Refrigeración industrial"
+            nota="El medidor de luz subiendo. Filmarlo era esperar horas para mostrar algo que se entiende en tres segundos." />
+          <VideoPieza video={vControl} poster={pControl} tono="claro"
+            pie="Refrigeración industrial"
+            nota="El equipo andando, con una luz que en una casa real no se consigue." />
+        </div>
       </div>
     </section>
 
-    <section className="grano relative bg-secondary py-20">
+    <section className="grano relative bg-tunel py-20 text-background">
       <div className="container mx-auto max-w-6xl px-6">
-        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground">Las piezas</p>
-        <h2 className="mt-3 font-display text-[clamp(1.7rem,4vw,2.6rem)] font-extrabold uppercase tracking-tight">
-          En preparación
+        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-primary">Las piezas</p>
+        <h2 className="mt-3 max-w-3xl font-display text-[clamp(1.9rem,5vw,3.4rem)] font-extrabold uppercase leading-[0.95] tracking-[-0.035em]">
+          Video editado,<br />con la voz de cada marca
         </h2>
-        <p className="mt-4 max-w-[35rem] leading-relaxed text-muted-foreground">
-          Estamos armando esta sección con trabajo real de cada tipo: piezas gráficas,
-          video editado y material grabado, cada uno junto a la marca para la que se hizo.
+        <p className="mt-5 max-w-[37rem] leading-relaxed text-background/70">
+          Mismo estudio, dos marcas distintas. Ninguna se parece a la otra, y ninguna se
+          parece a nosotros: cada pieza habla como habla su marca.
         </p>
+
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <VideoPieza video={vFiltros} poster={pFiltros} pie="Refrigeración industrial"
+            nota="La pregunta incómoda como gancho: hace cuánto que no limpiás los filtros." />
+          <VideoPieza video={vManten} poster={pManten} pie="Refrigeración industrial"
+            nota="Usar el aire en invierno también pide mantenimiento." />
+          <VideoPieza video={vPalabras} poster={pPalabras} pie="Neumáticos"
+            nota="Tres palabras, el stock a la vista y un cierre simple." />
+          <VideoPieza video={vHora} poster={pHora} pie="Neumáticos"
+            nota="El recordatorio del teléfono como formato: es hora de cambiarlos." />
+        </div>
       </div>
     </section>
   </Marco>
