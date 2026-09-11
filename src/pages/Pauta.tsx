@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Marco from "@/components/Marco";
+import CreativoFlotante from "@/components/CreativoFlotante";
+import vidNeumaticos from "@/assets/pauta/demo-neumaticos.mp4";
+import posNeumaticos from "@/assets/pauta/demo-neumaticos.jpg";
 
 /**
  * Portfolio de pauta.
@@ -33,6 +36,9 @@ type Caso = {
   queSignifica: string;
   grafico: Grafico;
   moneda: "ARS" | "USD";
+  /** La pieza que efectivamente corrió. Aparece solo si esta cargada, asi
+   *  que las tarjetas sin creativo siguen viendose bien. */
+  creativo?: { video: string; poster: string; enlace?: string; cuenta?: string };
 };
 
 const CASOS: Caso[] = [
@@ -45,6 +51,7 @@ const CASOS: Caso[] = [
     queSignifica: "Cada persona que escribió costó menos de cien pesos. Es el mejor número que conseguimos en una campaña de mensajes.",
     grafico: { tipo: "barras", unidad: "$ por consulta", menorEsMejor: true,
       datos: [{ etiqueta: "Pieza ganadora", valor: 96 }, { etiqueta: "Segunda", valor: 209 }, { etiqueta: "Tercera", valor: 313 }] },
+    creativo: { video: vidNeumaticos, poster: posNeumaticos },
   },
   {
     rubro: "Automotor", titulo: "Electrónica automotriz", moneda: "ARS",
@@ -219,11 +226,28 @@ const Pauta = () => {
                 transition={{ duration: 0.45, delay: (i % 2) * 0.08 }}
                 className="flex flex-col bg-tunel p-8">
 
-                <div className="flex items-baseline justify-between gap-3">
-                  <h2 className="font-display text-2xl font-extrabold uppercase leading-tight tracking-tight">{c.titulo}</h2>
-                  <span className="shrink-0 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-primary">{c.moneda}</span>
-                </div>
-                <p className="mt-1 text-sm text-background/60">{c.contexto}</p>
+                {/* Este bloque existe para que el float funcione: la tarjeta es
+                    un contenedor flex, y los flex ignoran los floats. */}
+                <div>
+
+                {/* El creativo va flotado y no en una columna: en una columna
+                    el texto quedaba en 184px de ancho en celular, que son unos
+                    veinticinco caracteres por renglon y se lee incomodo. Flotado,
+                    el texto lo rodea arriba y despues sigue a todo el ancho. */}
+                {c.creativo ? (
+                  <div className="float-right ml-5 mb-2">
+                    <CreativoFlotante {...c.creativo} />
+                  </div>
+                ) : null}
+
+                {/* La moneda va en la linea del contexto y ya no arriba a la
+                    derecha: ahi vivia en una fila flex que no esquivaba bien al
+                    creativo flotado y el cartelito quedaba tapado por el video. */}
+                <h2 className="font-display text-2xl font-extrabold uppercase leading-tight tracking-tight">{c.titulo}</h2>
+                <p className="mt-1 text-sm text-background/60">
+                  {c.contexto}
+                  <span className="ml-2 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-primary">{c.moneda}</span>
+                </p>
 
                 <div className="mt-7 space-y-5">
                   <div>
@@ -236,12 +260,14 @@ const Pauta = () => {
                   </div>
                 </div>
 
-                <div className="mt-7 border-t border-background/15 pt-6">
+                <div className="clear-both mt-7 border-t border-background/15 pt-6">
                   <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-primary">Qué pasó</p>
                   <p className="mt-2 font-display text-[clamp(1.6rem,3.5vw,2.2rem)] font-extrabold leading-none tracking-tight">
                     {c.resultado}
                   </p>
                   <p className="mt-3 leading-relaxed text-background/65">{c.queSignifica}</p>
+                </div>
+
                 </div>
 
                 <div className="mt-7">
