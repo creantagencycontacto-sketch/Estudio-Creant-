@@ -41,11 +41,18 @@ type Props = {
   intermedios: [string, string];
   /** El color de la sección que viene abajo. */
   fondo: string;
+  /** Marca el corte que vuelve a la superficie.
+   *
+   *  Bajando, la capa del frente va plana y con borde nítido a propósito: ese
+   *  borde ES la línea del suelo y por eso se lee bien. Subiendo no representa
+   *  nada y queda como una raya cruzando la pantalla, así que también se
+   *  desvanece. */
+  sube?: boolean;
   variante?: 0 | 1;
   className?: string;
 };
 
-const CorteTierra = ({ intermedios, fondo, variante = 0, className = "" }: Props) => {
+const CorteTierra = ({ intermedios, fondo, sube = false, variante = 0, className = "" }: Props) => {
   // Cada corte necesita ids propios: con tres en la misma página, los filtros
   // y degradados se pisarían entre sí y todos usarían los del primero.
   const id = useId().replace(/:/g, "");
@@ -83,18 +90,33 @@ const CorteTierra = ({ intermedios, fondo, variante = 0, className = "" }: Props
           <feComposite in="grano" in2="suave" operator="in" result="recortado" />
           <feBlend in="suave" in2="recortado" mode="multiply" />
         </filter>
+        {sube ? (
+          <linearGradient id={`${id}-funde-frente`} x1="0" y1="0" x2="0" y2="1">
+            {/* Tiene que llegar al 100% bastante antes del final. La curva se
+                extiende por debajo del encuadre, así que si el degradado
+                recién cierra en su último punto, al borde visible le falta un
+                cinco por ciento y por ahí se filtra el color de arriba: se ve
+                un escalón finito justo donde empieza la sección. */}
+            <stop offset="0" stopColor={fondo} stopOpacity="0" />
+            <stop offset="0.35" stopColor={fondo} stopOpacity="0.85" />
+            <stop offset="0.55" stopColor={fondo} stopOpacity="1" />
+            <stop offset="1" stopColor={fondo} stopOpacity="1" />
+          </linearGradient>
+        ) : null}
+
         <filter id={`${id}-frente`} x="-4%" y="-20%" width="108%" height="150%">
+          {sube ? <feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="suave" /> : null}
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="3" result="ruido" />
           <feColorMatrix in="ruido" type="saturate" values="0" result="gris" />
           <feComponentTransfer in="gris" result="grano"><feFuncA type="linear" slope="0.3" /></feComponentTransfer>
-          <feComposite in="grano" in2="SourceGraphic" operator="in" result="recortado" />
-          <feBlend in="SourceGraphic" in2="recortado" mode="multiply" />
+          <feComposite in="grano" in2={sube ? "suave" : "SourceGraphic"} operator="in" result="recortado" />
+          <feBlend in={sube ? "suave" : "SourceGraphic"} in2="recortado" mode="multiply" />
         </filter>
       </defs>
 
       <path filter={`url(#${id}-lejos)`} fill={`url(#${id}-funde-0)`} d={c.lejos} />
       <path filter={`url(#${id}-medio)`} fill={`url(#${id}-funde-1)`} d={c.medio} />
-      <path filter={`url(#${id}-frente)`} fill={fondo} d={c.frente} />
+      <path filter={`url(#${id}-frente)`} fill={sube ? `url(#${id}-funde-frente)` : fondo} d={c.frente} />
     </svg>
   );
 };

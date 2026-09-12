@@ -165,7 +165,7 @@ const Index = () => {
 
         {/* De vuelta hacia arriba: los tonos van al revés que en la boca,
             del naranja profundo a la arena de la superficie. */}
-        <CorteTierra variante={1} intermedios={["hsl(31 74% 48%)", "hsl(32 33% 68%)"]}
+        <CorteTierra variante={1} sube intermedios={["hsl(31 74% 48%)", "hsl(32 33% 68%)"]}
                      fondo="hsl(var(--background))" />
       </section>
 
