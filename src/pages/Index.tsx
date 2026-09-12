@@ -104,12 +104,52 @@ const Index = () => {
             Estudio de marca y pauta
           </p>
 
-          {/* Las primeras letras y las últimas se van comiendo por la tierra.
-              Son pocas y la erosión no llega al centro de cada una, así que a
-              tamaño de titular se siguen leyendo enteras. */}
+          {/* Los filtros del titular. Van acá, ocultos, porque un filtro SVG
+              tiene que existir en el documento para que el CSS lo pueda usar.
+
+              La letra se desenfoca y se le pasa grano fino por encima: el borde
+              se derrite hacia el fondo en vez de cortar. Es lo que hace la
+              referencia que pasó Mili — la letra tocando el fondo, no el fondo
+              perforando la letra.
+
+              El desenfoque es moderado a propósito: son las primeras y últimas
+              letras de un titular, no una imagen decorativa, y pasado de punto
+              deja de leerse. */}
+          <svg width="0" height="0" className="absolute" aria-hidden="true">
+            <defs>
+              {[
+                { id: "difuso-izq", semilla: 3 },
+                { id: "difuso-der", semilla: 11 },
+              ].map((f) => (
+                <filter key={f.id} id={f.id} x="-12%" y="-16%" width="124%" height="132%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="suave" />
+                  {/* La frecuencia define el tamaño del grano, y en un filtro
+                      sobre HTML una unidad es un píxel: por encima de 1 las
+                      partículas miden menos de un píxel y no se ven. */}
+                  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={f.semilla} result="ruido" />
+                  <feColorMatrix in="ruido" type="saturate" values="0" result="gris" />
+                  <feComponentTransfer in="gris" result="grano">
+                    <feFuncA type="linear" slope="0.55" />
+                  </feComponentTransfer>
+                  {/* El grano se recorta contra la letra ya desenfocada, así
+                      aparece también en el halo del borde y no solo en el
+                      centro macizo. */}
+                  <feComposite in="grano" in2="suave" operator="in" result="recortado" />
+                  <feBlend in="suave" in2="recortado" mode="multiply" />
+                </filter>
+              ))}
+            </defs>
+          </svg>
+
           <h1 className="mt-4 font-display text-[clamp(2.9rem,11vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.045em]">
-            <span className="letra-comida-izq">Ll</span>egaste al
-            <span className="block text-accent">hormigue<span className="letra-comida-der">ro.</span></span>
+            <span className="difuso">
+              <span className="difuso-fondo difuso-fondo-izq" aria-hidden="true">Ll</span>
+              <span className="difuso-nitido-izq">Ll</span>
+            </span>egaste al
+            <span className="block text-accent">hormigue<span className="difuso">
+                <span className="difuso-fondo difuso-fondo-der" aria-hidden="true">ro.</span>
+                <span className="difuso-nitido-der">ro.</span>
+              </span></span>
           </h1>
 
           <motion.p variants={aparece} initial="hidden" animate="visible" custom={1}
