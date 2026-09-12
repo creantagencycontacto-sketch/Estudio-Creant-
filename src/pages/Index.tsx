@@ -216,7 +216,9 @@ const Index = () => {
       </section>
 
       {/* ================= CONTACTO ================= */}
-      <section id="contacto" className="camara grano relative bg-tunel py-24 text-background">
+      {/* Menos aire abajo: entre el último enlace y el pie quedaban 136px de
+          marrón vacío. */}
+      <section id="contacto" className="camara grano relative bg-tunel pb-14 pt-24 text-background">
         <div className="container mx-auto max-w-4xl px-6 text-center">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-primary">Última cámara</p>
           <h2 className="mt-3 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.04em]">

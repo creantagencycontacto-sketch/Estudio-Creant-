@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { Instagram, MessageCircle } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WHATSAPP_URL } from "@/lib/leads";
 import { trackEvent } from "@/lib/tracking";
 import logotipo from "@/assets/logotipo-creant.svg";
+import BandaBrasa from "@/components/BandaBrasa";
 
 const SECCIONES = [
   { a: "/branding", texto: "Branding" },
@@ -81,29 +82,40 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
       {/* El padding de abajo acompaña al resplandor: tiene que ser MAYOR que
           donde termina el naranja (150px), para que nada quede que leerse
           encima. Si se sube uno hay que subir el otro. */}
-      <footer className="brasa grano relative overflow-hidden bg-tunel pb-40 pt-14 text-center text-background/55">
-        <div className="mb-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm md:hidden">
+      <footer className="brasa grano relative overflow-hidden bg-tunel pb-0 pt-6 text-center text-background/55">
+        <div className="mb-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm md:hidden">
           {SECCIONES.map((s) => (
             <Link key={s.a} to={s.a} className="px-2 py-3 transition-colors hover:text-primary">{s.texto}</Link>
           ))}
         </div>
-        <div className="relative z-[2] mb-4 flex items-center justify-center gap-6">
+        <BandaBrasa />
+
+        {/* Redes y firma en un solo renglón, adentro de la banda. El marrón
+            oscuro es el único color que se lee sobre el naranja pleno. */}
+        {/* Dos contenedores anidados y no uno: el de afuera empuja la fila al pie
+            de la banda —arriba están los granos rojos y sobre ellos el marrón no
+            llega al contraste mínimo— y el de adentro alinea los iconos con el
+            texto. Con uno solo hay que elegir: centrado deja la fila en el medio
+            de la banda, y alineado abajo las cajas táctiles de 44px de los
+            iconos les levantan el dibujo y queda desparejo. */}
+        <div className="relative z-[2] mt-4 flex h-[96px] items-end justify-center pb-3 md:mt-8 md:h-[124px] md:pb-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 text-tunel md:gap-x-7">
           <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer"
-             aria-label="Instagram de Creant" className="-m-3 p-3 transition-colors hover:text-primary">
-            <Instagram className="h-5 w-5" aria-hidden="true" />
+             aria-label="Instagram de Creant" className="-my-2 flex h-11 w-11 items-center justify-center transition-opacity hover:opacity-70">
+            <Instagram className="h-[1.15rem] w-[1.15rem]" aria-hidden="true" />
           </a>
           <a href="https://www.tiktok.com/@creantagency?_r=1&_t=ZS-94WzOFtFavI" target="_blank" rel="noopener noreferrer"
-             aria-label="TikTok de Creant" className="-m-3 flex min-h-[44px] items-center p-3 text-xs font-bold transition-colors hover:text-primary">
+             aria-label="TikTok de Creant" className="-my-2 flex h-11 items-center px-1 text-xs font-bold transition-opacity hover:opacity-70">
             TikTok
           </a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("pie")}
-             aria-label="Escribinos por WhatsApp" className="-m-3 p-3 transition-colors hover:text-primary">
-            <MessageCircle className="h-5 w-5" aria-hidden="true" />
-          </a>
+            {/* En celular se acorta: con "Argentina" la línea pide 397px y hay
+                343, así que se parte en dos renglones. Achicar la tipografía
+                hasta que entre la deja en ocho píxeles y medio, ilegible. */}
+            <p className="font-mono text-[0.66rem] font-semibold uppercase tracking-[0.12em] md:text-[0.7rem]">
+              © {new Date().getFullYear()} Creant · Buenos Aires<span className="hidden sm:inline">, Argentina</span>
+            </p>
+          </div>
         </div>
-        <p className="relative z-[2] font-mono text-[0.7rem] uppercase tracking-[0.14em]">
-          © {new Date().getFullYear()} Creant · Buenos Aires, Argentina
-        </p>
       </footer>
     </div>
   );
