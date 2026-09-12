@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Mail, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ContactForm from "@/components/ContactForm";
 import Marco from "@/components/Marco";
 import CorteTierra from "@/components/CorteTierra";
-import { WHATSAPP_URL } from "@/lib/leads";
-import { trackEvent } from "@/lib/tracking";
 
 import milagrosFoto from "@/assets/milagros-2026.webp";
 import juanFoto from "@/assets/juan-new.png";
@@ -75,8 +73,6 @@ const EQUIPO = [
 ];
 
 const Index = () => {
-  const trackWhatsapp = (origen: string) => () => trackEvent("Contact", { content_name: `WhatsApp — ${origen}` });
-
   return (
     <Marco>
       {/* ================= SUPERFICIE ================= */}
@@ -216,7 +212,9 @@ const Index = () => {
       </section>
 
       {/* ================= CONTACTO ================= */}
-      <section id="contacto" className="camara grano relative bg-tunel py-24 text-background">
+      {/* Menos aire abajo: al sacar la fila de contacto quedaban 152px de
+          marrón vacío entre la nota del formulario y el pie. */}
+      <section id="contacto" className="camara grano relative bg-tunel pb-10 pt-24 text-background">
         <div className="container mx-auto max-w-4xl px-6 text-center">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-primary">Última cámara</p>
           <h2 className="mt-3 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.04em]">
@@ -228,15 +226,6 @@ const Index = () => {
 
           <ContactForm />
 
-          <div className="mt-12 flex flex-col items-center justify-center gap-5 text-sm text-background/60 sm:flex-row sm:gap-8">
-            <a href="mailto:creantagency.contacto@gmail.com" className="flex items-center gap-2 py-3 transition-colors hover:text-primary">
-              <Mail className="h-4 w-4" /> creantagency.contacto@gmail.com
-            </a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsapp("sección contacto")}
-               className="flex items-center gap-2 py-3 transition-colors hover:text-primary">
-              <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
-          </div>
         </div>
       </section>
     </Marco>

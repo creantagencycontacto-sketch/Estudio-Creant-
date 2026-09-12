@@ -81,7 +81,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
       {/* El padding de abajo acompaña al resplandor: tiene que ser MAYOR que
           donde termina el naranja (150px), para que nada quede que leerse
           encima. Si se sube uno hay que subir el otro. */}
-      <footer className="brasa grano relative overflow-hidden bg-tunel pb-40 pt-14 text-center text-background/55">
+      <footer className="brasa grano relative overflow-hidden bg-tunel pb-40 pt-10 text-center text-background/55">
         <div className="mb-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm md:hidden">
           {SECCIONES.map((s) => (
             <Link key={s.a} to={s.a} className="px-2 py-3 transition-colors hover:text-primary">{s.texto}</Link>
@@ -101,8 +101,16 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>
-        <p className="relative z-[2] font-mono text-[0.7rem] uppercase tracking-[0.14em]">
-          © {new Date().getFullYear()} Creant · Buenos Aires, Argentina
+        {/* El mail va en la misma línea que la firma. En minúscula: una
+            dirección de correo en mayúsculas se lee peor y se copia mal.
+            En pantallas chicas el renglón se parte solo, que es preferible a
+            achicar la tipografía hasta que entre. */}
+        <p className="relative z-[2] px-6 font-mono text-[0.7rem] uppercase tracking-[0.14em]">
+          © {new Date().getFullYear()} Creant · Buenos Aires, Argentina ·{" "}
+          <a href="mailto:creantagency.contacto@gmail.com"
+             className="inline-block normal-case tracking-normal underline decoration-background/25 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary">
+            creantagency.contacto@gmail.com
+          </a>
         </p>
       </footer>
     </div>
