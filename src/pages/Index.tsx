@@ -122,7 +122,20 @@ const Index = () => {
                 { id: "difuso-der", semilla: 11 },
               ].map((f) => (
                 <filter key={f.id} id={f.id} x="-12%" y="-16%" width="124%" height="132%">
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="suave" />
+                  {/* Dos desenfoques y no uno. El angosto ablanda el borde de
+                      la letra; el ancho, a media opacidad, le arma un halo que
+                      se derrama sobre el fondo. Con el angosto solo la letra
+                      queda apenas suave pero sigue recortada contra la arena:
+                      el halo es lo que hace que la toque de verdad. */}
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="anchoCrudo" />
+                  <feComponentTransfer in="anchoCrudo" result="ancho">
+                    <feFuncA type="linear" slope="0.55" />
+                  </feComponentTransfer>
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="angosto" />
+                  <feMerge result="suave">
+                    <feMergeNode in="ancho" />
+                    <feMergeNode in="angosto" />
+                  </feMerge>
                   {/* La frecuencia define el tamaño del grano, y en un filtro
                       sobre HTML una unidad es un píxel: por encima de 1 las
                       partículas miden menos de un píxel y no se ven. */}
