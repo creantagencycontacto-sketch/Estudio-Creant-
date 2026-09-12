@@ -78,9 +78,10 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
 
       {children}
 
-      {/* pb-28 deja abajo una franja de tierra encendida sin texto encima: el
-          resplandor se ve entero y nada tiene que leerse sobre el naranja. */}
-      <footer className="brasa grano relative overflow-hidden bg-tunel pb-28 pt-14 text-center text-background/55">
+      {/* El padding de abajo acompaña al resplandor: tiene que ser MAYOR que
+          donde termina el naranja (150px), para que nada quede que leerse
+          encima. Si se sube uno hay que subir el otro. */}
+      <footer className="brasa grano relative overflow-hidden bg-tunel pb-40 pt-14 text-center text-background/55">
         <div className="mb-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm md:hidden">
           {SECCIONES.map((s) => (
             <Link key={s.a} to={s.a} className="px-2 py-3 transition-colors hover:text-primary">{s.texto}</Link>
