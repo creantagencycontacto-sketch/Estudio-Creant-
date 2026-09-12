@@ -170,12 +170,12 @@
      para que ahí asome la borrosa. Así el foco cae de a poco en vez de cortar
      seco donde termina el span. */
   .difuso-nitido-izq {
-    -webkit-mask-image: linear-gradient(to right, transparent 8%, #000 78%);
-    mask-image: linear-gradient(to right, transparent 8%, #000 78%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 52%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 52%);
   }
   .difuso-nitido-der {
-    -webkit-mask-image: linear-gradient(to left, transparent 8%, #000 78%);
-    mask-image: linear-gradient(to left, transparent 8%, #000 78%);
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 52%);
+    mask-image: linear-gradient(to left, transparent 0%, #000 52%);
   }
 
   /* Los campos del formulario viven en la cámara oscura, donde el texto es

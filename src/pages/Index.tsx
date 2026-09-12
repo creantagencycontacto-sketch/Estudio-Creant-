@@ -112,9 +112,9 @@ const Index = () => {
               referencia que pasó Mili — la letra tocando el fondo, no el fondo
               perforando la letra.
 
-              El desenfoque es moderado a propósito: son las primeras y últimas
-              letras de un titular, no una imagen decorativa, y pasado de punto
-              deja de leerse. */}
+              El desenfoque es leve y se reparte sobre varias letras, no sobre
+              dos: concentrado en dos se nota dónde empieza y parece un error de
+              render. Repartido queda como un acento en cada punta. */}
           <svg width="0" height="0" className="absolute" aria-hidden="true">
             <defs>
               {[
@@ -127,11 +127,11 @@ const Index = () => {
                       se derrama sobre el fondo. Con el angosto solo la letra
                       queda apenas suave pero sigue recortada contra la arena:
                       el halo es lo que hace que la toque de verdad. */}
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="anchoCrudo" />
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="anchoCrudo" />
                   <feComponentTransfer in="anchoCrudo" result="ancho">
-                    <feFuncA type="linear" slope="0.55" />
+                    <feFuncA type="linear" slope="0.34" />
                   </feComponentTransfer>
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="angosto" />
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="angosto" />
                   <feMerge result="suave">
                     <feMergeNode in="ancho" />
                     <feMergeNode in="angosto" />
@@ -142,7 +142,7 @@ const Index = () => {
                   <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={f.semilla} result="ruido" />
                   <feColorMatrix in="ruido" type="saturate" values="0" result="gris" />
                   <feComponentTransfer in="gris" result="grano">
-                    <feFuncA type="linear" slope="0.55" />
+                    <feFuncA type="linear" slope="0.34" />
                   </feComponentTransfer>
                   {/* El grano se recorta contra la letra ya desenfocada, así
                       aparece también en el halo del borde y no solo en el
@@ -156,12 +156,12 @@ const Index = () => {
 
           <h1 className="mt-4 font-display text-[clamp(2.9rem,11vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.045em]">
             <span className="difuso">
-              <span className="difuso-fondo difuso-fondo-izq" aria-hidden="true">Ll</span>
-              <span className="difuso-nitido-izq">Ll</span>
-            </span>egaste al
-            <span className="block text-accent">hormigue<span className="difuso">
-                <span className="difuso-fondo difuso-fondo-der" aria-hidden="true">ro.</span>
-                <span className="difuso-nitido-der">ro.</span>
+              <span className="difuso-fondo difuso-fondo-izq" aria-hidden="true">Lleg</span>
+              <span className="difuso-nitido-izq">Lleg</span>
+            </span>aste al
+            <span className="block text-accent">hormi<span className="difuso">
+                <span className="difuso-fondo difuso-fondo-der" aria-hidden="true">guero.</span>
+                <span className="difuso-nitido-der">guero.</span>
               </span></span>
           </h1>
 
