@@ -45,8 +45,15 @@ const CARGAS = [
   { escala: 0.037, retardo: "-5s", carga: <path d="M6 11.4 C0.4 7.6, -0.1 4.2, 2.3 2 C4.1 0.4, 5.7 1.3, 6 2.7 C6.4 1.3, 8 0.4, 9.8 2 C12.2 4.2, 11.7 7.6, 6 11.4 Z" fill="#C41230" /> },
   { escala: 0.045, retardo: "-10s", carga: (
     <g><rect x="0" y="6" width="3.4" height="5" fill="#2A1C13" /><rect x="4.3" y="3" width="3.4" height="8" fill="#E8940C" /><rect x="8.6" y="0" width="3.4" height="11" fill="#C41230" /></g>) },
-  { escala: 0.039, retardo: "-15s", carga: (
-    <g><path d="M6 11.4 C-0.6 8.8, -0.6 2.4, 6 0.4 C12.6 2.4, 12.6 8.8, 6 11.4 Z" fill="#8C8F41" /><path d="M6 11.4 L6 1.2" stroke="#2A1C13" strokeWidth="1.4" opacity="0.6" /></g>) },
+  // La hoja es la de Mili, trazada desde su SVG. El archivo original pesa 519 KB
+  // porque adentro no trae vectores sino cuatro mapas de bits: a doce píxeles
+  // eso es carísimo y además no se puede pintar por CSS. Se siguió el contorno
+  // y se simplificó a 36 puntos, que a este tamaño es más de lo que el ojo
+  // llega a ver. Va corrida en x para quedar centrada en el cuadro de carga.
+  // Escala mayor que las demás cargas a propósito: la hoja es alta y angosta,
+  // así que al mismo tamaño que un cuadrado pierde peso y parece más chica.
+  { escala: 0.05, retardo: "-15s", carga: (
+    <g transform="translate(2.9,0)"><path d="M4.85 0.00 L4.97 0.16 L5.44 1.69 L6.07 4.35 L6.24 5.90 L6.20 6.69 L6.09 7.30 L5.90 7.92 L5.59 8.54 L5.18 9.09 L4.69 9.56 L4.14 9.94 L3.57 10.20 L2.97 10.33 L2.42 10.32 L2.08 11.61 L1.95 11.85 L1.80 11.97 L1.42 12.00 L1.29 11.92 L1.36 11.44 L1.83 10.16 L1.41 9.92 L1.04 9.55 L0.63 8.95 L0.31 8.31 L0.09 7.62 L0.01 7.07 L0.00 6.49 L0.09 5.90 L0.28 5.30 L0.54 4.73 L1.40 3.47 L2.89 1.83 L4.41 0.35 L4.85 0.00Z" fill="#8CBE50" /></g>) },
   { escala: 0.043, retardo: "-20s", carga: <path d="M1.5 0.5 L11.5 5.5 L1.5 10.5 Z" fill="#C41230" /> },
   { escala: 0.036, retardo: "-25s", carga: (
     <g><rect x="0" y="1" width="12" height="9" rx="1.2" fill="#E8940C" /><path d="M0.6 1.8 L6 6 L11.4 1.8" fill="none" stroke="#2A1C13" strokeWidth="2.2" strokeLinejoin="round" /></g>) },
