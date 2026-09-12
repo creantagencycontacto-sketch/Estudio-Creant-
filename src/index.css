@@ -110,6 +110,39 @@
     opacity: 0.14;
   }
 
+  /* La brasa del fondo del hormiguero: un naranja que sube desde el borde de
+     abajo del pie. Va en ::before porque .grano ya usa el ::after.
+
+     El naranja no se pinta plano: se recorta con una máscara de ruido, así que
+     lo que se ve son granos de color que se van juntando hacia abajo. Pintado
+     plano daría un degradado de plantilla; hecho de grano parece tierra con
+     luz.
+
+     La máscara usa un mosaico grande y ruido fino: con el mosaico chico del
+     grano normal se alcanza a ver el patrón repetido a lo ancho del pie. */
+  .brasa::before {
+    content: "";
+    position: absolute;
+    /* Ocupa todo el alto del pie y no una medida fija: con una medida más
+       alta que el pie, el degradado queda cortado por arriba y se ve el
+       borde donde arranca de golpe. */
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    /* Las paradas van en píxeles y no en porcentaje: así el resplandor queda
+       siempre en la misma franja de abajo, mida lo que mida el pie. Con
+       porcentajes crecía junto con el pie y se comía el texto, que sobre el
+       naranja fuerte cae a 2:1 — ni a opacidad plena llegaría al mínimo. */
+    background: linear-gradient(
+      to top,
+      hsl(31 74% 48% / 0.85) 0,
+      hsl(31 74% 48% / 0.4) 44px,
+      hsl(31 74% 48% / 0) 104px
+    );
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+  }
+
   /* Los campos del formulario viven en la cámara oscura, donde el texto es
      claro. Si heredaran ese color quedarían claros sobre un campo claro y no
      se leería nada: acá se les devuelve el contraste. */

@@ -78,13 +78,15 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
 
       {children}
 
-      <footer className="grano relative bg-tunel pb-10 pt-14 text-center text-background/55">
+      {/* pb-28 deja abajo una franja de tierra encendida sin texto encima: el
+          resplandor se ve entero y nada tiene que leerse sobre el naranja. */}
+      <footer className="brasa grano relative overflow-hidden bg-tunel pb-28 pt-14 text-center text-background/55">
         <div className="mb-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm md:hidden">
           {SECCIONES.map((s) => (
             <Link key={s.a} to={s.a} className="px-2 py-3 transition-colors hover:text-primary">{s.texto}</Link>
           ))}
         </div>
-        <div className="mb-4 flex items-center justify-center gap-6">
+        <div className="relative z-[2] mb-4 flex items-center justify-center gap-6">
           <a href="https://www.instagram.com/estudio.creant/" target="_blank" rel="noopener noreferrer"
              aria-label="Instagram de Creant" className="-m-3 p-3 transition-colors hover:text-primary">
             <Instagram className="h-5 w-5" aria-hidden="true" />
@@ -98,7 +100,7 @@ const Marco = ({ children }: { children: React.ReactNode }) => {
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>
-        <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em]">
+        <p className="relative z-[2] font-mono text-[0.7rem] uppercase tracking-[0.14em]">
           © {new Date().getFullYear()} Creant · Buenos Aires, Argentina
         </p>
       </footer>
