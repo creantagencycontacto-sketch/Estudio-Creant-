@@ -104,9 +104,12 @@ const Index = () => {
             Estudio de marca y pauta
           </p>
 
+          {/* Las primeras letras y las últimas se van comiendo por la tierra.
+              Son pocas y la erosión no llega al centro de cada una, así que a
+              tamaño de titular se siguen leyendo enteras. */}
           <h1 className="mt-4 font-display text-[clamp(2.9rem,11vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.045em]">
-            Llegaste al
-            <span className="block text-accent">hormiguero.</span>
+            <span className="letra-comida-izq">Ll</span>egaste al
+            <span className="block text-accent">hormigue<span className="letra-comida-der">ro.</span></span>
           </h1>
 
           <motion.p variants={aparece} initial="hidden" animate="visible" custom={1}
