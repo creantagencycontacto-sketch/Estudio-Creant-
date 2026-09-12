@@ -75,7 +75,10 @@ const Index = () => {
       <section className="grano relative overflow-hidden">
         {/* El sendero va en la franja libre de abajo: si cruzara el titular, las
             obreras caminarían tapadas por las letras. */}
-        <svg className="sendero-hormigas pointer-events-none absolute bottom-9 left-0 right-0 z-[4]"
+        {/* El sendero se apoya justo arriba del corte de tierra. Si queda por
+            debajo, las obreras caminan sobre la tierra en vez de sobre la
+            superficie y se pierde la idea de que el hormiguero empieza ahí. */}
+        <svg className="sendero-hormigas pointer-events-none absolute bottom-[86px] left-0 right-0 z-[4] md:bottom-[158px]"
              viewBox="0 0 1440 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <path d="M -40 96 C 250 62, 520 112, 800 74 S 1240 46, 1500 90"
                 fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="1.1"
@@ -122,10 +125,74 @@ const Index = () => {
           </motion.div>
         </div>
 
-        {/* El corte de tierra: la superficie se abre y empieza el hormiguero. */}
-        <svg className="relative z-[3] -mb-px block h-auto w-full" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,52 C90,30 150,74 246,58 C348,41 392,80 500,66 C600,53 660,86 762,70 C870,53 918,88 1030,72 C1130,58 1190,34 1290,52 C1352,63 1400,44 1440,50 L1440,90 L0,90 Z"
-                fill="hsl(var(--tunel))" />
+        {/* El corte de tierra: la superficie se abre y empieza el hormiguero.
+            Son tres capas en vez de una. La de atrás va más clara, más alta y
+            muy difuminada; la del frente, oscura y nítida. Esa diferencia de
+            foco es lo que da profundidad: el ojo lee lo borroso como lejos.
+
+            Cada capa lleva su propio grano, y el de atrás más marcado, porque
+            el desenfoque solo se ve digital — el grano es lo que lo vuelve
+            fotográfico. Va como filtro adentro del SVG y no como una capa
+            encima, así queda recortado a la forma y no mancha la arena.
+
+            Las curvas arrancan en -60 y terminan en 1500, fuera del encuadre:
+            si empezaran justo en el borde, el desenfoque dejaría los costados
+            transparentes y se vería el corte. */}
+        <svg className="relative z-[3] -mb-px block h-[78px] w-full md:h-[150px]"
+             viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            {/* El degradado es lo que hace que la capa aparezca en vez de
+                empezar. Sin él, por más desenfoque que tenga, arriba queda un
+                borde y se lee como una banda de color pegada. */}
+            <linearGradient id="fundeLejos" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="hsl(32 33% 66%)" stopOpacity="0" />
+              <stop offset="0.45" stopColor="hsl(32 33% 66%)" stopOpacity="0.8" />
+              <stop offset="1" stopColor="hsl(32 33% 66%)" stopOpacity="1" />
+            </linearGradient>
+            <linearGradient id="fundeMedio" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="hsl(27 36% 38%)" stopOpacity="0" />
+              <stop offset="0.4" stopColor="hsl(27 36% 38%)" stopOpacity="0.9" />
+              <stop offset="1" stopColor="hsl(27 36% 38%)" stopOpacity="1" />
+            </linearGradient>
+            <filter id="tierraLejos" x="-8%" y="-30%" width="116%" height="170%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="suave" />
+              <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="4" seed="7" result="ruido" />
+              <feColorMatrix in="ruido" type="saturate" values="0" result="gris" />
+              <feComponentTransfer in="gris" result="grano">
+                <feFuncA type="linear" slope="0.75" />
+              </feComponentTransfer>
+              <feComposite in="grano" in2="suave" operator="in" result="recortado" />
+              <feBlend in="suave" in2="recortado" mode="multiply" />
+            </filter>
+            <filter id="tierraMedio" x="-6%" y="-25%" width="112%" height="160%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="suave" />
+              <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" seed="19" result="ruido" />
+              <feColorMatrix in="ruido" type="saturate" values="0" result="gris" />
+              <feComponentTransfer in="gris" result="grano">
+                <feFuncA type="linear" slope="0.5" />
+              </feComponentTransfer>
+              <feComposite in="grano" in2="suave" operator="in" result="recortado" />
+              <feBlend in="suave" in2="recortado" mode="multiply" />
+            </filter>
+            <filter id="tierraFrente" x="-4%" y="-20%" width="108%" height="150%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="3" result="ruido" />
+              <feColorMatrix in="ruido" type="saturate" values="0" result="gris" />
+              <feComponentTransfer in="gris" result="grano">
+                <feFuncA type="linear" slope="0.3" />
+              </feComponentTransfer>
+              <feComposite in="grano" in2="SourceGraphic" operator="in" result="recortado" />
+              <feBlend in="SourceGraphic" in2="recortado" mode="multiply" />
+            </filter>
+          </defs>
+
+          {/* Los tonos salen de la misma familia que la arena y el túnel, a
+              mitad de camino entre los dos. */}
+          <path filter="url(#tierraLejos)" fill="url(#fundeLejos)"
+                d="M-60,46 C120,18 260,60 440,42 C620,24 760,68 940,48 C1120,28 1280,56 1500,36 L1500,180 L-60,180 Z" />
+          <path filter="url(#tierraMedio)" fill="url(#fundeMedio)"
+                d="M-60,84 C140,54 300,96 480,76 C660,56 820,102 1000,82 C1180,62 1320,88 1500,72 L1500,180 L-60,180 Z" />
+          <path filter="url(#tierraFrente)" fill="hsl(var(--tunel))"
+                d="M-60,114 C90,90 150,136 246,118 C348,100 392,142 500,126 C600,112 660,148 762,130 C870,112 918,150 1030,132 C1130,116 1190,90 1290,112 C1352,126 1400,104 1500,112 L1500,180 L-60,180 Z" />
         </svg>
       </section>
 
