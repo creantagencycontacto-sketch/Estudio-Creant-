@@ -143,41 +143,6 @@
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
   }
 
-  /* Las puntas del titular se derriten hacia el fondo: desenfoque suave más
-     grano fino encima. La letra toca el fondo, no el fondo a la letra.
-     Los filtros viven en el SVG oculto de la portada.
-
-     Son dos capas superpuestas. Abajo va la letra desenfocada y arriba la
-     misma letra nítida, tapada con un degradado que la deja ver hacia adentro
-     y la esconde hacia el borde. Resultado: el foco cae de a poco.
-     Con una sola capa el desenfoque es parejo y se ve el corte seco justo
-     donde termina el span — la L borrosa contra la E nítida. */
-  .difuso {
-    position: relative;
-    display: inline-block;
-  }
-  /* La copia borrosa va detrás y fuera del alcance del lector de pantalla.
-     Es una segunda copia del mismo texto: si se generara con ::before y
-     content, varios lectores la leerían igual y se escucharía "Ll Llegaste". */
-  .difuso-fondo {
-    position: absolute;
-    inset: 0;
-  }
-  .difuso-fondo-izq { filter: url(#difuso-izq); }
-  .difuso-fondo-der { filter: url(#difuso-der); }
-
-  /* La copia nítida es la que lleva el texto real, y se esconde hacia el borde
-     para que ahí asome la borrosa. Así el foco cae de a poco en vez de cortar
-     seco donde termina el span. */
-  .difuso-nitido-izq {
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 52%);
-    mask-image: linear-gradient(to right, transparent 0%, #000 52%);
-  }
-  .difuso-nitido-der {
-    -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 52%);
-    mask-image: linear-gradient(to left, transparent 0%, #000 52%);
-  }
-
   /* Los campos del formulario viven en la cámara oscura, donde el texto es
      claro. Si heredaran ese color quedarían claros sobre un campo claro y no
      se leería nada: acá se les devuelve el contraste. */

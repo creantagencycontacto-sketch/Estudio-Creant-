@@ -77,12 +77,11 @@ const Index = () => {
     <Marco>
       {/* ================= SUPERFICIE ================= */}
       <section className="grano relative overflow-hidden">
-        {/* El sendero va en la franja libre de abajo: si cruzara el titular, las
-            obreras caminarían tapadas por las letras. */}
-        {/* El sendero se apoya sobre la boca del hormiguero, en la franja
-            donde la primera capa de tierra todavía es casi transparente. Más
-            abajo las obreras quedan tapadas por el marrón; más arriba se
-            despegan del suelo y parecen flotar. */}
+        {/* El sendero se apoya sobre la boca del hormiguero, en la franja donde
+            la primera capa de tierra todavía es casi transparente. Más abajo las
+            obreras quedan tapadas por el marrón; más arriba se despegan del
+            suelo y parecen flotar. Y nunca a la altura del titular: ahí
+            caminarían tapadas por las letras. */}
         <svg className="sendero-hormigas pointer-events-none absolute bottom-[62px] left-0 right-0 z-[4] md:bottom-[120px]"
              viewBox="0 0 1440 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <path d="M -40 96 C 250 62, 520 112, 800 74 S 1240 46, 1500 90"
@@ -104,65 +103,9 @@ const Index = () => {
             Estudio de marca y pauta
           </p>
 
-          {/* Los filtros del titular. Van acá, ocultos, porque un filtro SVG
-              tiene que existir en el documento para que el CSS lo pueda usar.
-
-              La letra se desenfoca y se le pasa grano fino por encima: el borde
-              se derrite hacia el fondo en vez de cortar. Es lo que hace la
-              referencia que pasó Mili — la letra tocando el fondo, no el fondo
-              perforando la letra.
-
-              El desenfoque es leve y se reparte sobre varias letras, no sobre
-              dos: concentrado en dos se nota dónde empieza y parece un error de
-              render. Repartido queda como un acento en cada punta. */}
-          <svg width="0" height="0" className="absolute" aria-hidden="true">
-            <defs>
-              {[
-                { id: "difuso-izq", semilla: 3 },
-                { id: "difuso-der", semilla: 11 },
-              ].map((f) => (
-                <filter key={f.id} id={f.id} x="-12%" y="-16%" width="124%" height="132%">
-                  {/* Dos desenfoques y no uno. El angosto ablanda el borde de
-                      la letra; el ancho, a media opacidad, le arma un halo que
-                      se derrama sobre el fondo. Con el angosto solo la letra
-                      queda apenas suave pero sigue recortada contra la arena:
-                      el halo es lo que hace que la toque de verdad. */}
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="anchoCrudo" />
-                  <feComponentTransfer in="anchoCrudo" result="ancho">
-                    <feFuncA type="linear" slope="0.34" />
-                  </feComponentTransfer>
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="angosto" />
-                  <feMerge result="suave">
-                    <feMergeNode in="ancho" />
-                    <feMergeNode in="angosto" />
-                  </feMerge>
-                  {/* La frecuencia define el tamaño del grano, y en un filtro
-                      sobre HTML una unidad es un píxel: por encima de 1 las
-                      partículas miden menos de un píxel y no se ven. */}
-                  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={f.semilla} result="ruido" />
-                  <feColorMatrix in="ruido" type="saturate" values="0" result="gris" />
-                  <feComponentTransfer in="gris" result="grano">
-                    <feFuncA type="linear" slope="0.34" />
-                  </feComponentTransfer>
-                  {/* El grano se recorta contra la letra ya desenfocada, así
-                      aparece también en el halo del borde y no solo en el
-                      centro macizo. */}
-                  <feComposite in="grano" in2="suave" operator="in" result="recortado" />
-                  <feBlend in="suave" in2="recortado" mode="multiply" />
-                </filter>
-              ))}
-            </defs>
-          </svg>
-
           <h1 className="mt-4 font-display text-[clamp(2.9rem,11vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.045em]">
-            <span className="difuso">
-              <span className="difuso-fondo difuso-fondo-izq" aria-hidden="true">Lleg</span>
-              <span className="difuso-nitido-izq">Lleg</span>
-            </span>aste al
-            <span className="block text-accent">hormi<span className="difuso">
-                <span className="difuso-fondo difuso-fondo-der" aria-hidden="true">guero.</span>
-                <span className="difuso-nitido-der">guero.</span>
-              </span></span>
+            Llegaste al
+            <span className="block text-accent">hormiguero.</span>
           </h1>
 
           <motion.p variants={aparece} initial="hidden" animate="visible" custom={1}
