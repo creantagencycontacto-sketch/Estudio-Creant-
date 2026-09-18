@@ -9,42 +9,52 @@ import { useVideoEnVista } from "@/hooks/useVideoEnVista";
  * previa—, tarda, y si el cliente borra el posteo la tarjeta queda con un
  * hueco. Un mp4 propio no depende de nadie.
  *
- * El video va mudo, en loop y sin controles: no es una pieza para mirar
- * sentado, es la prueba de que la campaña existió.
+ * Si la pieza es video va muda, en loop y sin controles: no es algo para
+ * mirar sentado, es la prueba de que la campaña existió.
  *
  * La carga diferida y el arranque al entrar en pantalla viven en
  * useVideoEnVista, compartido con las piezas de la página de contenido.
  */
 
 type Props = {
-  video: string;
-  poster: string;
+  /** La pieza. Casi todas son imagen: es lo que entrega el Administrador de
+   *  Anuncios al bajar un creativo. Con `video` se usa el mp4 y la imagen
+   *  pasa a ser su primer cuadro. */
+  imagen: string;
+  video?: string;
   /** Cuando está, el creativo se vuelve un link a las redes del cliente. */
   enlace?: string;
   /** Nombre de la cuenta, solo si hay enlace. */
   cuenta?: string;
 };
 
-const CreativoFlotante = ({ video, poster, enlace, cuenta }: Props) => {
+const CreativoFlotante = ({ imagen, video, enlace, cuenta }: Props) => {
   const { ref, cargar } = useVideoEnVista();
 
   const pieza = (
     <>
       <div className="relative overflow-hidden rounded-[1.1rem] border-2 border-background/25 bg-black/40 shadow-[0_14px_34px_-12px_rgba(0,0,0,0.7)]">
-        <video
-          ref={ref}
-          className="block aspect-[9/16] w-full object-cover"
-          src={cargar ? video : undefined}
-          poster={poster}
-          preload="none"
-          muted
-          loop
-          playsInline
-          // Decorativo: el caso se entiende sin el video, así que no necesita
-          // descripción propia ni entrar en el orden de tabulación.
-          aria-hidden="true"
-          tabIndex={-1}
-        />
+        {video ? (
+          <video
+            ref={ref}
+            className="block aspect-[9/16] w-full object-cover"
+            src={cargar ? video : undefined}
+            poster={imagen}
+            preload="none"
+            muted
+            loop
+            playsInline
+            // Decorativo: el caso se entiende sin la pieza, así que no necesita
+            // descripción propia ni entrar en el orden de tabulación.
+            aria-hidden="true"
+            tabIndex={-1}
+          />
+        ) : (
+          /* Las piezas vienen en proporciones distintas —cuadradas, verticales,
+             4:5— y se muestran como son. Forzarlas todas al 9:16 les recortaría
+             el remate, que en un anuncio casi siempre está abajo. */
+          <img src={imagen} alt="" className="block w-full" loading="lazy" aria-hidden="true" />
+        )}
         {enlace ? (
           <span className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center gap-1.5 bg-gradient-to-t from-black/90 to-transparent px-2 pb-2 pt-8 font-mono text-[0.55rem] uppercase tracking-[0.12em] text-background opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
             <Instagram className="h-3 w-3" aria-hidden="true" />

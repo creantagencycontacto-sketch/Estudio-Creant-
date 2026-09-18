@@ -2,8 +2,15 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Marco from "@/components/Marco";
 import CreativoFlotante from "@/components/CreativoFlotante";
-import vidNeumaticos from "@/assets/pauta/demo-neumaticos.mp4";
-import posNeumaticos from "@/assets/pauta/demo-neumaticos.jpg";
+
+// Los creativos que efectivamente corrieron, bajados del Administrador de
+// Anuncios por Juan. Cada uno es el que produjo el numero que dice la tarjeta.
+import crNeumaticos from "@/assets/pauta/cr-neumaticos.webp";
+import crTienda from "@/assets/pauta/cr-tienda.webp";
+import crEstetica from "@/assets/pauta/cr-estetica.webp";
+import crRefrigeracion from "@/assets/pauta/cr-refrigeracion.webp";
+import crSalud from "@/assets/pauta/cr-salud.webp";
+import crCreant from "@/assets/pauta/cr-creant.webp";
 
 /**
  * Portfolio de pauta.
@@ -38,7 +45,7 @@ type Caso = {
   moneda: "ARS" | "USD";
   /** La pieza que efectivamente corrió. Aparece solo si esta cargada, asi
    *  que las tarjetas sin creativo siguen viendose bien. */
-  creativo?: { video: string; poster: string; enlace?: string; cuenta?: string };
+  creativo?: { imagen: string; video?: string; enlace?: string; cuenta?: string };
 };
 
 const CASOS: Caso[] = [
@@ -51,7 +58,7 @@ const CASOS: Caso[] = [
     queSignifica: "Cada persona que escribió costó menos de cien pesos. Es el mejor número que conseguimos en una campaña de mensajes.",
     grafico: { tipo: "barras", unidad: "$ por consulta", menorEsMejor: true,
       datos: [{ etiqueta: "Pieza ganadora", valor: 96 }, { etiqueta: "Segunda", valor: 209 }, { etiqueta: "Tercera", valor: 313 }] },
-    creativo: { video: vidNeumaticos, poster: posNeumaticos },
+    creativo: { imagen: crNeumaticos },
   },
   {
     rubro: "Automotor", titulo: "Electrónica automotriz", moneda: "ARS",
@@ -71,6 +78,7 @@ const CASOS: Caso[] = [
     queSignifica: "De cada veintidós personas que escribieron, una terminó comprando sin hablar con nadie. En el resto de la cartera la venta se cierra por WhatsApp.",
     grafico: { tipo: "barras", unidad: "personas",
       datos: [{ etiqueta: "Escribieron", valor: 357 }, { etiqueta: "Compraron en la web", valor: 16 }] },
+    creativo: { imagen: crTienda },
   },
   {
     rubro: "Viajes", titulo: "Viajes a parques temáticos", moneda: "USD",
@@ -90,6 +98,7 @@ const CASOS: Caso[] = [
     resultado: "11 de cada 100 tocaron el anuncio",
     queSignifica: "En un rubro donde la publicidad es carísima, una de cada nueve personas que lo vio quiso saber más.",
     grafico: { tipo: "puntos", llenos: 11, leyenda: "de cada 100 personas que vieron el anuncio, tocaron" },
+    creativo: { imagen: crEstetica },
   },
   {
     rubro: "Servicios B2B", titulo: "Refrigeración industrial", moneda: "ARS",
@@ -99,6 +108,7 @@ const CASOS: Caso[] = [
     resultado: "13 de cada 100 tocaron el anuncio",
     queSignifica: "Es uno de los números más altos de toda la cartera. Y en un rubro donde nadie espera que la publicidad funcione.",
     grafico: { tipo: "puntos", llenos: 13, leyenda: "de cada 100 personas que vieron el anuncio, tocaron" },
+    creativo: { imagen: crRefrigeracion },
   },
   {
     rubro: "Salud", titulo: "Salud mental", moneda: "USD",
@@ -109,6 +119,7 @@ const CASOS: Caso[] = [
     queSignifica: "Llegar a mil personas costó treinta y seis centavos. Es el alcance más barato que conseguimos.",
     grafico: { tipo: "barras", unidad: "personas alcanzadas",
       datos: [{ etiqueta: "Pieza que funcionó", valor: 56063 }, { etiqueta: "Pieza anterior", valor: 6134 }] },
+    creativo: { imagen: crSalud },
   },
   {
     rubro: "Agencia", titulo: "Creant", moneda: "ARS",
@@ -118,6 +129,7 @@ const CASOS: Caso[] = [
     resultado: "11 de cada 100 tocaron el anuncio",
     queSignifica: "Números chicos al lado de los clientes, y va igual: la agencia también invierte en su propia marca.",
     grafico: { tipo: "puntos", llenos: 11, leyenda: "de cada 100 personas que vieron el anuncio, tocaron" },
+    creativo: { imagen: crCreant },
   },
 ];
 
