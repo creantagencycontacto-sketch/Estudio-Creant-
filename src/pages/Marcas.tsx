@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import Marco from "@/components/Marco";
+import Planos, { type Plano } from "@/components/Planos";
 
 import mGrannie from "@/assets/marcas/grannie.png";
 import mReyna from "@/assets/marcas/reyna.png";
@@ -22,18 +23,26 @@ import reynaGrandes from "@/assets/marcas/aplicaciones/reyna-grandes.webp";
 import reynaPieza from "@/assets/marcas/aplicaciones/reyna-pieza.webp";
 import reynaLogo from "@/assets/marcas/aplicaciones/reyna-logo.png";
 import reynaSello from "@/assets/marcas/aplicaciones/reyna-sello.png";
-import grSello from "@/assets/marcas/aplicaciones/grannie-sello.png";
-import grNombre from "@/assets/marcas/aplicaciones/grannie-nombre.png";
-import grFrutilla from "@/assets/marcas/aplicaciones/grannie-frutilla.webp";
-import grArandanos from "@/assets/marcas/aplicaciones/grannie-arandanos.webp";
-import grNaranjas from "@/assets/marcas/aplicaciones/grannie-naranjas.webp";
-import grManzana from "@/assets/marcas/aplicaciones/grannie-manzana.webp";
-import grPera from "@/assets/marcas/aplicaciones/grannie-pera.webp";
-import grOtonal from "@/assets/marcas/aplicaciones/grannie-otonal.webp";
-import grFrutosRojos from "@/assets/marcas/aplicaciones/grannie-frutos-rojos.webp";
-import grDurazno from "@/assets/marcas/aplicaciones/grannie-durazno.webp";
-import grMockup from "@/assets/marcas/aplicaciones/grannie-mockup.webp";
 import grConservas from "@/assets/marcas/aplicaciones/grannie-conservas.webp";
+// Grannie, desde los archivos originales de la carpeta de la marca: las
+// etiquetas en su version de imprenta (6 x 10 cm), las tres conservas y el
+// logo redondo recortado del cuadrado crema en el que venia.
+import grLogo from "@/assets/marcas/grannie/logo-redondo.webp";
+import grPackaging from "@/assets/marcas/grannie/mockup-packaging.webp";
+import grPosteo from "@/assets/marcas/grannie/posteo-mermeladas.webp";
+import etqFrutilla from "@/assets/marcas/grannie/etq-frutilla.webp";
+import etqArandanos from "@/assets/marcas/grannie/etq-arandanos.webp";
+import etqNaranjas from "@/assets/marcas/grannie/etq-naranjas.webp";
+import etqManzana from "@/assets/marcas/grannie/etq-manzana.webp";
+import etqPera from "@/assets/marcas/grannie/etq-pera.webp";
+import etqOtonal from "@/assets/marcas/grannie/etq-otonal.webp";
+import etqFrutosRojos from "@/assets/marcas/grannie/etq-frutos-rojos.webp";
+import etqDurazno from "@/assets/marcas/grannie/etq-durazno.webp";
+import etqHigos from "@/assets/marcas/grannie/etq-higos.webp";
+import etqTomate from "@/assets/marcas/grannie/etq-tomate.webp";
+import consBerenjenas from "@/assets/marcas/grannie/cons-berenjenas.webp";
+import consPepinos from "@/assets/marcas/grannie/cons-pepinos.webp";
+import consPickles from "@/assets/marcas/grannie/cons-pickles.webp";
 import grMermeladas from "@/assets/marcas/aplicaciones/grannie-mermeladas.webp";
 import asLogo from "@/assets/marcas/aplicaciones/aste-logo.png";
 import asIso from "@/assets/marcas/aplicaciones/aste-isologo.png";
@@ -171,6 +180,10 @@ type Marca = {
    *  Cada bloque elige sus columnas: dos o tres para fotos y piezas
    *  cuadradas, cuatro para etiquetas, donde lo que importa es poder
    *  compararlas entre si de un vistazo. */
+  /** El universo armado por planos. Cuando esta, reemplaza a la ficha
+   *  clasica (logos, paleta y bloques), que queda para las marcas que
+   *  todavia no se pasaron. */
+  planos?: Plano[];
   bloques?: {
     titulo: string;
     columnas: 2 | 3 | 4 | 6;
@@ -198,31 +211,47 @@ const MARCAS: Marca[] = [
     // sabor, para que se vea que el sistema cambia de paleta y no de forma.
     paleta: ["#FC6000", "#FCF0B4", "#48546C", "#900000"],
     fondo: "#FCF0B4", tinta: "#3B1616", colorLogo: "#FC6000",
-    logos: [grSello, grNombre],
     relato: "Elsie emprende de grande, haciendo conservas con las recetas de su familia. El enfoque fue parecido al de Reyna: una tipografía descontracturada pero legible, versátil para encajar en todos sus productos artesanales. Cada sabor tiene su propio mundo de color y todos comparten el mismo sistema: la fruta ilustrada, la onda del dulce cayendo y el sello se repiten en cada etiqueta, y lo único que cambia es la paleta.",
     cierre: "Terminé babeando con cada etiqueta. Y esa es la prueba de que funcionan: si te dan ganas de comerlas, la etiqueta ya hizo su trabajo.",
-    bloques: [
-      {
-        titulo: "En el frasco", columnas: 3, uniforme: true,
+    // La paleta de Grannie manda: crema de etiqueta, naranja de logo y el
+    // marron del frasco. El texto sobre naranja va en marron y no en crema:
+    // crema sobre naranja da 2,68 y no llega ni al minimo de 3.
+    planos: [
+      { tipo: "portada", fondo: "#FCF0B4", tinta: "#3B1616", logo: grLogo,
+        alt: "Logo de Grannie, Mermeladas Caseras", bajada: "Identidad y packaging",
+        detalle: "Conservas artesanales" },
+      { tipo: "pregunta", onda: true, fondo: "#FC6000", tinta: "#3B1616",
+        alcance: ["Logotipo y sello", "Etiquetas para diez mermeladas",
+                  "Etiquetas para la línea de conservas", "Mockups y piezas para redes"] },
+      { tipo: "relato", onda: true, fondo: "#FCF0B4", tinta: "#3B1616",
+        pieza: { src: grPackaging, fondo: "#F0F0F2", alt: "Frasco de mermelada Grannie junto a la bolsa de papel con el logo" } },
+      { tipo: "estante", onda: true, fondo: "#3B1616", tinta: "#FCF0B4",
+        titulo: "Diez sabores, un mismo sistema",
         piezas: [
-          { src: grMockup, pie: "El packaging completo" },
-          { src: grMermeladas, pie: "La línea de mermeladas" },
-          { src: grConservas, pie: "La línea de conservas" },
-        ],
-      },
-      {
-        titulo: "Sabor por sabor, el mismo sistema", columnas: 4,
+          { src: etqFrutilla, alt: "Etiqueta de mermelada de frutilla" },
+          { src: etqArandanos, alt: "Etiqueta de mermelada de arándanos" },
+          { src: etqNaranjas, alt: "Etiqueta de mermelada de naranjas" },
+          { src: etqManzana, alt: "Etiqueta de mermelada de manzana" },
+          { src: etqPera, alt: "Etiqueta de mermelada de pera" },
+          { src: etqDurazno, alt: "Etiqueta de mermelada de durazno" },
+          { src: etqFrutosRojos, alt: "Etiqueta de mermelada de frutos rojos" },
+          { src: etqOtonal, alt: "Etiqueta de mermelada otoñal" },
+          { src: etqHigos, alt: "Etiqueta de higos en almíbar" },
+          { src: etqTomate, alt: "Etiqueta de mermelada de tomate" },
+        ] },
+      { tipo: "galeria", onda: true, fondo: "#FCF0B4", tinta: "#3B1616", columnas: 3,
+        titulo: "Y la línea de conservas",
         piezas: [
-          { src: grFrutilla, pie: "Frutilla" },
-          { src: grArandanos, pie: "Arándanos" },
-          { src: grNaranjas, pie: "Naranjas" },
-          { src: grManzana, pie: "Manzana" },
-          { src: grPera, pie: "Pera" },
-          { src: grOtonal, pie: "Otoñal" },
-          { src: grFrutosRojos, pie: "Frutos rojos" },
-          { src: grDurazno, pie: "Durazno" },
-        ],
-      },
+          { src: consBerenjenas, alt: "Etiqueta de berenjenas en conserva" },
+          { src: consPepinos, alt: "Etiqueta de pepinos en conserva" },
+          { src: consPickles, alt: "Etiqueta de pickles" },
+        ] },
+      { tipo: "par", fondo: "#3B1616", piezas: [
+        { src: grConservas, alt: "Los tres frascos de la línea de conservas" },
+        { src: grPosteo, alt: "Posteo de Grannie con los frascos de mermelada sobre la mesa" },
+      ] },
+      { tipo: "cita", onda: true, fondo: "#FC6000", tinta: "#3B1616" },
+      { tipo: "paleta", fondo: "#3B1616", colores: ["#FC6000", "#FCF0B4", "#48546C", "#900000"] },
     ],
   },
   {
@@ -432,7 +461,9 @@ const LogoMascara = ({ src, color, className }: { src: string; color: string; cl
   />
 );
 
-const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
+const Universo = ({ marca, siguiente, cerrar, abrir }: {
+  marca: Marca; siguiente: Marca; cerrar: () => void; abrir: (m: Marca) => void;
+}) => {
   const panel = useRef<HTMLDivElement>(null);
 
   // Mientras el universo esta abierto la pagina de atras no se scrollea: si no,
@@ -464,12 +495,18 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
       <button
         onClick={cerrar}
         aria-label="Cerrar"
-        className="fixed right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full transition-opacity hover:opacity-70 md:right-8 md:top-8"
-        style={{ background: `${marca.tinta}14`, color: marca.tinta }}
+        // Solido y no transparente: flota sobre planos de colores muy
+        // distintos, y casi transparente se pisaba con el texto al scrollear.
+        className="fixed right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-md transition-opacity hover:opacity-80 md:right-8 md:top-8"
+        style={{ background: marca.tinta, color: marca.fondo }}
       >
         <X className="h-5 w-5" aria-hidden="true" />
       </button>
 
+      {marca.planos ? (
+        <Planos planos={marca.planos}
+          textos={{ pregunta: marca.pregunta ?? marca.concepto, relato: marca.relato, cierre: marca.cierre }} />
+      ) : (
       <motion.div
         initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: 0.08 }}
@@ -541,7 +578,6 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
                 {/* El borde tiene que verse: algunas paletas incluyen el mismo
                     color del fondo y sin marco el cuadrito desaparece. */}
                 <div className="h-20 md:h-28" style={{ background: c, outline: `1px solid ${marca.tinta}3D` }} />
-                <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-wider" style={{ opacity: 0.8 }}>{c}</p>
               </div>
             ))}
           </div>
@@ -581,17 +617,38 @@ const Universo = ({ marca, cerrar }: { marca: Marca; cerrar: () => void }) => {
           </div>
         ))}
 
-        <button
-          onClick={cerrar}
-          className="mt-16 border-b pb-1 font-mono text-[0.7rem] uppercase tracking-[0.18em] transition-opacity hover:opacity-60"
-          style={{ borderColor: `${marca.tinta}59` }}
-        >
-          ← Volver a todas las marcas
-        </button>
       </motion.div>
+      )}
+
+      <Salida siguiente={siguiente} cerrar={cerrar} abrir={abrir} />
     </motion.div>
   );
 };
+
+/**
+ * La salida del universo. Es lo unico de la ficha con la tipografia de Creant,
+ * y a proposito: marca el borde donde termina la marca y vuelve el estudio.
+ * Y ofrece la siguiente en vez de solo volver, que es como se recorre un
+ * portfolio: de caso en caso, sin pasar cada vez por la grilla.
+ */
+const Salida = ({ siguiente, cerrar, abrir }: {
+  siguiente: Marca; cerrar: () => void; abrir: (m: Marca) => void;
+}) => (
+  <nav aria-label="Otras marcas" className="grano relative bg-tunel px-6 py-16 text-background md:py-20">
+    <div className="mx-auto flex max-w-5xl flex-col-reverse gap-12 md:flex-row md:items-end md:justify-between">
+      <button onClick={cerrar}
+        className="self-start border-b border-background/30 py-2 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-background/70 transition-colors hover:border-primary hover:text-primary md:self-auto">
+        ← Todas las marcas
+      </button>
+      <button onClick={() => abrir(siguiente)} className="group text-left md:text-right">
+        <span className="block font-mono text-[0.7rem] uppercase tracking-[0.22em] text-primary">Siguiente marca</span>
+        <span className="mt-3 block font-display text-[clamp(2rem,6vw,3.6rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.035em] transition-colors group-hover:text-primary">
+          {siguiente.nombre} <span aria-hidden="true">→</span>
+        </span>
+      </button>
+    </div>
+  </nav>
+);
 
 const Marcas = () => {
   const [abierta, setAbierta] = useState<Marca | null>(null);
@@ -649,8 +706,15 @@ const Marcas = () => {
         </div>
       </section>
 
-      <AnimatePresence>
-        {abierta && <Universo marca={abierta} cerrar={() => setAbierta(null)} />}
+      {/* mode="wait": la ficha que se va termina de salir antes de que entre la
+          siguiente. Si conviven, la que sale le devuelve el scroll a la pagina
+          de atras mientras la nueva todavia esta abierta. */}
+      <AnimatePresence mode="wait">
+        {abierta && (
+          <Universo key={abierta.nombre} marca={abierta}
+            siguiente={MARCAS[(MARCAS.indexOf(abierta) + 1) % MARCAS.length]}
+            cerrar={() => setAbierta(null)} abrir={setAbierta} />
+        )}
       </AnimatePresence>
     </Marco>
   );
