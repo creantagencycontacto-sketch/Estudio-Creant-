@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Calesita from "@/components/Calesita";
 
 /**
  * El universo de una marca, armado por planos.
@@ -32,6 +33,7 @@ export type Plano = Base & (
   | { tipo: "pregunta"; fondo: string; tinta: string; alcance: string[] }
   | { tipo: "relato"; fondo: string; tinta: string; pieza?: Pieza & { fondo: string } }
   | { tipo: "estante"; fondo: string; tinta: string; titulo: string; piezas: Pieza[] }
+  | { tipo: "calesita"; fondo: string; tinta: string; titulo: string; piezas: Pieza[] }
   | { tipo: "galeria"; fondo: string; tinta: string; titulo?: string; columnas: 2 | 3; piezas: Pieza[] }
   | { tipo: "par"; fondo: string; piezas: [Pieza, Pieza] }
   | { tipo: "cita"; fondo: string; tinta: string }
@@ -151,6 +153,31 @@ const PlanoUnico = ({ p, t }: { p: Plano; t: Textos }) => {
                 className="w-[44vw] max-w-[14rem] shrink-0 snap-start md:w-full md:max-w-none"
               />
             ))}
+          </div>
+        </section>
+      );
+
+    case "calesita":
+      // Las piezas en ronda: giran solas, se arrastran para girarlas a mano, y
+      // tocar una la trae al frente y la deja quieta para mirarla. En celular
+      // la ronda llega hasta el borde de la pantalla.
+      return (
+        <section className="relative py-24 md:py-32" style={{ background: p.fondo, color: p.tinta }}>
+          {p.onda ? <Onda color={p.fondo} /> : null}
+          <Aparece className="mx-auto max-w-6xl px-6">
+            <p className="max-w-[30rem] text-[clamp(1.6rem,4vw,2.6rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
+              {p.titulo}
+            </p>
+          </Aparece>
+          <div className="mx-auto mt-12 max-w-6xl md:px-6">
+            <Calesita
+              items={p.piezas} titulo={p.titulo} tinta={p.tinta}
+              nombre={(x) => x.alt}
+              ancho="w-[36vw] max-w-[12rem]"
+              cara={(x) => (
+                <img src={x.src} alt="" draggable={false} loading="lazy" className="aspect-[3/5] w-full object-cover" />
+              )}
+            />
           </div>
         </section>
       );

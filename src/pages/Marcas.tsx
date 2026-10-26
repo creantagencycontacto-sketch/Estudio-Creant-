@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import Marco from "@/components/Marco";
 import Planos, { type Plano } from "@/components/Planos";
+import Calesita from "@/components/Calesita";
 
 import mGrannie from "@/assets/marcas/grannie.png";
 import mReyna from "@/assets/marcas/reyna.png";
@@ -43,7 +44,6 @@ import etqTomate from "@/assets/marcas/grannie/etq-tomate.webp";
 import consBerenjenas from "@/assets/marcas/grannie/cons-berenjenas.webp";
 import consPepinos from "@/assets/marcas/grannie/cons-pepinos.webp";
 import consPickles from "@/assets/marcas/grannie/cons-pickles.webp";
-import grMermeladas from "@/assets/marcas/aplicaciones/grannie-mermeladas.webp";
 import asLogo from "@/assets/marcas/aplicaciones/aste-logo.png";
 import asIso from "@/assets/marcas/aplicaciones/aste-isologo.png";
 import asBarro from "@/assets/marcas/aplicaciones/aste-barro.webp";
@@ -105,21 +105,15 @@ import chyTarjeta from "@/assets/marcas/aplicaciones/chy-tarjeta.webp";
 import chyTote from "@/assets/marcas/aplicaciones/chy-tote.webp";
 import chyCartel from "@/assets/marcas/aplicaciones/chy-cartel.webp";
 import chySticker from "@/assets/marcas/aplicaciones/chy-sticker.webp";
-// Portadas recortadas a mano. Las dos piezas originales venian con marco:
-// la de Malvada es la captura de un posteo y trae el borde rosa de la
-// pantalla; la de Resistencia, una franja oscura arriba. Y la de Resistencia
-// no se puede recortar al centro: el nombre corre vertical por la izquierda y
-// la atleta esta a la derecha, asi que el corte va justo entre los dos.
-import mlvPortada from "@/assets/marcas/aplicaciones/mlv-zapas-portada.webp";
-import resPortada from "@/assets/marcas/aplicaciones/res-atleta-portada.webp";
 
 /**
  * Portfolio de marcas.
  *
- * La grilla muestra una pieza de cada marca, no el logo. Antes eran ocho logos
- * aplanados a una sola tinta, y el que llegaba veía lo menos interesante del
- * trabajo —y encima apagado— mientras las piezas quedaban escondidas atrás de
- * un click. La puerta tiene que mostrar lo que hay adentro.
+ * La puerta es una calesita con los ocho logos en la misma tinta, girando: cada
+ * identidad fue diseñada para destacar, y juntas y a todo color se pelean. Se
+ * toca una para entrar a su universo. Durante un tiempo fue una grilla con una
+ * pieza de cada marca, pero Mili prefiere que en la puerta se vean las marcas
+ * y que las piezas se descubran adentro.
  *
  * Al abrir una NO se despliega una ficha más abajo, que era el problema de la
  * version anterior: la pagina no se movia y el usuario creia que su click no
@@ -144,10 +138,10 @@ type Marca = {
   nombre: string;
   logo: string;
   rubro: string;
-  /** La pieza que la representa en la grilla. Una aplicación en el mundo
-   *  —un packaging, un cartel, una prenda— y no el logo solo: es lo que
-   *  cuenta que la marca está funcionando. Se muestra recortada a 4:5. */
-  portada: string;
+  /** Alto sobre ancho del archivo de logo. En la calesita cada logo ocupa la
+   *  misma superficie y no el mismo alto: si no, los logotipos anchos se comen
+   *  la ronda y los sellos redondos quedan chiquitos. */
+  proporcion: number;
   /** La pregunta de mercado que abre el caso. Cuando esta, reemplaza al
    *  concepto en el titular: dos frases cortas peleando por el mismo lugar
    *  se anulan entre si. */
@@ -203,7 +197,7 @@ type Marca = {
 const MARCAS: Marca[] = [
   {
     nombre: "Grannie", logo: mGrannie, rubro: "Conservas artesanales",
-    portada: grMermeladas,
+    proporcion: 0.32,
     pregunta: "¿Cómo hacés que las recetas de una familia se vean como una marca?",
     concepto: "Un sistema que se estira sabor por sabor sin romperse",
     // La paleta sale de los archivos de la marca, no de una aproximacion:
@@ -225,7 +219,7 @@ const MARCAS: Marca[] = [
                   "Etiquetas para la línea de conservas", "Mockups y piezas para redes"] },
       { tipo: "relato", onda: true, fondo: "#FCF0B4", tinta: "#3B1616",
         pieza: { src: grPackaging, fondo: "#F0F0F2", alt: "Frasco de mermelada Grannie junto a la bolsa de papel con el logo" } },
-      { tipo: "estante", onda: true, fondo: "#3B1616", tinta: "#FCF0B4",
+      { tipo: "calesita", onda: true, fondo: "#3B1616", tinta: "#FCF0B4",
         titulo: "Diez sabores, un mismo sistema",
         piezas: [
           { src: etqFrutilla, alt: "Etiqueta de mermelada de frutilla" },
@@ -256,7 +250,7 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "Los Budines de Reyna", logo: mReyna, rubro: "Pastelería artesanal",
-    portada: reynaPackaging,
+    proporcion: 1.1,
     pregunta: "¿Cómo te destacás en un mercado tan diverso y saturado como la pastelería?",
     concepto: "El personaje antes que el logo",
     paleta: ["#8C8F41", "#321F17", "#FFF2DE"],
@@ -277,7 +271,7 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "Malvada Shoes", logo: mMalvada, rubro: "Calzado y accesorios",
-    portada: mlvPortada,
+    proporcion: 0.6,
     concepto: "El color se gana, no se reparte",
     paleta: ["#C7FF0F", "#F887C0", "#8F7BC1", "#111111"],
     fondo: "#111111", tinta: "#FFFFFF", colorLogo: "#C7FF0F",
@@ -325,7 +319,7 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "NMO Perfumería", logo: mNmo, rubro: "Perfumería · rebranding",
-    portada: nmoRegalo,
+    proporcion: 0.95,
     concepto: "El nombre ya tenía la respuesta",
     paleta: ["#98CFF1", "#61A5DA", "#32536D"],
     fondo: "#32536D", tinta: "#EAF4FC", colorLogo: "#98CFF1",
@@ -359,7 +353,7 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "Resistencia", logo: mResistencia, rubro: "Indumentaria deportiva",
-    portada: resPortada,
+    proporcion: 1,
     concepto: "Dos colores, cero decoración",
     paleta: ["#C4FF00", "#0A0A0A", "#FFFFFF"],
     fondo: "#0A0A0A", tinta: "#FFFFFF", colorLogo: "#C4FF00",
@@ -378,7 +372,7 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "Astegiano", logo: mAstegiano, rubro: "Neumáticos",
-    portada: asCampo,
+    proporcion: 0.74,
     concepto: "La marca dentro de la banda de rodamiento",
     paleta: ["#FFED00", "#151912", "#A6A6A6"],
     fondo: "#151912", tinta: "#FFFFFF", colorLogo: "#FFED00",
@@ -398,7 +392,7 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "Magna Fitness", logo: mMagna, rubro: "Indumentaria femenina",
-    portada: magRojo,
+    proporcion: 0.91,
     concepto: "Magna significa «fuera de lo común»",
     paleta: ["#D90416", "#F2949C", "#F2F2F2"],
     fondo: "#F2F2F2", tinta: "#1A1A1A", colorLogo: "#D90416",
@@ -417,7 +411,7 @@ const MARCAS: Marca[] = [
   },
   {
     nombre: "Cherry Nails", logo: mCherry, rubro: "Manicuría",
-    portada: chyCartel,
+    proporcion: 0.55,
     concepto: "Una guía corta para una marca chica",
     paleta: ["#E63462", "#F5A9C0", "#1A1A1A"],
     fondo: "#1A1A1A", tinta: "#FFFFFF", colorLogo: "#E63462",
@@ -460,6 +454,28 @@ const LogoMascara = ({ src, color, className }: { src: string; color: string; cl
     }}
   />
 );
+
+/** El logo en su tarjeta de la calesita. Todos ocupan la misma superficie: el
+ *  ancho y el alto salen de la proporcion de cada archivo.
+ *
+ *  La tarjeta es opaca a proposito. Sueltos, los logos de la misma tinta se
+ *  encimaban al cruzarse en la ronda y se volvian una sola mancha; con fondo,
+ *  la de adelante tapa a la de atras y se lee la profundidad. */
+const LogoEnRonda = ({ marca }: { marca: Marca }) => {
+  const lado = 0.5; // raiz de la superficie de cada logo, en anchos de tarjeta
+  const raiz = Math.sqrt(marca.proporcion);
+  return (
+    // La tarjeta es de 4:3: el alto va en porcentaje de tres cuartos del ancho
+    <span className="flex aspect-[4/3] w-full items-center justify-center border border-background/15 bg-tunel transition-colors group-hover:border-primary">
+      <span className="block" style={{
+        width: `${Math.min(1, lado / raiz) * 100}%`,
+        height: `${Math.min(1, (lado * raiz) / 0.75) * 100}%`,
+      }}>
+        <LogoMascara src={marca.logo} color="hsl(var(--background))" className="block h-full w-full" />
+      </span>
+    </span>
+  );
+};
 
 const Universo = ({ marca, siguiente, cerrar, abrir }: {
   marca: Marca; siguiente: Marca; cerrar: () => void; abrir: (m: Marca) => void;
@@ -672,37 +688,32 @@ const Marcas = () => {
 
       <section className="grano relative bg-tunel py-16 text-background">
         <div className="container mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-2 gap-px bg-background/15 md:grid-cols-4">
-            {MARCAS.map((m, i) => (
-              <motion.button
-                key={m.nombre}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: (i % 4) * 0.06 }}
-                onClick={() => setAbierta(m)}
-                aria-label={`Entrar al universo de ${m.nombre}`}
-                className="group relative flex flex-col bg-tunel p-3 text-left transition-colors hover:bg-background/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary md:p-4"
-              >
-                {/* Todas al mismo 4:5 aunque las piezas vengan cuadradas o
-                    verticales: con altos distintos la grilla se ve rota. El
-                    texto va abajo y no encima, asi se lee igual sobre una foto
-                    clara que sobre una oscura, sin velos que las apaguen. */}
-                <span className="relative block aspect-[4/5] w-full overflow-hidden">
-                  <img src={m.portada} alt="" loading="lazy" decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
-                </span>
-                <span className="mt-3 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-background/60">
+          <p className="mb-8 max-w-[34rem] text-sm text-background/60">
+            Todas en la misma tinta: cada una fue diseñada para destacar, así que juntas
+            y a todo color se pelean. Tocá una para entrar a su universo.
+          </p>
+          {/* Debajo de la ronda va el nombre de la que esta al frente: los
+              logos solos, sin nombre, no dicen de que rubro es cada marca. */}
+          <Calesita
+            items={MARCAS}
+            titulo="Las marcas"
+            tinta="hsl(var(--background))"
+            nombre={(m) => `Entrar al universo de ${m.nombre}`}
+            alTocar={(m) => setAbierta(m)}
+            ancho="w-[30vw] max-w-[12rem]"
+            claseRonda="-mx-6 md:mx-0"
+            cara={(m) => <LogoEnRonda marca={m} />}
+            pie={(m) => (
+              <>
+                <span className="block font-mono text-[0.6rem] uppercase tracking-[0.14em] text-background/60">
                   {m.rubro}
                 </span>
-                <span className="mt-1 flex items-baseline justify-between gap-2 font-display text-base font-extrabold uppercase leading-tight tracking-tight md:text-lg">
+                <span className="mt-1 block font-display text-xl font-extrabold uppercase leading-tight tracking-tight md:text-2xl">
                   {m.nombre}
-                  {/* Sin esta pista, en compu la celda no se lee como tocable */}
-                  <span aria-hidden="true" className="text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">→</span>
                 </span>
-              </motion.button>
-            ))}
-          </div>
+              </>
+            )}
+          />
         </div>
       </section>
 
