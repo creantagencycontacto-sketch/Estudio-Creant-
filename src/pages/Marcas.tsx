@@ -204,23 +204,22 @@ const MARCAS: Marca[] = [
     // el naranja y la crema son los del logo, y los otros dos son colores de
     // sabor, para que se vea que el sistema cambia de paleta y no de forma.
     paleta: ["#FC6000", "#FCF0B4", "#48546C", "#900000"],
-    fondo: "#FCF0B4", tinta: "#3B1616", colorLogo: "#FC6000",
+    // Marron y crema, como la entrada: es el color con el que se abre el
+    // universo, y el boton de cerrar va crema para verse sobre el.
+    fondo: "#3B1616", tinta: "#FCF0B4", colorLogo: "#FC6000",
     relato: "Elsie emprende de grande, haciendo conservas con las recetas de su familia. El enfoque fue parecido al de Reyna: una tipografía descontracturada pero legible, versátil para encajar en todos sus productos artesanales. Cada sabor tiene su propio mundo de color y todos comparten el mismo sistema: la fruta ilustrada, la onda del dulce cayendo y el sello se repiten en cada etiqueta, y lo único que cambia es la paleta.",
     cierre: "Terminé babeando con cada etiqueta. Y esa es la prueba de que funcionan: si te dan ganas de comerlas, la etiqueta ya hizo su trabajo.",
     // La paleta de Grannie manda: crema de etiqueta, naranja de logo y el
-    // marron del frasco. El texto sobre naranja va en marron y no en crema:
-    // crema sobre naranja da 2,68 y no llega ni al minimo de 3.
+    // marron del frasco. Pero ningun texto va sobre naranja: crema sobre
+    // naranja da 2,68 y no llega al minimo, y marron sobre naranja a Mili no
+    // le gusta. El naranja queda en el logo, las etiquetas y la paleta.
     planos: [
-      { tipo: "portada", fondo: "#FCF0B4", tinta: "#3B1616", logo: grLogo,
+      { tipo: "entrada", fondo: "#3B1616", tinta: "#FCF0B4", logo: grLogo,
         alt: "Logo de Grannie, Mermeladas Caseras", bajada: "Identidad y packaging",
-        detalle: "Conservas artesanales" },
-      { tipo: "pregunta", onda: true, fondo: "#FC6000", tinta: "#3B1616",
+        detalle: "Conservas artesanales",
         alcance: ["Logotipo y sello", "Etiquetas para diez mermeladas",
-                  "Etiquetas para la línea de conservas", "Mockups y piezas para redes"] },
-      { tipo: "relato", onda: true, fondo: "#FCF0B4", tinta: "#3B1616",
-        pieza: { src: grPackaging, fondo: "#F0F0F2", alt: "Frasco de mermelada Grannie junto a la bolsa de papel con el logo" } },
-      { tipo: "calesita", onda: true, fondo: "#3B1616", tinta: "#FCF0B4",
-        titulo: "Diez sabores, un mismo sistema",
+                  "Etiquetas para la línea de conservas", "Mockups y piezas para redes"],
+        titulo: ["Diez sabores", "un mismo sistema"],
         piezas: [
           { src: etqFrutilla, alt: "Etiqueta de mermelada de frutilla" },
           { src: etqArandanos, alt: "Etiqueta de mermelada de arándanos" },
@@ -233,7 +232,9 @@ const MARCAS: Marca[] = [
           { src: etqHigos, alt: "Etiqueta de higos en almíbar" },
           { src: etqTomate, alt: "Etiqueta de mermelada de tomate" },
         ] },
-      { tipo: "galeria", onda: true, fondo: "#FCF0B4", tinta: "#3B1616", columnas: 3,
+      { tipo: "relato", onda: true, fondo: "#FCF0B4", tinta: "#3B1616",
+        pieza: { src: grPackaging, fondo: "#F0F0F2", alt: "Frasco de mermelada Grannie junto a la bolsa de papel con el logo" } },
+      { tipo: "galeria", onda: true, fondo: "#3B1616", tinta: "#FCF0B4", columnas: 3,
         titulo: "Y la línea de conservas",
         piezas: [
           { src: consBerenjenas, alt: "Etiqueta de berenjenas en conserva" },
@@ -244,7 +245,7 @@ const MARCAS: Marca[] = [
         { src: grConservas, alt: "Los tres frascos de la línea de conservas" },
         { src: grPosteo, alt: "Posteo de Grannie con los frascos de mermelada sobre la mesa" },
       ] },
-      { tipo: "cita", onda: true, fondo: "#FC6000", tinta: "#3B1616" },
+      { tipo: "cita", onda: true, fondo: "#FCF0B4", tinta: "#3B1616" },
       { tipo: "paleta", fondo: "#3B1616", colores: ["#FC6000", "#FCF0B4", "#48546C", "#900000"] },
     ],
   },

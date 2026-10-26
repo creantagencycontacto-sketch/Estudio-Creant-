@@ -28,12 +28,20 @@ type Base = {
   onda?: boolean;
 };
 
+/** Un titulo de una linea, o de dos tamaños: lo que se cuenta, grande, y lo
+ *  que lo explica, junto y mas chico abajo. En un solo tamaño el corte de
+ *  linea caia donde quisiera y dejaba una palabra sola colgando. */
+type Titulo = string | [string, string];
+const comoTexto = (t: Titulo) => (typeof t === "string" ? t : t.join(", "));
+
 export type Plano = Base & (
   | { tipo: "portada"; fondo: string; tinta: string; logo: string; alt: string; bajada: string; detalle?: string }
   | { tipo: "pregunta"; fondo: string; tinta: string; alcance: string[] }
   | { tipo: "relato"; fondo: string; tinta: string; pieza?: Pieza & { fondo: string } }
   | { tipo: "estante"; fondo: string; tinta: string; titulo: string; piezas: Pieza[] }
-  | { tipo: "calesita"; fondo: string; tinta: string; titulo: string; piezas: Pieza[] }
+  | { tipo: "calesita"; fondo: string; tinta: string; titulo: Titulo; piezas: Pieza[] }
+  | { tipo: "entrada"; fondo: string; tinta: string; logo: string; alt: string; bajada: string; detalle?: string;
+      titulo: Titulo; piezas: Pieza[]; alcance: string[] }
   | { tipo: "galeria"; fondo: string; tinta: string; titulo?: string; columnas: 2 | 3; piezas: Pieza[] }
   | { tipo: "par"; fondo: string; piezas: [Pieza, Pieza] }
   | { tipo: "cita"; fondo: string; tinta: string }
@@ -73,8 +81,85 @@ const Aparece = ({ children, className }: { children: React.ReactNode; className
   </motion.div>
 );
 
+const TituloEnDos = ({ titulo }: { titulo: Titulo }) =>
+  typeof titulo === "string" ? (
+    <p className="max-w-[30rem] text-[clamp(1.6rem,4vw,2.6rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
+      {titulo}
+    </p>
+  ) : (
+    <p className="font-semibold tracking-[-0.02em]">
+      <span className="block text-[clamp(2.8rem,9vw,5.5rem)] leading-[0.95]">{titulo[0]}</span>
+      <span className="mt-2 block whitespace-nowrap text-[clamp(1.5rem,4.5vw,2.6rem)] leading-tight">{titulo[1]}</span>
+    </p>
+  );
+
+// Las piezas en ronda: giran solas, se arrastran para girarlas a mano, y tocar
+// una la trae al frente y la deja quieta para mirarla. El 3:5 es el formato de
+// las etiquetas (6 x 10 cm): fijo, para que la ronda tenga su alto antes de
+// que carguen las imagenes.
+const RondaDePiezas = ({ piezas, titulo, tinta }: { piezas: Pieza[]; titulo: Titulo; tinta: string }) => (
+  <Calesita
+    items={piezas} titulo={comoTexto(titulo)} tinta={tinta}
+    nombre={(x) => x.alt}
+    ancho="w-[36vw] max-w-[12rem]"
+    cara={(x) => (
+      <img src={x.src} alt="" draggable={false} loading="lazy" className="aspect-[3/5] w-full object-cover" />
+    )}
+  />
+);
+
 const PlanoUnico = ({ p, t }: { p: Plano; t: Textos }) => {
   switch (p.tipo) {
+    case "entrada":
+      // La entrada del universo en un solo espacio: el logo, la pregunta, la
+      // respuesta girando y lo que se hizo. Antes eran una portada con el logo
+      // solo y un bloque naranja con la pregunta en marron: sosa de estructura
+      // y con un contraste que a Mili no le gustaba.
+      return (
+        <section className="relative px-6 pb-24 pt-24 md:pb-32 md:pt-28" style={{ background: p.fondo, color: p.tinta }}>
+          <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
+            <motion.img
+              src={p.logo} alt={p.alt}
+              initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }}
+              className="w-[min(46vw,16rem)]"
+            />
+            <p className="mt-6 text-xl font-semibold md:text-2xl">{p.bajada}</p>
+            {p.detalle ? <p className="mt-1 text-base opacity-80">{p.detalle}</p> : null}
+          </div>
+
+          {/* Aire medido para que en celular las etiquetas ya asomen al pie de
+              la primera pantalla: que se vea que abajo hay algo moviendose. */}
+          <Aparece className="mx-auto mt-14 max-w-5xl md:mt-24">
+            <p className="max-w-[46rem] text-[clamp(1.9rem,5vw,3.4rem)] font-semibold leading-[1.08] tracking-[-0.02em]">
+              {t.pregunta}
+            </p>
+          </Aparece>
+
+          {/* La respuesta a la pregunta, girando. En celular la ronda llega
+              hasta el borde de la pantalla. */}
+          <div className="mx-auto mt-14 max-w-6xl md:mt-24">
+            <Aparece className="mx-auto max-w-5xl">
+              <TituloEnDos titulo={p.titulo} />
+            </Aparece>
+            <div className="-mx-6 mt-8 md:mx-0">
+              <RondaDePiezas piezas={p.piezas} titulo={p.titulo} tinta={p.tinta} />
+            </div>
+          </div>
+
+          {/* Lo que el que mira tiene que poder responder sin leer el relato:
+              que se hizo en esta marca. */}
+          <Aparece className="mx-auto mt-16 max-w-5xl md:mt-24">
+            <p className="text-sm font-semibold">Qué hicimos</p>
+            <ul className="mt-4 grid border-t md:grid-cols-2 md:gap-x-10" style={{ borderColor: `${p.tinta}40` }}>
+              {p.alcance.map((a) => (
+                <li key={a} className="border-b py-4 text-lg md:text-xl" style={{ borderColor: `${p.tinta}40` }}>{a}</li>
+              ))}
+            </ul>
+          </Aparece>
+        </section>
+      );
+
     case "portada":
       return (
         <section className="relative flex min-h-[100svh] flex-col items-center justify-center px-6 py-24 text-center"
@@ -158,26 +243,15 @@ const PlanoUnico = ({ p, t }: { p: Plano; t: Textos }) => {
       );
 
     case "calesita":
-      // Las piezas en ronda: giran solas, se arrastran para girarlas a mano, y
-      // tocar una la trae al frente y la deja quieta para mirarla. En celular
-      // la ronda llega hasta el borde de la pantalla.
+      // En celular la ronda llega hasta el borde de la pantalla
       return (
         <section className="relative py-24 md:py-32" style={{ background: p.fondo, color: p.tinta }}>
           {p.onda ? <Onda color={p.fondo} /> : null}
           <Aparece className="mx-auto max-w-6xl px-6">
-            <p className="max-w-[30rem] text-[clamp(1.6rem,4vw,2.6rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
-              {p.titulo}
-            </p>
+            <TituloEnDos titulo={p.titulo} />
           </Aparece>
           <div className="mx-auto mt-12 max-w-6xl md:px-6">
-            <Calesita
-              items={p.piezas} titulo={p.titulo} tinta={p.tinta}
-              nombre={(x) => x.alt}
-              ancho="w-[36vw] max-w-[12rem]"
-              cara={(x) => (
-                <img src={x.src} alt="" draggable={false} loading="lazy" className="aspect-[3/5] w-full object-cover" />
-              )}
-            />
+            <RondaDePiezas piezas={p.piezas} titulo={p.titulo} tinta={p.tinta} />
           </div>
         </section>
       );
